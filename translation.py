@@ -11,7 +11,7 @@ ops = [['j', 'jal', 'jr', 'jalr',
 
 def getJumpTarget(codeline):
     if isControl(getOp(codeline)) == False:
-        raise Exception, "Can't retrieve jump target for non-branch/jump instruction"
+        raise Exception, "Can't retrieve jump target for non-branch/jump instruction" + codeline
     words = codeline.split()
     target = words[len(words) - 1].split(",")
     return target[len(target)-1]

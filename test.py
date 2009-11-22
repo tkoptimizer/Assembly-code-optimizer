@@ -2,12 +2,19 @@ from blocks import *
 from flowgraph import *
 from basicblock import *
 
-#myBlock = BasicBlocks("O0/dhrystone.s")
-#myBlock.analyze()
-#print myBlock.startPoints
+myBlock = blockBuilder("O0/dhrystone.s")
+myBlock.analyze()
+#myBlock.getBlockTargets()
 
-test = BasicBlock(["beq $2,$3,$L2", "lw	$2,56($fp)"], 10, "bla")
+for block in myBlock.basicBlocks:
+    for line in block.code:
+        print line
 
-testgraph = FlowGraph(test)
+    print ""
+    print "---"
 
-testgraph.printDot()
+#block = myBlock.basicBlocks[0]
+#
+#while block.targets[0]:
+#    print block.code
+#    block = block.targets[0]

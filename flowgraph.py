@@ -10,6 +10,8 @@ class FlowGraph:
         self.dot           = ""
         self.nodeCount     = 0
 
+        self.nodes = []
+
         self.initGraph()
         self.toGraph()
         self.endGraph()
