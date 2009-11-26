@@ -34,7 +34,6 @@ class blockBuilder:
         self.file    = open(filename)
         self.listing = self.file.readlines()
         self.basicBlocks = [] 
-        self.newblock    = 1
 
 
     def analyze(self):
@@ -47,6 +46,7 @@ class blockBuilder:
         self.startPoints = []
         currentBlock = None;
         numBlocks = 0
+        newblock    = True
 
         # Iterate over every line of assembly stored in this object. 
         for line in self.listing:
@@ -57,22 +57,23 @@ class blockBuilder:
             else:
                 # Create a new block if we previously found a control operator
                 # or if we're in the first block.
-                if self.newblock == 1:
+                if newblock:
                     numBlocks += 1
-                    currentBlock = basicBlock(line, "B" + str(numBlocks))
-                    self.newblock = 0
+                    currentBlock = basicBlock("B" + str(numBlocks))
+                    newblock = False
 
                     self.basicBlocks.append(currentBlock)
-                else:
-                    #cut the last character off line - it's a "newline" char
-                    currentBlock.addLine(line[:len(line)-1])
+                
+                #cut the last character off line - it's a "newline" char
+                print "Adding line: " + str(line[:len(line)-1])
+                currentBlock.addLine(line[:len(line)-1])
 
                 # Check if we found a jump or branch operator.
                 if isControl(operator):
 
                     # Jump or branch operator: end of block
                     self.startPoints.append(lineNumber + 2)
-                    self.newblock = 1
+                    newblock = True
 
                     # Target will be start of new block
                     target = getJumpTarget(line)
