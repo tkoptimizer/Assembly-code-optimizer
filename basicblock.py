@@ -2,15 +2,17 @@ class basicBlock:
     """
     Represents a basic block
     """
-    code = []
+    code    = []
     targets = []
-    name = None
+    name    = None
 
     def __init__(self, name):
         """
         Constructor
         """
-        self.name    = name
+        self.name       = name
+        self.code       = []
+        self.targets    = []
 
 
     def addLine(self, line):

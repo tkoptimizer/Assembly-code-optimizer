@@ -46,7 +46,7 @@ class blockBuilder:
         self.startPoints = []
         currentBlock = None;
         numBlocks = 0
-        newblock    = True
+        newBlock = True
 
         # Iterate over every line of assembly stored in this object. 
         for line in self.listing:
@@ -57,15 +57,14 @@ class blockBuilder:
             else:
                 # Create a new block if we previously found a control operator
                 # or if we're in the first block.
-                if newblock:
+                if newBlock == True:
                     numBlocks += 1
                     currentBlock = basicBlock("B" + str(numBlocks))
-                    newblock = False
+                    newBlock = False
 
                     self.basicBlocks.append(currentBlock)
                 
                 #cut the last character off line - it's a "newline" char
-                print "Adding line: " + str(line[:len(line)-1])
                 currentBlock.addLine(line[:len(line)-1])
 
                 # Check if we found a jump or branch operator.
@@ -73,7 +72,7 @@ class blockBuilder:
 
                     # Jump or branch operator: end of block
                     self.startPoints.append(lineNumber + 2)
-                    newblock = True
+                    newBlock = True
 
                     # Target will be start of new block
                     target = getJumpTarget(line)
