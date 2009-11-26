@@ -3,12 +3,13 @@ class basicBlock:
     Represents a basic block
     """
 
-    def __init__(self, firstline):
+    def __init__(self, name, firstline):
         """
         Constructor
         """
         self.code    = []
         self.targets = []
+        self.name    = name
 
         self.code.append(firstline)
 
@@ -30,7 +31,7 @@ class basicBlock:
         self.targets.append(targetNode)
 
     def getLabel(self):
-        return self.code[0]
+        return self.name
 
     def getTarget(self):
         return self.code[len(self.code) - 1]

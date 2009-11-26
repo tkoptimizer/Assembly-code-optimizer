@@ -46,6 +46,7 @@ class blockBuilder:
         lineNumber = 0
         self.startPoints = []
         currentBlock = None;
+        numBlocks = 0
 
         # Iterate over every line of assembly stored in this object. 
         for line in self.listing:
@@ -57,7 +58,8 @@ class blockBuilder:
                 # Create a new block if we previously found a control operator
                 # or if we're in the first block.
                 if self.newblock == 1:
-                    currentBlock = basicBlock(line)
+                    numBlocks += 1
+                    currentBlock = basicBlock(line, "B" + str(numBlocks))
                     self.newblock = 0
 
                     self.basicBlocks.append(currentBlock)
