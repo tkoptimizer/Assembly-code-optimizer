@@ -8,6 +8,7 @@ myBlock.analyze()
 
 for block in myBlock.basicBlocks:
     for line in block.code:
+#        print line[:len(line) - 1]
         print line
 
     print ""

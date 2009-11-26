@@ -64,7 +64,8 @@ class blockBuilder:
 
                     self.basicBlocks.append(currentBlock)
                 else:
-                    currentBlock.addLine(line)
+                    #cut the last character off line - it's a "newline" char
+                    currentBlock.addLine(line[:len(line)-1])
 
                 # Check if we found a jump or branch operator.
                 if isControl(operator):
