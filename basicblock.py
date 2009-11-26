@@ -6,13 +6,16 @@ class basicBlock:
     targets = []
     name    = None
 
-    def __init__(self, name):
+    def __init__(self, name, startLine):
         """
         Constructor
         """
         self.name       = name
         self.code       = []
         self.targets    = []
+        self.genSet     = []
+        self.killSet    = []
+        self.startLine  = startLine
 
 
     def addLine(self, line):
@@ -22,6 +25,14 @@ class basicBlock:
 
         self.code.append(line)
 
+    def getLine(self, lineNumber):
+        """
+        Returns a line of code, using the global line number, not the line
+        number within the block.
+        """
+
+        return self.code[lineNumber - self.startLine]
+
 
     def addTarget(self, targetNode):
         """
@@ -30,6 +41,13 @@ class basicBlock:
         """
 
         self.targets.append(targetNode)
+
+    
+    def addGen(self, lineNumber):
+        self.genSet.append(lineNumber)
+
+    def addKill(self, lineNumber):
+        self.killSet.append(lineNumber)
 
     def getLabel(self):
         return self.name

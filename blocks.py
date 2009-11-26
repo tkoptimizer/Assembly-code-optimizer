@@ -42,11 +42,11 @@ class blockBuilder:
         basicblock depending on what code is on the current line.
         """
 
-        lineNumber = 0
+        lineNumber       = 0
+        numBlocks        = 0
         self.startPoints = []
-        currentBlock = None;
-        numBlocks = 0
-        newBlock = True
+        currentBlock     = None;
+        newBlock         = True
 
         # Iterate over every line of assembly stored in this object. 
         for line in self.listing:
@@ -59,10 +59,11 @@ class blockBuilder:
                 # or if we're in the first block.
                 if newBlock == True:
                     numBlocks += 1
-                    currentBlock = basicBlock("B" + str(numBlocks))
-                    newBlock = False
-
+                    
+                    currentBlock = basicBlock("B" + str(numBlocks), lineNumber)
                     self.basicBlocks.append(currentBlock)
+
+                    newBlock = False
                 
                 #cut the last character off line - it's a "newline" char
                 currentBlock.addLine(line[:len(line)-1])
@@ -89,7 +90,15 @@ class blockBuilder:
         # Remove duplicates and sort list
         self.startPoints = list(set(self.startPoints))
         self.startPoints.sort()
+    
 
+    def findGenSet(self):
+        for block in self.basicBlocks:
+            for line in block.code:
+                if writesReg(line):
+                    block.addGen(getWriteLocation(line))                   
+
+    def findKillSet(self)
 
     def getLabelPosition(self, target):
         """
