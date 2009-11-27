@@ -34,7 +34,6 @@ class blockBuilder:
         self.file    = open(filename)
         self.listing = self.file.readlines()
         self.basicBlocks = [] 
-        self.newblock    = 1
 
 
     def analyze(self):
@@ -43,9 +42,11 @@ class blockBuilder:
         basicblock depending on what code is on the current line.
         """
 
-        lineNumber = 0
+        lineNumber       = 0
+        numBlocks        = 0
         self.startPoints = []
-        currentBlock = None;
+        currentBlock     = None;
+        newBlock         = True
 
         # Iterate over every line of assembly stored in this object. 
         for line in self.listing:
@@ -56,20 +57,23 @@ class blockBuilder:
             else:
                 # Create a new block if we previously found a control operator
                 # or if we're in the first block.
-                if self.newblock == 1:
-                    currentBlock = basicBlock(line)
-                    self.newblock = 0
-
+                if newBlock == True:
+                    numBlocks += 1
+                    
+                    currentBlock = basicBlock("B" + str(numBlocks), lineNumber)
                     self.basicBlocks.append(currentBlock)
-                else:
-                    currentBlock.addLine(line)
+
+                    newBlock = False
+                
+                #cut the last character off line - it's a "newline" char
+                currentBlock.addLine(line[:len(line)-1])
 
                 # Check if we found a jump or branch operator.
                 if isControl(operator):
 
                     # Jump or branch operator: end of block
                     self.startPoints.append(lineNumber + 2)
-                    self.newblock = 1
+                    newBlock = True
 
                     # Target will be start of new block
                     target = getJumpTarget(line)
@@ -86,7 +90,15 @@ class blockBuilder:
         # Remove duplicates and sort list
         self.startPoints = list(set(self.startPoints))
         self.startPoints.sort()
+    
 
+    def findGenSet(self):
+        for block in self.basicBlocks:
+            for line in block.code:
+                if writesReg(line):
+                    block.addGen(getWriteLocation(line))                   
+
+    def findKillSet(self)
 
     def getLabelPosition(self, target):
         """

@@ -2,11 +2,12 @@ from blocks import *
 from flowgraph import *
 from basicblock import *
 
-myBlock = blockBuilder("O0/dhrystone.s")
+myBlock = blockBuilder("O0/pi.s")
 myBlock.analyze()
 #myBlock.getBlockTargets()
 
 for block in myBlock.basicBlocks:
+    print block.name
     for line in block.code:
         print line
 

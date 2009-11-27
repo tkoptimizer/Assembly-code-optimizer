@@ -2,15 +2,20 @@ class basicBlock:
     """
     Represents a basic block
     """
+    code    = []
+    targets = []
+    name    = None
 
-    def __init__(self, firstline):
+    def __init__(self, name, startLine):
         """
         Constructor
         """
-        self.code    = []
-        self.targets = []
-
-        self.code.append(firstline)
+        self.name       = name
+        self.code       = []
+        self.targets    = []
+        self.genSet     = []
+        self.killSet    = []
+        self.startLine  = startLine
 
 
     def addLine(self, line):
@@ -19,6 +24,14 @@ class basicBlock:
         """
 
         self.code.append(line)
+
+    def getLine(self, lineNumber):
+        """
+        Returns a line of code, using the global line number, not the line
+        number within the block.
+        """
+
+        return self.code[lineNumber - self.startLine]
 
 
     def addTarget(self, targetNode):
@@ -29,12 +42,19 @@ class basicBlock:
 
         self.targets.append(targetNode)
 
+    
+    def addGen(self, lineNumber):
+        self.genSet.append(lineNumber)
+
+    def addKill(self, lineNumber):
+        self.killSet.append(lineNumber)
+
     def getLabel(self):
         """
-        If there is a label it will be on the first line.
+        Return the name / label of this basicblock.
         """
 
-        return self.code[0]
+        return self.name
 
     def getTarget(self):
         """
