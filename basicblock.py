@@ -30,7 +30,16 @@ class basicBlock:
         self.targets.append(targetNode)
 
     def getLabel(self):
+        """
+        If there is a label it will be on the first line.
+        """
+
         return self.code[0]
 
     def getTarget(self):
-        return self.code[len(self.code) - 1]
+        """
+        The last instruction of a basicblock is a branch or jump, so the target
+        of the block will be on the last line.
+        """
+
+        return self.code[-1]

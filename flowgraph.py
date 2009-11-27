@@ -1,4 +1,4 @@
-class FlowGraph:
+class flowGraph:
     "Represents a flow graph for assembly source code"
 
     def __init__(self, node):
