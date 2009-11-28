@@ -98,7 +98,8 @@ class blockBuilder:
                 if writesReg(line):
                     block.addGen(getWriteLocation(line))                   
 
-    def findKillSet(self)
+    def findKillSet(self):
+        pass
 
     def getLabelPosition(self, target):
         """
@@ -130,16 +131,16 @@ class blockBuilder:
         raise Exception, "Label not in current file."
 
     
-    def getBlockTargets(self):
+    def findBlockTargets(self):
         """
         Find the operational successor of each basic block.
         """
+
         for block in self.basicBlocks:
-            target = getJumpTarget(block.getTarget())
+            if isControl(getOp(block.getTarget())):
+                target = getJumpTarget(block.getTarget())
 
-            for searchBlock in self.basicBlocks:
-                label = searchBlock.getLabel()
-
-                if target == label[0:len(label) - 2] or target[2:len(label) - 1] == label[0:len(label) - 1]:
-                    block.addTarget(searchBlock)
-                    break
+                for searchBlock in self.basicBlocks:
+                    if searchBlock.hasLabel(target):
+                        target = target.replace("$", "S__")
+                        block.addTarget(searchBlock.name)

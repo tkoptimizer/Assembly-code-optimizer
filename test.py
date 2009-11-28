@@ -4,18 +4,19 @@ from basicblock import *
 
 myBlock = blockBuilder("O0/pi.s")
 myBlock.analyze()
-#myBlock.getBlockTargets()
+myBlock.findBlockTargets()
 
-for block in myBlock.basicBlocks:
-    print block.name
-    for line in block.code:
-        print line
+graph = flowGraph(myBlock.basicBlocks)
+graph.saveToFile("pi.dot")
 
-    print ""
-    print "---"
-
-#block = myBlock.basicBlocks[0]
+#print "digraph test {"
 #
-#while block.targets[0]:
-#    print block.code
-#    block = block.targets[0]
+#for block in myBlock.basicBlocks:
+#
+#    if block.targets:
+#        for target in block.targets:
+#            print block.name + " -> " + target
+#    else:
+#        print block.name + " -> system"
+#
+#print "}"

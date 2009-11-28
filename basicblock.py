@@ -4,18 +4,23 @@ class basicBlock:
     """
     code    = []
     targets = []
+    genSet  = []
+    killSet = []
+    labels  = []
     name    = None
 
     def __init__(self, name, startLine):
         """
-        Constructor
+        Initialises all class variables.
         """
         self.name       = name
+        self.startLine  = startLine
+
         self.code       = []
         self.targets    = []
         self.genSet     = []
         self.killSet    = []
-        self.startLine  = startLine
+        self.labels     = []
 
 
     def addLine(self, line):
@@ -24,6 +29,7 @@ class basicBlock:
         """
 
         self.code.append(line)
+
 
     def getLine(self, lineNumber):
         """
@@ -44,10 +50,20 @@ class basicBlock:
 
     
     def addGen(self, lineNumber):
+        """
+        Appends a linenumber to the gen list.
+        """
+
         self.genSet.append(lineNumber)
 
+
     def addKill(self, lineNumber):
+        """
+        Appends a linenumber to the kill list.
+        """
+
         self.killSet.append(lineNumber)
+
 
     def getLabel(self):
         """
@@ -56,6 +72,7 @@ class basicBlock:
 
         return self.name
 
+
     def getTarget(self):
         """
         The last instruction of a basicblock is a branch or jump, so the target
@@ -63,3 +80,36 @@ class basicBlock:
         """
 
         return self.code[-1]
+    
+
+    def findLabel(self, label):
+        """
+        Constructs a list of all available labels within this basic block.
+        """
+        
+        if label[0] == "$":
+            for line in self.code:
+                if line[0:-1] == label:
+                    self.labels.append(label)
+                    return True
+        elif label[0:2] == "__":
+            for line in self.code:
+                if line[:-1] == label[2:]:
+                    self.labels.append(label)
+                    return True
+
+        return False
+
+
+    def hasLabel(self, label):
+        """
+        Check the list of available labels or look for a label over every line
+        of code.
+        """
+
+        if label in self.labels:
+            return True
+        else:
+            return self.findLabel(label)
+                    
+                
