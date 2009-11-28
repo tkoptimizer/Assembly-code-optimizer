@@ -1,0 +1,17 @@
+#!/bin/bash
+
+OUTDIR=graphs
+
+dotFiles=`find flowgraphs/ -name '*.dot' -type f`
+
+if [ ! -d $OUTDIR ];
+then
+    mkdir $OUTDIR
+fi
+
+for file in $dotFiles; do
+    name=`ls ${file} | awk -F/ '{print $2}' | awk -F. '{print $1}'`
+
+    echo "Creating graph for: ${name}"
+    `dot -Tpng -o ${OUTDIR}/${name}.png $file`
+done

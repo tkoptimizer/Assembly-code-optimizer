@@ -33,6 +33,6 @@ class flowGraph:
         self.dotSource += "}"
 
     def saveToFile(self, filename):
-        file = open(filename, "w")
+        file = open("flowgraphs/" + filename, "w")
         file.write(self.dotSource)
         file.close()
