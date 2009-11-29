@@ -8,8 +8,8 @@
 # All the supported operations.
 ops = [['j', 'jal', 'jr', 'jalr',
        'beq', 'bne', 'blez', 'bgtz', 'bltz', 'bgez', 'bct', 'bcf'],
-       ['lb', 'lbu', 'lhu', 'lw', 'dlw', 'l.s', 'l.d',
-       'sb', 'sbu', 'shu', 'sw', 'dsw', 's.s', 's.d'],
+       ['lb', 'lbu', 'lhu', 'lw', 'dlw', 'l.s', 'l.d'],
+       ['sb', 'sbu', 'shu', 'sw', 'dsw', 's.s', 's.d'],
        ['add', 'addu', 'sub', 'subu', 'mult', 'multu', 'div', 'divu',
        'and', 'or', 'xor', 'nor', 'sll', 'srl', 'sra', 'slt', 'sltu'],
        ['add.s', 'add.d', 'sub.s', 'sub.d', 'mult.s', 'mult.d', 
@@ -40,6 +40,20 @@ def getOp(codeline):
 
     return word[0]
 
+def getTargetRegister(codeline):
+    """
+    Uses the split function to find the target register for a load/store
+    operation.
+    """
+
+    if(isLoadStore(getOp(codeline))) == False or isArithmetic(getOp(codeline)) == False:
+        raise Exception, "Can't retrieve target for a non-load/store/arithmetic instruction " + codeline
+
+    words = codeline.split()
+    targets = words[-1].split(",")
+
+    return targets[0]
+
 def isControl(op):
     """
     Returns wether or not the operation is in the list of control operations.
@@ -47,27 +61,49 @@ def isControl(op):
 
     return op in ops[0]
 
-def isLoadstore(op):
+def isLoad(op):
     """
-    Returns wether or not the operation is in the list of load / store
-    operations.
+    Returns wether or not the operation is in the list of load operations.
     """
 
     return op in ops[1]
 
-def isIntArithmetic(op):
+def isLoadStore(op):
     """
-    Returns wether or not the operation is in the list of arithmatic operations.
+    Check if the operator is either a store or a load operation.
     """
 
+    return isLoad(op) or isStore(op)
+
+
+def isStore(op):
+    """
+    Return wether or not the operation is in the list of store operations
+    """
+    
     return op in ops[2]
 
-def isFloatArithmetic(op):
+
+def isIntArithmetic(op):
     """
-    Returns wether or not the operation is in the list of float arithmatic
+    Returns wether or not the operation is in the list of integer arithmetic
     operations.
     """
 
     return op in ops[3]
 
+def isFloatArithmetic(op):
+    """
+    Returns wether or not the operation is in the list of float arithmetic
+    operations.
+    """
 
+    return op in ops[4]
+
+
+def isArithmetic(op):
+    """
+    Check if the operator is either int arithmetic or float arithmetic.
+    """
+
+    return isIntArithmetic(op) or isFloatArithmetic(op)

@@ -1,22 +1,18 @@
 from blocks import *
 from flowgraph import *
 from basicblock import *
+from redundant_load_store import *
 
-myBlock = blockBuilder("O0/whet.s")
+myBlock = blockBuilder("O0/acron.s")
 myBlock.analyze()
 myBlock.findBlockTargets()
 
-graph = flowGraph(myBlock.basicBlocks)
-graph.saveToFile("whet.dot")
+opt = redundantLoadStore(myBlock.basicBlocks)
+opt.analyseBlocks()
 
-#print "digraph test {"
-#
-#for block in myBlock.basicBlocks:
-#
-#    if block.targets:
-#        for target in block.targets:
-#            print block.name + " -> " + target
-#    else:
-#        print block.name + " -> system"
-#
-#print "}"
+#for block in opt.optimizedBlocks:
+   #print block.name + ": "
+   #for line in block.code:
+   #    print "\t" + line
+
+   #print "-----------"
