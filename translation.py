@@ -19,16 +19,38 @@ ops = [['j', 'jal', 'jr', 'jalr',
 
 def getJumpTarget(codeline):
     """
-    Uses regular expressions to get the target of a jump or branch instruction.
+    Uses split functionality to get the target of a jump or branch instruction.
     """
     
     if isControl(getOp(codeline)) == False:
         raise Exception, "Can't retrieve jump target for non-branch/jump instruction" + codeline
 
-    words = codeline.split()
-    target = words[len(words) - 1].split(",")
+    words = codeline.split(",")
+    if len(words) == 1:
+        words = words[0]
+        words = words.split()
 
-    return target[len(target)-1]
+    return words[-1]
+
+def setJumpTarget(codeline, newTarget):
+    """
+    Uses split functionality to remove the target of a jump or branch
+    instruction, replace it and return the result
+    """
+    
+    if isControl(getOp(codeline)) == False:
+        raise Exception, "Can't retrieve jump target for non-branch/jump instruction" + codeline
+
+    words = codeline.split(",")
+    if len(words) == 1:
+        words = words[0]
+        words = words.split()
+
+    oldTarget = words[-1]
+    words = codeline[:len(codeline)-len(oldTarget)] + newTarget
+   
+    return words
+
 
 def getOp(codeline):
     """

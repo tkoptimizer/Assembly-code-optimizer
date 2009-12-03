@@ -3,7 +3,7 @@ class basicBlock:
     Represents a basic block
     """
     code    = []
-    targets = []
+    target  = None
     genSet  = []
     killSet = []
     labels  = []
@@ -17,11 +17,10 @@ class basicBlock:
         self.startLine  = startLine
 
         self.code       = []
-        self.targets    = []
+        self.target     = None
         self.genSet     = []
         self.killSet    = []
         self.labels     = []
-
 
     def addLine(self, line):
         """
@@ -39,23 +38,12 @@ class basicBlock:
 
         return self.code[lineNumber - self.startLine]
 
-
-    def addTarget(self, targetNode):
-        """
-        Method for adding a target to which this basicblock can jump at the end
-        of its execution.
-        """
-
-        self.targets.append(targetNode)
-
-    
     def addGen(self, lineNumber):
         """
         Appends a linenumber to the gen list.
         """
 
         self.genSet.append(lineNumber)
-
 
     def addKill(self, lineNumber):
         """
@@ -71,16 +59,6 @@ class basicBlock:
         """
 
         return self.name
-
-
-    def getTarget(self):
-        """
-        The last instruction of a basicblock is a branch or jump, so the target
-        of the block will be on the last line.
-        """
-
-        return self.code[-1]
-    
 
     def findLabel(self, label):
         """

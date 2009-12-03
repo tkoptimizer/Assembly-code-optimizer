@@ -25,7 +25,7 @@ class flowGraph:
         for block in self.basicBlocks:
             if block.targets:
                 for target in block.targets:
-                    self.dotSource += block.name + " -> " + target + "\n"
+                    self.dotSource += block.name + " -> " + target.name + "\n"
             else:
                 self.dotSource += block.name + " -> system\n"
 

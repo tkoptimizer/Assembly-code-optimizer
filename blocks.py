@@ -44,7 +44,6 @@ class blockBuilder:
 
         lineNumber       = 0
         numBlocks        = 0
-        self.startPoints = []
         currentBlock     = None;
         newBlock         = True
 
@@ -72,25 +71,9 @@ class blockBuilder:
                 if isControl(operator):
 
                     # Jump or branch operator: end of block
-                    self.startPoints.append(lineNumber + 2)
                     newBlock = True
 
-                    # Target will be start of new block
-                    target = getJumpTarget(line)
-
-                    try:
-                        position = self.getLabelPosition(target)
-                    except:
-                        " Nothing to do: the label position is not in current file "
-                    else:
-                        self.startPoints.append(position)
-
             lineNumber += 1
-
-        # Remove duplicates and sort list
-        self.startPoints = list(set(self.startPoints))
-        self.startPoints.sort()
-    
 
     def findGenSet(self):
         for block in self.basicBlocks:
@@ -101,7 +84,7 @@ class blockBuilder:
     def findKillSet(self):
         pass
 
-    def getLabelPosition(self, target):
+    def getLabelPosition(self, targetLine):
         """
         Method for finding the line a jump target can be found.
         """
@@ -109,21 +92,21 @@ class blockBuilder:
         lineNumber = 0
 
         # Look for labels of the form: '$name'
-        if target[0] == "$" :
+        if targetLine[0] == "$" :
 
             for line in self.listing:
-                if len(line) - 2 > len(target) or len(line) < len(target):
+                if len(line) - 2 > len(targetLine) or len(line) < len(targetLine):
                     " Target not on this line, skipping. "
-                elif line[0:len(line)-2] == target:
+                elif line[0:len(line)-2] == targetLine:
                     return lineNumber
 
                 lineNumber += 1
 
         # Look for labels of the form: '__name'
-        elif target[0:2] == "__" :
+        elif targetLine[0:2] == "__" :
 
             for line in self.listing:
-                if line[0:len(line)-1] == target[2:len(line)-1]:
+                if line[0:len(line)-1] == targetLine[2:len(line)-1]:
                     return lineNumber
 
                 lineNumber += 1
@@ -137,10 +120,10 @@ class blockBuilder:
         """
 
         for block in self.basicBlocks:
-            if isControl(getOp(block.getTarget())):
-                target = getJumpTarget(block.getTarget())
+            if isControl(getOp(block.code[-1])):
+                targetLabel = getJumpTarget(block.code[-1])
 
                 for searchBlock in self.basicBlocks:
-                    if searchBlock.hasLabel(target):
-                        target = target.replace("$", "S__")
-                        block.addTarget(searchBlock.name)
+                    if searchBlock.hasLabel(targetLabel):
+                        targetLabel = targetLabel.replace("$", "S__")
+                        block.target = searchBlock
