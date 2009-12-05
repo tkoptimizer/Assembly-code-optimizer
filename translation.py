@@ -28,7 +28,7 @@ def getJumpTarget(codeline):
     words = codeline.split()
     target = words[len(words) - 1].split(",")
 
-    return target[len(target)-1]
+    return target[len(target) - 1]
 
 def getOp(codeline):
     """
@@ -53,6 +53,18 @@ def getTargetRegister(codeline):
     targets = words[-1].split(",")
 
     return targets[0]
+
+def getLoadStoreAddress(codeline):
+    """
+    Uses the split function to find the address for a load or store operation.
+    """
+    if(isLoadStore(getOp(codeline)) == False):
+        raise Exception, "Can't retrieve load or store address for non load/store operation."
+
+    words = codeline.split()
+    targets = words[-1].split(",")
+
+    return targets[1]
 
 def isControl(op):
     """

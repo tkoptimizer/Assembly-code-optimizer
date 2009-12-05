@@ -1,5 +1,6 @@
 from translation import *
 from basicblock import *
+from collections import deque
 
 #
 # Optimization class.
@@ -30,14 +31,19 @@ class redundantLoadStore:
             self.optimizedBlocks.append(newBlock)
 
 
+    def findRegisterByAddress(addresses, address):
+        for address in addresses:
+            if address[0] == address:
+                return getTargetRegister(address[1])
+
     def analyseBasicBlock(self, block):
         """
         Use a list to find all redundant loads and stores.
         """
 
         optimized = False
-        loaded    = []
-        stored    = []
+        addresses = deque()
+        registers = deque()
         newBlock  = basicBlock(block.name, block.startLine)
 
         for line in block.code:
@@ -46,18 +52,26 @@ class redundantLoadStore:
             operation = getOp(line)
 
             try:
-                register  = getTargetRegister(line)
+                register = getTargetRegister(line)
+                address  = getLoadStoreAddress(line) 
             except:
                 " No problem, just skip the operation, but still add the line. "
             else:
                 if isLoad(operation):
 
-                    if register not in loaded and register not in stored:
-                        loaded.append(register)
+                    if register not in registers:
+                        print "register not found"
+                        if address in addresses:
+                            # That memory address is allready loaded in one of
+                            # the registers, so we add a MOVE instruction.
+
+                            old_register = findRegisterByAddress(address)
+
+                            line = "############ move\t" + old_register + "," + register
+                        else:
+                            registers.append( (register, line) )
+                            addresses.append( (address, line) )
                     else:
-                        # The register hasn't been altered as it is still in the
-                        # list of registers. Therefor, we can leave this line out of
-                        # the source.
                         
                         doNotAdd = True
                         print "Not adding load for " + str(register)

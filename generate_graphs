@@ -2,7 +2,7 @@
 
 OUTDIR=graphs
 
-dotFiles=`find flowgraphs/ -name '*.dot' -type f`
+dotFiles=`find flowgraphs -name '*.dot' -type f`
 
 if [ ! -d $OUTDIR ];
 then
