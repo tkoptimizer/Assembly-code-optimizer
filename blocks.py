@@ -1,5 +1,6 @@
 from translation import *
 from basicblock import *
+from operations import *
 
 #
 # TODO
@@ -42,17 +43,18 @@ class blockBuilder:
         basicblock depending on what code is on the current line.
         """
 
-        lineNumber       = 0
-        numBlocks        = 0
-        currentBlock     = None;
-        newBlock         = True
+        lineNumber   = 0
+        numBlocks    = 0
+        currentBlock = None;
+        newBlock     = True
 
         # Iterate over every line of assembly stored in this object. 
         for line in self.listing:
+
             try:
-                operator = getOp(line)
+                currentOpp = operation(line)
             except:
-                " Nothing to do: no operator on this line "
+                "An exception was thrown, should be logged..."
             else:
                 # Create a new block if we previously found a control operator
                 # or if we're in the first block.
@@ -65,53 +67,23 @@ class blockBuilder:
                     newBlock = False
                 
                 #cut the last character off line - it's a "newline" char
-                currentBlock.addLine(line[:len(line)-1])
+                currentBlock.addOperation(currentOpp)
 
                 # Check if we found a jump or branch operator.
-                if isControl(operator):
+                if currentOpp.type == operation.CONTROL:
 
                     # Jump or branch operator: end of block
                     newBlock = True
 
-            lineNumber += 1
+                lineNumber += 1
+
 
     def findGenSet(self):
-        for block in self.basicBlocks:
-            for line in block.code:
-                if writesReg(line):
-                    block.addGen(getWriteLocation(line))                   
+        pass
+
 
     def findKillSet(self):
         pass
-
-    def getLabelPosition(self, targetLine):
-        """
-        Method for finding the line a jump target can be found.
-        """
-
-        lineNumber = 0
-
-        # Look for labels of the form: '$name'
-        if targetLine[0] == "$" :
-
-            for line in self.listing:
-                if len(line) - 2 > len(targetLine) or len(line) < len(targetLine):
-                    " Target not on this line, skipping. "
-                elif line[0:len(line)-2] == targetLine:
-                    return lineNumber
-
-                lineNumber += 1
-
-        # Look for labels of the form: '__name'
-        elif targetLine[0:2] == "__" :
-
-            for line in self.listing:
-                if line[0:len(line)-1] == targetLine[2:len(line)-1]:
-                    return lineNumber
-
-                lineNumber += 1
-
-        raise Exception, "Label not in current file."
 
     
     def findBlockTargets(self):
@@ -120,9 +92,12 @@ class blockBuilder:
         """
 
         for block in self.basicBlocks:
-            if isControl(getOp(block.code[-1])):
-                targetLabel = getJumpTarget(block.code[-1])
+            currentOpp = block.operations[-1]
 
+            if currentOpp.type == operation.CONTROL:
+                targetLabel = currentOpp.getTarget()
+                
+                # Search each block for the label we need.
                 for searchBlock in self.basicBlocks:
                     if searchBlock.hasLabel(targetLabel):
                         targetLabel = targetLabel.replace("$", "S__")

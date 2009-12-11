@@ -4,7 +4,7 @@ from basicblock import *
 from redundant_load_store import *
 from redundantLabels import *
 
-myBlock = blockBuilder("O0/slalom.s")
+myBlock = blockBuilder("O0/pi.s")
 myBlock.analyze()
 myBlock.findBlockTargets()
 
@@ -13,4 +13,7 @@ opt = redundantLabels(myBlock.basicBlocks)
 opt.analyseBlocks()
 
 for block in opt.optimizedBlocks:
-    opt.getRedundantLabels(block)
+    for operation in block.operations:
+        print operation
+
+    print "\n+-+-+-+-+-+-+-+-+-+-+-+\n"

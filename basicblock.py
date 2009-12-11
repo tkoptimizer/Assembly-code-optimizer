@@ -1,13 +1,17 @@
+from operations import *
+
 class basicBlock:
     """
     Represents a basic block
     """
-    code    = []
-    target  = None
-    genSet  = []
-    killSet = []
-    labels  = []
-    name    = None
+
+    operations = []
+    genSet     = []
+    killSet    = []
+    labels     = []
+
+    name       = None
+    target     = None
 
     def __init__(self, name, startLine):
         """
@@ -15,19 +19,20 @@ class basicBlock:
         """
         self.name       = name
         self.startLine  = startLine
-
-        self.code       = []
         self.target     = None
+
+        self.operations = []
         self.genSet     = []
         self.killSet    = []
         self.labels     = []
 
-    def addLine(self, line):
+    def addOperation(self, line):
         """
-        Method for adding a line to the lines of code inside this basicblock.
+        Method for adding an operation to the operations allready inside this
+        basicblock.
         """
 
-        self.code.append(line)
+        self.operations.append(line)
 
 
     def getLine(self, lineNumber):
@@ -36,7 +41,8 @@ class basicBlock:
         number within the block.
         """
 
-        return self.code[lineNumber - self.startLine]
+        return self.operation[lineNumber - self.startLine].code
+
 
     def addGen(self, lineNumber):
         """
@@ -44,6 +50,7 @@ class basicBlock:
         """
 
         self.genSet.append(lineNumber)
+
 
     def addKill(self, lineNumber):
         """
@@ -60,19 +67,21 @@ class basicBlock:
 
         return self.name
 
+
     def findLabel(self, label):
         """
         Constructs a list of all available labels within this basic block.
         """
         
         if label[0] == "$":
-            for line in self.code:
-                if line[0:-1] == label:
+            for operation in self.operations:
+                if operation.type == operation.LABEL and operation.getLabelName() == label:
                     self.labels.append(label)
                     return True
+
         elif label[0:2] == "__":
-            for line in self.code:
-                if line[:-1] == label[2:]:
+            for operation in self.operations:
+                if operation.type == operation.LABEL and operation.getLabelName() == label[2:]:
                     self.labels.append(label)
                     return True
 
