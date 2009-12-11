@@ -1,22 +1,6 @@
 from translation import *
 from basicblock import *
-from operations import *
-
-#
-# TODO
-# 
-# The code for storing each start line of a basicblock is not really needed
-# anymore, but could prove useful with debugging.
-#
-# The targets should not just be line numbers, but should become blocks.
-#
-# --
-#
-# Possible optimization:
-# Find basic blocks by following the basic blocks.
-#   - don't read the next line after a jump, but continue from the line of the
-#     jump target. This way only reachable code is processed.
-#
+from operation import *
 
 class blockBuilder:
     """
@@ -34,7 +18,8 @@ class blockBuilder:
 
         self.file    = open(filename)
         self.listing = self.file.readlines()
-        self.basicBlocks = [] 
+        self.basicBlocks = []
+        self.exceptions  = []
 
 
     def analyze(self):
@@ -53,8 +38,9 @@ class blockBuilder:
 
             try:
                 currentOpp = operation(line)
-            except:
-                "An exception was thrown, should be logged..."
+            except Exception as error:
+                # Keep a log of all exceptions.
+                self.exceptions.append(error)
             else:
                 # Create a new block if we previously found a control operator
                 # or if we're in the first block.
@@ -85,7 +71,31 @@ class blockBuilder:
     def findKillSet(self):
         pass
 
+
+    def hasErrors(self):
+        """
+        True if any exceptions occurred during execution.
+        """
+
+        return len(self.exceptions) > 0
+
     
+    def errorReport(self):
+        """
+        Print all the logged exceptions in the form of an error report.
+        """
+
+        print "Error report: "
+        print "--------------------------------------------------\n"
+        
+        for ex in self.exceptions:
+            print type(ex)
+            print "\t", ex
+            print ""
+
+        print "--------------------------------------------------"
+
+
     def findBlockTargets(self):
         """
         Find the operational successor of each basic block.

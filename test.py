@@ -1,19 +1,30 @@
 from blocks import *
 from flowgraph import *
 from basicblock import *
-from redundant_load_store import *
+from redundantLoadStore import *
 from redundantLabels import *
 
-myBlock = blockBuilder("O0/pi.s")
+myBlock = blockBuilder("O0/dhrystone.s")
 myBlock.analyze()
 myBlock.findBlockTargets()
 
-#opt = redundantLoadStore(myBlock.basicBlocks)
-opt = redundantLabels(myBlock.basicBlocks)
+#if myBlock.hasErrors():
+#    myBlock.errorReport()
+
+opt = redundantLoadStore(myBlock.basicBlocks)
 opt.analyseBlocks()
+opt = redundantLabels(opt.optimizedBlocks)
+opt.analyseBlocks()
+
+buffer = ""
 
 for block in opt.optimizedBlocks:
     for operation in block.operations:
-        print operation
+        if operation.included:
+            buffer += operation.code + "\n"
+        else:
+            buffer += "# " + operation.code + "\n"
 
-    print "\n+-+-+-+-+-+-+-+-+-+-+-+\n"
+    #buffer += "\n## basicblock ##\n\n"
+
+print buffer

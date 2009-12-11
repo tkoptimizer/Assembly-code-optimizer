@@ -176,7 +176,7 @@ class operation:
 
         if self.included:
             return "[ " + self.verboseType(self.type) + " ]:  " + code
-        else
+        else:
             return "[ " + self.verboseType(self.type) + " ]:  " + code
 
 
@@ -256,8 +256,8 @@ class operation:
         register for an arithmetic, load or store operation.
         """
 
-        if self.type == operation.STORE or self.type == operation.SYSTEM:
-            raise Exception, "Store or system operations don't have a target!"
+        if self.type == operation.SYSTEM:
+            raise Exception, "System operations don't have a target!"
 
         elif self.type == operation.CONTROL:
             # For branch operations the last argument is the target (or offset).
@@ -318,7 +318,7 @@ class operation:
             parts = self.code.split()
             parts = parts[1].split(",")
             
-            return parts[0]
+            return parts[1]
         else:
             raise Exception, "Can't retrieve address for none store / load operations."
 
