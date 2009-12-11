@@ -51,6 +51,12 @@ class redundantLoadStore:
                     return oldOperation
                 elif address1 == address2:
                     return oldOperation
+                elif register1 == register2:
+                    # The register is updated, so we update the list of changed
+                    # items.
+                    self.changed.remove(oldOperation)
+                    self.changed.append(operation)
+
         return None
 
 
@@ -90,14 +96,13 @@ class redundantLoadStore:
                         register1 = previousEditor.getTarget()
                         register2 = operation.getTarget()
 
-                        print register1[1]
-
                         if register1[1] == "f" or register2[1] == "f" or register1[1] == "s" or register2[1] == "s":
                             # We can't touch the frame / stack pointers.
                             continue
 
                         operation.code = "\tmove\t" + operation.getTarget() + "," + previousEditor.getTarget()
                         operation.type = operation.INT_ARITHMETIC
+                        
                 elif self.previouslyStored(operation):
                     operation.exclude()
                 else:

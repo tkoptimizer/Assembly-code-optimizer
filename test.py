@@ -13,8 +13,8 @@ myBlock.findBlockTargets()
 
 opt = redundantLoadStore(myBlock.basicBlocks)
 opt.analyseBlocks()
-opt = redundantLabels(opt.optimizedBlocks)
-opt.analyseBlocks()
+#opt = redundantLabels(opt.optimizedBlocks)
+#opt.analyseBlocks()
 
 buffer = ""
 
@@ -25,6 +25,6 @@ for block in opt.optimizedBlocks:
         else:
             buffer += "# " + operation.code + "\n"
 
-    #buffer += "\n## basicblock ##\n\n"
+    buffer += "\n## basicblock ##\n\n"
 
 print buffer
