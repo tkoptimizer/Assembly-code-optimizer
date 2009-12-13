@@ -4,7 +4,7 @@ from basicblock import *
 from redundantLoadStore import *
 from redundantLabels import *
 
-myBlock = blockBuilder("O0/dhrystone.s")
+myBlock = blockBuilder("O0/slalom.s")
 myBlock.analyze()
 myBlock.findBlockTargets()
 
@@ -25,6 +25,6 @@ for block in opt.optimizedBlocks:
         else:
             buffer += "# " + operation.code + "\n"
 
-    buffer += "\n## basicblock ##\n\n"
+    #buffer += "\n## basicblock ##\n\n"
 
 print buffer

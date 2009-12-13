@@ -313,12 +313,15 @@ class operation:
         Get the address of a load or store operation using python's 'split'
         statement.
         """
-
+        
         if self.type == operation.LOAD or self.type == operation.STORE:
             parts = self.code.split()
             parts = parts[1].split(",")
             
-            return parts[1]
+            try:
+                return parts[1]
+            except:
+                " Apparently we're trying to return empty data, skipping. "
         else:
             raise Exception, "Can't retrieve address for none store / load operations."
 

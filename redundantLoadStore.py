@@ -36,35 +36,53 @@ class redundantLoadStore:
 
     
     def previouslyChanged(self, operation):
+        """
+        Search for operations that have altered the same address or register as
+        the current operation.
+        """
+
         for oldOperation in self.changed:
-            try:
-                register1 = oldOperation.getTarget()
-                register2 = operation.getTarget()
-                address1  = oldOperation.getAddress()
-                address2  = operation.getAddress()
+            if operation.type in (operation.LOAD, operation.STORE):
+                if oldOperation.type in (operation.LOAD, operation.STORE):
 
-            except Exception as error:
-                self.exceptions.append(error)
+                    register1 = operation.getTarget()
+                    register2 = oldOperation.getTarget()
 
-            else:
-                if register1 == register2 and address1 == address2:
+                    address1 = operation.getTarget()
+                    address2 = oldOperation.getTarget()
+
+                    if register1 == register2 and address1 == address2:
+                        return oldOperation
+                    elif address1 == address2:
+                        return oldOperation
+
+                elif oldOperation.type in (operation.INT_ARITHMETIC, operation.FLOAT_ARITHMETIC):
+
+                    register1 = operation.getTarget()
+                    register2 = oldOperation.getTarget()
+
+                    if register1 == register2:
+                        return oldOperation
+
+            elif operation.type in (operation.INT_ARITHMETIC, operation.FLOAT_ARITHMETIC):
+                register1 = operation.getTarget()
+                register2 = oldOperation.getTarget()
+
+                if register1 == register2:
                     return oldOperation
-                elif address1 == address2:
-                    return oldOperation
-                elif register1 == register2:
-                    # The register is updated, so we update the list of changed
-                    # items.
-                    self.changed.remove(oldOperation)
-                    self.changed.append(operation)
-
         return None
 
 
     def previouslyStored(self, operation):
+        """
+        Search for an idetical STORE operation.
+        """
+
         for oldOperation in self.changed:
             if oldOperation.type == operation.STORE:
                 register1 = oldOperation.getTarget()
                 register2 = operation.getTarget()
+
                 address1  = oldOperation.getAddress()
                 address2  = operation.getAddress()
 
@@ -88,21 +106,22 @@ class redundantLoadStore:
                     # We know that either both target and address are the same
                     # or the targets are not the same but the addresses are.
 
-                    if previousEditor.getTarget() == operation.getTarget():
-                        operation.exclude()
-                    
-                    else:
-                        # The addresses are the same, so we just move the value.
-                        register1 = previousEditor.getTarget()
-                        register2 = operation.getTarget()
-
-                        if register1[1] == "f" or register2[1] == "f" or register1[1] == "s" or register2[1] == "s":
-                            # We can't touch the frame / stack pointers.
-                            continue
-
-                        operation.code = "\tmove\t" + operation.getTarget() + "," + previousEditor.getTarget()
-                        operation.type = operation.INT_ARITHMETIC
+                    if previousEditor.type in (operation.LOAD, operation.STORE):
+                        if previousEditor.getTarget() == operation.getTarget() and previousEditor.getAddress() == operation.getAddress():        
+                            operation.exclude()
                         
+                        elif previousEditor.getTarget() == operation.getTarget() and not previousEditor.getAddress() == operation.getAddress():        
+                            # The old value was overwritten, so replace the previous
+                            # operation with the new operation.
+
+                            self.changed.remove(previousEditor)                        
+                            self.changed.append(operation)
+                    else:
+                        if previousEditor.getTarget() == operation.getTarget():
+
+                            self.changed.remove(previousEditor)                        
+                            self.changed.append(operation)
+
                 elif self.previouslyStored(operation):
                     operation.exclude()
                 else:
@@ -114,10 +133,13 @@ class redundantLoadStore:
                     # again.
                     operation.exclude()
                 else:
-                    self.changed.append(operation)
+                    if previousEditor is not None:
+                        self.changed.remove(previousEditor)
+                    else:
+                        self.changed.append(operation)
 
             elif operation.type in (operation.INT_ARITHMETIC, operation.FLOAT_ARITHMETIC):
                 if previousEditor is not None:
                     self.changed.remove(previousEditor)
-
+                
                 self.changed.append(operation)

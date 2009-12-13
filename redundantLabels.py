@@ -20,7 +20,6 @@ class redundantLabels:
 
         for block in self.blocks:
             newBlock = self.analyseBasicBlock(block)
-            self.optimizedBlocks.append(newBlock)
 
     def analyseBasicBlock(self, block):
         #print block.getLabel() + " has " + str(len(block.code)) + " lines"
