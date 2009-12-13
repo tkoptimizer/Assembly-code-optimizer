@@ -4,17 +4,20 @@ from basicblock import *
 from redundantLoadStore import *
 from redundantLabels import *
 
-myBlock = blockBuilder("O0/slalom.s")
+myBlock = blockBuilder("O0/dhrystone.s")
 myBlock.analyze()
 myBlock.findBlockTargets()
+
+#for block in myBlock.basicBlocks:
+#    print block.target
 
 #if myBlock.hasErrors():
 #    myBlock.errorReport()
 
 opt = redundantLoadStore(myBlock.basicBlocks)
 opt.analyseBlocks()
-#opt = redundantLabels(opt.optimizedBlocks)
-#opt.analyseBlocks()
+opt = redundantLabels(opt.optimizedBlocks)
+opt.analyseBlocks()
 
 buffer = ""
 

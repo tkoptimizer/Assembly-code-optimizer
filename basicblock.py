@@ -5,14 +5,6 @@ class basicBlock:
     Represents a basic block
     """
 
-    operations = []
-    genSet     = []
-    killSet    = []
-    labels     = []
-
-    name       = None
-    target     = None
-
     def __init__(self, name, startLine):
         """
         Initialises all class variables.
@@ -25,6 +17,10 @@ class basicBlock:
         self.genSet     = []
         self.killSet    = []
         self.labels     = []
+    
+    
+    def __str__(self):
+        return str(self.startLine) + ": " + self.name
 
     def addOperation(self, line):
         """
@@ -34,6 +30,22 @@ class basicBlock:
 
         self.operations.append(line)
 
+    
+    def numOperations(self):
+        """
+        Count the number of operations within this basic block.
+        """
+
+        return len(self.operations)
+
+
+    def exclude(self):
+        """
+        Exclude the entire block from the code.
+        """
+
+        for operation in self.operations:
+            operation.exclude()
 
     def getLine(self, lineNumber):
         """
@@ -72,16 +84,17 @@ class basicBlock:
         """
         Constructs a list of all available labels within this basic block.
         """
-        
+
         if label[0] == "$":
             for operation in self.operations:
-                if operation.type == operation.LABEL and operation.getLabelName() == label:
+                if operation.type == operation.LABEL and operation.getLabelName()[0:3] == label:
+                    
                     self.labels.append(label)
                     return True
 
         elif label[0:2] == "__":
             for operation in self.operations:
-                if operation.type == operation.LABEL and operation.getLabelName() == label[2:]:
+                if operation.type == operation.LABEL and operation.getLabelName()[:-2] == label[2:]:
                     self.labels.append(label)
                     return True
 
@@ -93,7 +106,7 @@ class basicBlock:
         Check the list of available labels or look for a label over every line
         of code.
         """
-
+        
         if label in self.labels:
             return True
         else:

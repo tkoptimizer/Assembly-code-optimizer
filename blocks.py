@@ -52,7 +52,6 @@ class blockBuilder:
 
                     newBlock = False
                 
-                #cut the last character off line - it's a "newline" char
                 currentBlock.addOperation(currentOpp)
 
                 # Check if we found a jump or branch operator.
@@ -105,10 +104,9 @@ class blockBuilder:
             currentOpp = block.operations[-1]
 
             if currentOpp.type == operation.CONTROL:
-                targetLabel = currentOpp.getTarget()
+                targetLabel = currentOpp.getTarget()                
                 
                 # Search each block for the label we need.
                 for searchBlock in self.basicBlocks:
                     if searchBlock.hasLabel(targetLabel):
-                        targetLabel = targetLabel.replace("$", "S__")
                         block.target = searchBlock
