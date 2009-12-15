@@ -1,5 +1,4 @@
 import copy
-from translation import *
 
 class copyPropagation:
     def __init__(self, blocks):
