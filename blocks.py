@@ -1,4 +1,3 @@
-from translation import *
 from basicblock import *
 from operation import *
 

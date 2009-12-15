@@ -5,7 +5,7 @@ from redundantLoadStore import *
 from redundantLabels import *
 from copyPropagation import *
 
-myBlock = blockBuilder("O0/dhrystone.s")
+myBlock = blockBuilder("O0/acron.s")
 myBlock.analyze()
 myBlock.findBlockTargets()
 
