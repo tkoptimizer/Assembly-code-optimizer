@@ -3,6 +3,7 @@ from flowgraph import *
 from basicblock import *
 from redundantLoadStore import *
 from redundantLabels import *
+from copyPropagation import *
 
 myBlock = blockBuilder("O0/dhrystone.s")
 myBlock.analyze()
@@ -17,6 +18,8 @@ myBlock.findBlockTargets()
 opt = redundantLoadStore(myBlock.basicBlocks)
 opt.analyseBlocks()
 opt = redundantLabels(opt.optimizedBlocks)
+opt.analyseBlocks()
+opt = copyPropagation(opt.optimizedBlocks)
 opt.analyseBlocks()
 
 buffer = ""

@@ -75,7 +75,7 @@ class redundantLoadStore:
 
     def previouslyStored(self, operation):
         """
-        Search for an idetical STORE operation.
+        Search for an identical STORE operation.
         """
 
         for oldOperation in self.changed:
