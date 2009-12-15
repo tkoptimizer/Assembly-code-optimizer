@@ -12,7 +12,7 @@ class copyPropagation:
 
     def analyseBlocks(self):
         for block in self.optimizedBlocks:
-            print "New block!"
+            #print "New block!"
             self.analyseBasicBlock(block)
 
     def analyseBasicBlock(self, block):
@@ -31,10 +31,10 @@ class copyPropagation:
             if isMove:
                 src = line.getMoveSource()
                 dst = line.getMoveDestination()
-                print "Testing for " + src
+                #print "Testing for " + src
                 
                 innerlinenr = linenr + 1
-                print "First will be: " + block.operations[innerlinenr].code
+                #print "First will be: " + block.operations[innerlinenr].code
                 while innerlinenr < len(block.operations):
                     l = block.operations[innerlinenr]
 
@@ -51,12 +51,12 @@ class copyPropagation:
                         break
 
                     if l.type == l.STORE and l.getAddress() == dst:
-                        print "Replacing address " + dst + " by " + src
-                        print l.code
+                        #print "Replacing address " + dst + " by " + src
+                        #print l.code
                         l.setAddress(src)
                     elif isMove and l.getMoveSource() == dst:
-                        print "Replacing address " + dst + " by " + src
-                        print l.code
+                        #print "Replacing address " + dst + " by " + src
+                        #print l.code
                         l.setMoveSource(src)
                     
                     innerlinenr += 1
