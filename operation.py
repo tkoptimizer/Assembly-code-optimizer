@@ -323,8 +323,7 @@ class operation:
             except:
                 " Apparently we're trying to return empty data, skipping. "
         else:
-            raise Exception, "Can't retrieve address for none store / load operations."
-
+            raise Exception, "Can't retrieve address for non-store / load operations."
 
     def setAddress(self, address):
         """
@@ -339,4 +338,54 @@ class operation:
 
             self.code = first + address + parts[:1]
         else:
-            raise Exception, "Can't change address for none store / load operations."
+            raise Exception, "Can't change address for non-store / load operations."
+
+    def ensureMove(self):
+        if not self.operation == "move":
+            raise Exception, "Operation " + self.code + " is not a move."
+
+    def getMoveSource(self):
+        """
+        Gets the source address of a move operation
+        """
+        self.ensureMove()
+        parts = self.code.split()
+        parts = parts[1].split(",")
+        
+        try:
+            return parts[0]
+        except:
+            raise Exception, "Fatal: move operation " + self.code + " has no source address."
+        
+
+    def setMoveSource(self, address):
+        """
+        Sets the source address of a move operation
+        """
+        self.ensureMove()
+        parts = self.code.split()
+        parts = parts[1].split(",")
+
+        self.code = self.code.replace(parts[0], address)
+
+    def getMoveDestination(self):
+        """
+        Gets the destination address of a move operation
+        """
+        self.ensureMove()
+        parts = self.code.split()
+        parts = parts[1].split(",")
+        
+        try:
+            return parts[1]
+        except:
+            raise Exception, "Fatal: move operation " + self.code + " has no destination address..."
+
+    def setMoveDestination(self, address):
+        """
+        Sets the destination address of a move operation
+        """
+        self.ensureMove()
+        parts = self.code.split()
+        parts = parts[1].split(",")
+        self.code = self.code.replace(parts[1], address)
