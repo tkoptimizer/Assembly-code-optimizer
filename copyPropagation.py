@@ -30,9 +30,10 @@ class copyPropagation:
 
             if isMove:
                 src = line.getMoveSource()
+            if isMove and src != "$sp" and src != "$fp":
                 dst = line.getMoveDestination()
                 #print "Testing for " + src
-                
+
                 innerlinenr = linenr + 1
                 #print "First will be: " + block.operations[innerlinenr].code
                 while innerlinenr < len(block.operations):

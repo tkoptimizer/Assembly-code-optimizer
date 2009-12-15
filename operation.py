@@ -353,7 +353,7 @@ class operation:
         parts = parts[1].split(",")
         
         try:
-            return parts[0]
+            return parts[1]
         except:
             raise Exception, "Fatal: move operation " + self.code + " has no source address."
         
@@ -366,7 +366,7 @@ class operation:
         parts = self.code.split()
         parts = parts[1].split(",")
 
-        self.code = self.code.replace(parts[0], address)
+        self.code = self.code.replace(parts[1], address)
 
     def getMoveDestination(self):
         """
@@ -377,7 +377,7 @@ class operation:
         parts = parts[1].split(",")
         
         try:
-            return parts[1]
+            return parts[0]
         except:
             raise Exception, "Fatal: move operation " + self.code + " has no destination address..."
 
@@ -388,4 +388,4 @@ class operation:
         self.ensureMove()
         parts = self.code.split()
         parts = parts[1].split(",")
-        self.code = self.code.replace(parts[1], address)
+        self.code = self.code.replace(parts[0], address)
