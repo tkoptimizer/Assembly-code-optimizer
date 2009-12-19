@@ -307,6 +307,33 @@ class operation:
 
             self.code = first + target + parts[1:]
 
+    def usesSource(self, reg):
+        """
+        Determines whether a command uses a particular source or not
+        """
+        if self.type == operation.CONTROL:
+            "1. Control statement can use a register were a jump target is stored"
+            parts = self.code.split(",")
+            if len(parts) == 1:
+                parts = parts[0]
+                parts = parts.split()
+
+            return reg == parts[-1]
+        elif self.type == operation.LOAD:
+            "2. Load statements have no sources. Throw exception"
+            raise Exception, "Load statements don't use any source registers"
+        elif self.type == operation.STORE:
+            "3. Store statements have their source at the first argument"
+            parts = self.code.split()
+            arguments = parts[-1].split(",")
+            return arguments[0] == reg 
+        elif self.type == operation.INT_ARITHMETIC or \
+            self.type == operation.FLOAT_ARITHMETIC:
+            "4. Arithmetic functions can have two sources"
+        else:
+            "Raise exception - uncategorized operation"
+            raise Exception, "Uncategorized operation"
+
     def setSource(self, source):
         """
         Sets the source register for a store operation.
