@@ -7,9 +7,9 @@ from copyPropagation import *
 from subprocess import call
 
 readfile = "O0/slalom.s"
-writefile = "slalom_copyproptimized.s"
+writefile = "pi_copyproptimized.s"
 
-myBlock = blockBuilder("O0/slalom.s")
+myBlock = blockBuilder("O0/pi.s")
 myBlock.analyze()
 myBlock.findBlockTargets()
 

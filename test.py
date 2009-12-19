@@ -5,7 +5,7 @@ from redundantLoadStore import *
 from redundantLabels import *
 from copyPropagation import *
 
-myBlock = blockBuilder("O0/acron.s")
+myBlock = blockBuilder("O0/pi.s")
 myBlock.analyze()
 myBlock.findBlockTargets()
 
@@ -33,4 +33,4 @@ for block in opt.optimizedBlocks:
 
     #buffer += "\n## basicblock ##\n\n"
 
-print buffer
+#print buffer

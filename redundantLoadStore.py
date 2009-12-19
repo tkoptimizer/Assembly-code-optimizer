@@ -43,17 +43,18 @@ class redundantLoadStore:
         for oldOperation in self.changed:
             if operation.type in (operation.LOAD, operation.STORE):
                 if oldOperation.type in (operation.LOAD, operation.STORE):
+                    
+                    if oldOperation.size == operation.size:
+                        register1 = operation.getTarget()
+                        register2 = oldOperation.getTarget()
 
-                    register1 = operation.getTarget()
-                    register2 = oldOperation.getTarget()
+                        address1 = operation.getTarget()
+                        address2 = oldOperation.getTarget()
 
-                    address1 = operation.getTarget()
-                    address2 = oldOperation.getTarget()
-
-                    if register1 == register2 and address1 == address2:
-                        return oldOperation
-                    elif address1 == address2:
-                        return oldOperation
+                        if register1 == register2 and address1 == address2:
+                            return oldOperation
+                        elif address1 == address2:
+                            return oldOperation
 
                 elif oldOperation.type in (operation.INT_ARITHMETIC, operation.FLOAT_ARITHMETIC):
 
@@ -79,14 +80,15 @@ class redundantLoadStore:
 
         for oldOperation in self.changed:
             if oldOperation.type == operation.STORE:
-                register1 = oldOperation.getTarget()
-                register2 = operation.getTarget()
+                if oldOperation.size == operation.size:
+                    register1 = oldOperation.getTarget()
+                    register2 = operation.getTarget()
 
-                address1  = oldOperation.getAddress()
-                address2  = operation.getAddress()
+                    address1  = oldOperation.getAddress()
+                    address2  = operation.getAddress()
 
-                if register1 == register2 and address1 == address2:
-                    return oldOperation
+                    if register1 == register2 and address1 == address2:
+                        return oldOperation
 
         return None
 

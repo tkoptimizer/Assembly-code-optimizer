@@ -144,6 +144,11 @@ class operation:
     SYSTEM           = 5
     LABEL            = 6
 
+    # Load and store sizes
+    BYTE = 0
+    WORD = 1
+    UNKNOWN = 2
+
     def __init__(self, line):
         """
         Defines what type of operation we've found and stores the line.
@@ -164,6 +169,8 @@ class operation:
 
         self.code = line[0:-1]
         self.included = True
+        self.size = self.determineSize()
+
 
     
     def __str__(self):
@@ -178,6 +185,27 @@ class operation:
             return "[ " + self.verboseType(self.type) + " ]:  " + code
         else:
             return "[ " + self.verboseType(self.type) + " ]:  " + code
+
+
+    def determineSize(self):
+        """
+        Find out if we're loading a block, a byte or a word.
+        """
+        
+        if self.type in (operation.STORE, operation.LOAD):
+            sizeToken = self.operation[1]
+            
+            if sizeToken == ".":
+                sizeToken = self.operation[2]
+            elif sizeToken == "i":
+                sizeToken = "b"
+
+            if sizeToken == "w":
+                return operation.WORD
+            elif sizeToken == "b":
+                return operation.BYTE
+            else:
+                return operation.UNKNOWN
 
 
     def verboseType(self, type):
@@ -340,52 +368,69 @@ class operation:
         else:
             raise Exception, "Can't change address for non-store / load operations."
 
-    def ensureMove(self):
-        if not self.operation == "move":
-            raise Exception, "Operation " + self.code + " is not a move."
+
+    def isMove(self):
+        """
+        There is only one 'move' operation, but it's part of the arithmetic
+        operations. So we add this function to find out if an operation is a
+        move.
+        """
+        
+        if self.type == operation.INT_ARITHMETIC:
+            if self.operation == "move":
+                return True
+            else:
+                return False
+
 
     def getMoveSource(self):
         """
         Gets the source address of a move operation
         """
-        self.ensureMove()
-        parts = self.code.split()
-        parts = parts[1].split(",")
-        
-        try:
-            return parts[1]
-        except:
-            raise Exception, "Fatal: move operation " + self.code + " has no source address."
+
+        if self.isMove():
+            parts = self.code.split()
+            parts = parts[1].split(",")
+            
+            try:
+                return parts[1]
+            except:
+                raise Exception, "Fatal: move operation " + self.code + " has no source address."
         
 
     def setMoveSource(self, address):
         """
         Sets the source address of a move operation
         """
-        self.ensureMove()
-        parts = self.code.split()
-        parts = parts[1].split(",")
 
-        self.code = self.code.replace(parts[1], address)
+        if self.isMove():
+            parts = self.code.split()
+            parts = parts[1].split(",")
+
+            self.code = self.code.replace(parts[1], address)
+
 
     def getMoveDestination(self):
         """
         Gets the destination address of a move operation
         """
-        self.ensureMove()
-        parts = self.code.split()
-        parts = parts[1].split(",")
-        
-        try:
-            return parts[0]
-        except:
-            raise Exception, "Fatal: move operation " + self.code + " has no destination address..."
+
+        if self.ifMove():
+            parts = self.code.split()
+            parts = parts[1].split(",")
+            
+            try:
+                return parts[0]
+            except:
+                raise Exception, "Fatal: move operation " + self.code + " has no destination address..."
+
 
     def setMoveDestination(self, address):
         """
         Sets the destination address of a move operation
         """
-        self.ensureMove()
-        parts = self.code.split()
-        parts = parts[1].split(",")
-        self.code = self.code.replace(parts[0], address)
+
+        if self.isMove():
+            parts = self.code.split()
+            parts = parts[1].split(",")
+            self.code = self.code.replace(parts[0], address)
