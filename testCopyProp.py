@@ -6,10 +6,10 @@ from redundantLabels import *
 from copyPropagation import *
 from subprocess import call
 
-readfile = "O0/slalom.s"
-writefile = "slalom_copyproptimized.s"
+readfile = "O0/acron.s"
+writefile = "acron_copyproptimized.s"
 
-myBlock = blockBuilder("O0/slalom.s")
+myBlock = blockBuilder(readfile)
 myBlock.analyze()
 myBlock.findBlockTargets()
 

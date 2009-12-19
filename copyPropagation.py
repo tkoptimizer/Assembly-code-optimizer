@@ -15,6 +15,15 @@ class copyPropagation:
             self.analyseBasicBlock(block)
 
     def analyseBasicBlock(self, block):
+        self.redundantMoveDetection(block)
+            
+    def redundantMoveDetection(self, block):
+        """Detects which moves are redundant. I.e.:
+            mov $regA, $regB
+            instr $regA, $regA, ... // Where instruction writes to $regA
+           becomes:
+            mov $regA, $regB        // will be removed by dead code elimination
+            instr $regA, $regB, ..."""
         linenr = 0
 
         while linenr < len(block.operations):
@@ -24,17 +33,18 @@ class copyPropagation:
             try:
                 line.ensureMove()
                 isMove = True
-            except:
-                "Nothing to do - line is no move"
-
-            if isMove:
                 src = line.getMoveSource()
-            if isMove and src != "$sp" and src != "$fp":
                 dst = line.getMoveDestination()
-                #print "Testing for " + src
+            except:
+                "Skipping line " + str(linenr) + " - line is no move"
 
+            if isMove and src != "$sp" and src != "$fp":
+                "Move destination was register " + str(dst)
+                "Now checking if register " + str(dst) + " is used while " + \
+                str(src) + "is still unchanged"
+
+                #Copy propagation starts on the next line
                 innerlinenr = linenr + 1
-                #print "First will be: " + block.operations[innerlinenr].code
                 while innerlinenr < len(block.operations):
                     l = block.operations[innerlinenr]
 
@@ -47,18 +57,20 @@ class copyPropagation:
 
                     if not (l.type == l.STORE or l.type == l.CONTROL\
                         or l.type == l.SYSTEM) and l.getTarget() == src:
-                        "Breaking off - register " + src + " is overwritten by " + l.code
+                        print "Breaking off - register " + str(src) +\
+                        " is overwritten by " + str(l.code)
                         break
 
                     if l.type == l.STORE and l.getAddress() == dst:
-                        #print "Replacing address " + dst + " by " + src
-                        #print l.code
+                        print "Replace address " + str(dst) + " by " + str(src)
                         l.setAddress(src)
                     elif isMove and l.getMoveSource() == dst:
-                        #print "Replacing address " + dst + " by " + src
+                        print "Replace address " + str(dst) + " by " + str(src)
                         #print l.code
                         l.setMoveSource(src)
                     
                     innerlinenr += 1
-
+            
             linenr += 1
+
+    
