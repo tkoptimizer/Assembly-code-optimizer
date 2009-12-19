@@ -1,5 +1,4 @@
-import copy
-from translation import *
+from operation import *
 
 class redundantLabels:
     def __init__(self, blocks):
@@ -7,8 +6,7 @@ class redundantLabels:
         """
         
         self.name            = "Remove redundant labels / jumps"
-        self.blocks          = blocks
-        self.optimizedBlocks = []
+        self.optimizedBlocks = blocks
 
 
     def analyseBlocks(self):
@@ -18,28 +16,29 @@ class redundantLabels:
         list of optimized basic blocks.
         """
 
-        for block in self.blocks:
-            newBlock = self.analyseBasicBlock(block)
-            self.optimizedBlocks.append(newBlock)
+        for block in self.optimizedBlocks:
+            self.analyseBasicBlock(block)
 
     def analyseBasicBlock(self, block):
-        #print block.getLabel() + " has " + str(len(block.code)) + " lines"
-        newBlock = copy.deepcopy(block)
-       
-        if not (newBlock.target == None) and len(newBlock.target.code) == 2:
-            #Replace jump target with target of the target-block
-            print "Replacing: "
-            print newBlock.code[-1]
+        """
+        Look at a single basic block and its target. If the target only has two
+        operations, of which the last is a control operation, make the block
+        jump to end directly.
+        """
 
-            jumpTargetLabel = getJumpTarget(newBlock.target.code[-1])
-            newBlock.code[-1] = setJumpTarget(newBlock.code[-1], jumpTargetLabel)
-
-            newBlock.target = newBlock.target.target
+        if not block.target == None and block.target.numOperations() == 2:
+            if block.target.operations[-1].type == operation.CONTROL:
+                target = block.target.operations[-1].getTarget()
+            else:
+                raise Exception, "Basicblock has no control operation on the last line!"
             
-            print "with: "
-            print newBlock.code[-1]
-            print "-----\n"
-        return newBlock
+            if block.operations[-1].type == operation.CONTROL:
+                block.operations[-1].setTarget(target)
+                
+                # Exclude the old block from the code.
+                block.target.exclude()
+                block.target = block.target.target
+                
 
     def getRedundantLabels(self, block):
         if not (block.target == None) and len(block.target.code) == 2:

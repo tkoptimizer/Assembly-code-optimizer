@@ -1,21 +1,5 @@
-from translation import *
 from basicblock import *
-
-#
-# TODO
-# 
-# The code for storing each start line of a basicblock is not really needed
-# anymore, but could prove useful with debugging.
-#
-# The targets should not just be line numbers, but should become blocks.
-#
-# --
-#
-# Possible optimization:
-# Find basic blocks by following the basic blocks.
-#   - don't read the next line after a jump, but continue from the line of the
-#     jump target. This way only reachable code is processed.
-#
+from operation import *
 
 class blockBuilder:
     """
@@ -33,7 +17,8 @@ class blockBuilder:
 
         self.file    = open(filename)
         self.listing = self.file.readlines()
-        self.basicBlocks = [] 
+        self.basicBlocks = []
+        self.exceptions  = []
 
 
     def analyze(self):
@@ -42,17 +27,19 @@ class blockBuilder:
         basicblock depending on what code is on the current line.
         """
 
-        lineNumber       = 0
-        numBlocks        = 0
-        currentBlock     = None;
-        newBlock         = True
+        lineNumber   = 0
+        numBlocks    = 0
+        currentBlock = None;
+        newBlock     = True
 
         # Iterate over every line of assembly stored in this object. 
         for line in self.listing:
+
             try:
-                operator = getOp(line)
-            except:
-                " Nothing to do: no operator on this line "
+                currentOpp = operation(line)
+            except Exception as error:
+                # Keep a log of all exceptions.
+                self.exceptions.append(error)
             else:
                 # Create a new block if we previously found a control operator
                 # or if we're in the first block.
@@ -64,66 +51,61 @@ class blockBuilder:
 
                     newBlock = False
                 
-                #cut the last character off line - it's a "newline" char
-                currentBlock.addLine(line[:len(line)-1])
+                currentBlock.addOperation(currentOpp)
 
                 # Check if we found a jump or branch operator.
-                if isControl(operator):
+                if currentOpp.type == operation.CONTROL:
 
                     # Jump or branch operator: end of block
                     newBlock = True
 
-            lineNumber += 1
+                lineNumber += 1
+
 
     def findGenSet(self):
-        for block in self.basicBlocks:
-            for line in block.code:
-                if writesReg(line):
-                    block.addGen(getWriteLocation(line))                   
+        pass
+
 
     def findKillSet(self):
         pass
 
-    def getLabelPosition(self, targetLine):
+
+    def hasErrors(self):
         """
-        Method for finding the line a jump target can be found.
+        True if any exceptions occurred during execution.
         """
 
-        lineNumber = 0
-
-        # Look for labels of the form: '$name'
-        if targetLine[0] == "$" :
-
-            for line in self.listing:
-                if len(line) - 2 > len(targetLine) or len(line) < len(targetLine):
-                    " Target not on this line, skipping. "
-                elif line[0:len(line)-2] == targetLine:
-                    return lineNumber
-
-                lineNumber += 1
-
-        # Look for labels of the form: '__name'
-        elif targetLine[0:2] == "__" :
-
-            for line in self.listing:
-                if line[0:len(line)-1] == targetLine[2:len(line)-1]:
-                    return lineNumber
-
-                lineNumber += 1
-
-        raise Exception, "Label not in current file."
+        return len(self.exceptions) > 0
 
     
+    def errorReport(self):
+        """
+        Print all the logged exceptions in the form of an error report.
+        """
+
+        print "Error report: "
+        print "--------------------------------------------------\n"
+        
+        for ex in self.exceptions:
+            print type(ex)
+            print "\t", ex
+            print ""
+
+        print "--------------------------------------------------"
+
+
     def findBlockTargets(self):
         """
         Find the operational successor of each basic block.
         """
 
         for block in self.basicBlocks:
-            if isControl(getOp(block.code[-1])):
-                targetLabel = getJumpTarget(block.code[-1])
+            currentOpp = block.operations[-1]
 
+            if currentOpp.type == operation.CONTROL:
+                targetLabel = currentOpp.getTarget()                
+                
+                # Search each block for the label we need.
                 for searchBlock in self.basicBlocks:
                     if searchBlock.hasLabel(targetLabel):
-                        targetLabel = targetLabel.replace("$", "S__")
                         block.target = searchBlock
