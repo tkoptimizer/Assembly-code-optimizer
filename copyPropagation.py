@@ -15,28 +15,43 @@ class copyPropagation:
             self.analyseBasicBlock(block)
 
     def analyseBasicBlock(self, block):
+        self.redundantMoveDetection(block)
+            
+    def redundantMoveDetection(self, block):
+        """Detects which moves are redundant. I.e.:
+            mov $regA, $regB
+            instr $regA, $regA, ... // Where instruction writes to $regA
+           becomes:
+            mov $regA, $regB        // will be removed by dead code elimination
+            instr $regA, $regB, ..."""
         linenr = 0
 
+        totalOps = len(block.operations) - 1
+        print str(totalOps) + " lines to go.."
         while linenr < len(block.operations):
+            print "line " + str(linenr) + " / " + str(totalOps)
             line = block.operations[linenr]
             isMove = False
              
             try:
                 line.ensureMove()
                 isMove = True
-            except:
-                "Nothing to do - line is no move"
-
-            if isMove:
                 src = line.getMoveSource()
-            if isMove and src != "$sp" and src != "$fp":
                 dst = line.getMoveDestination()
-                #print "Testing for " + src
+            except:
+                "Skipping line " + str(linenr) + " - line is no move"
 
+            if isMove and src != "$sp" and src != "$fp":
+                print "Move found!"
+                print "Move destination was register " + str(dst)
+                print "Now checking if register " + str(dst) + " is used while " + \
+                str(src) + " is still unchanged"
+
+                #Copy propagation starts on the next line
                 innerlinenr = linenr + 1
-                #print "First will be: " + block.operations[innerlinenr].code
                 while innerlinenr < len(block.operations):
                     l = block.operations[innerlinenr]
+                    print "checking " + l.code
 
                     #Ugly, but Pythonic way of testing if an operation is a move ^^
                     try:
@@ -47,18 +62,24 @@ class copyPropagation:
 
                     if not (l.type == l.STORE or l.type == l.CONTROL\
                         or l.type == l.SYSTEM) and l.getTarget() == src:
-                        "Breaking off - register " + src + " is overwritten by " + l.code
+                        print "Breaking off - register " + str(src) +\
+                        " is overwritten by " + str(l.code)
                         break
 
-                    if l.type == l.STORE and l.getAddress() == dst:
-                        #print "Replacing address " + dst + " by " + src
-                        #print l.code
-                        l.setAddress(src)
+                    if l.type == l.STORE and l.getTarget() == dst:
+                        print "HIT! Replace address " + str(dst) + " by " + str(src)
+                        l.setSource(src)
+                        print "Line is now: " + l.code
                     elif isMove and l.getMoveSource() == dst:
-                        #print "Replacing address " + dst + " by " + src
-                        #print l.code
+                        print "HIT! Replace address " + str(dst) + " by " + str(src)
                         l.setMoveSource(src)
+                        print "Line is now: " + l.code
+                    #other operations that use dst?
+
                     
                     innerlinenr += 1
-
+                    if innerlinenr == len(block.operations):
+                        print "End of block reached. Continuing.."
             linenr += 1
+
+    
