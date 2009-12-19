@@ -307,6 +307,18 @@ class operation:
 
             self.code = first + target + parts[1:]
 
+    def setSource(self, source):
+        """
+        Sets the source register for a store operation.
+        """
+        if self.type != operation.STORE:
+            raise Exception, "Not-store operations are not yet supported!"
+
+        parts = self.code.split()
+        first = parts[0]
+        parts = parts[1].split(",")
+
+        self.code = first + "\t" + source + "," + parts[1]
 
     def getAddress(self):
         """

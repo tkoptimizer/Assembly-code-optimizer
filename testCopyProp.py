@@ -6,8 +6,8 @@ from redundantLabels import *
 from copyPropagation import *
 from subprocess import call
 
-readfile = "O0/acron.s"
-writefile = "acron_copyproptimized.s"
+readfile = "O0/pi.s"
+writefile = "copyproptimized.s"
 
 myBlock = blockBuilder(readfile)
 myBlock.analyze()
@@ -27,7 +27,7 @@ for block in opt.optimizedBlocks:
 
     #buffer += "\n## basicblock ##\n\n"
 
-f = open(writefile, 'a')
+f = open(writefile, 'w')
 f.write(buffer)
 
 call(["gvim", "-d", readfile, writefile])
