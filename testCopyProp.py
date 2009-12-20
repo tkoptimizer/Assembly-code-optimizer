@@ -6,7 +6,7 @@ from redundantLabels import *
 from copyPropagation import *
 from subprocess import call
 
-readfile = "O0/pi.s"
+readfile = "O0/acron.s"
 writefile = "copyproptimized.s"
 
 myBlock = blockBuilder(readfile)
