@@ -32,12 +32,13 @@ class redundantLabels:
             else:
                 raise Exception, "Basicblock has no control operation on the last line!"
             
-            if block.operations[-1].type == operation.CONTROL:
-                block.operations[-1].setTarget(target)
-                
-                # Exclude the old block from the code.
-                block.target.exclude()
-                block.target = block.target.target
+            if target[0] == "$":
+                if block.operations[-1].type == operation.CONTROL:
+                    block.operations[-1].setTarget(target)
+                    
+                    # Exclude the old block from the code.
+                    block.target.exclude()
+                    block.target = block.target.target
                 
 
     def getRedundantLabels(self, block):

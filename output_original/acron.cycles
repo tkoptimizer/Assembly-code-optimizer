@@ -7,7 +7,7 @@ of SimpleScalar, LLC (info@simplescalar.com).
 
 sim: command line: sim-outorder -redir:prog output_original/acron.output -redir:sim output_original/acron.cycles acron_ori 
 
-sim: simulation started @ Sun Dec 13 15:18:20 2009, options follow:
+sim: simulation started @ Sun Dec 20 19:20:58 2009, options follow:
 
 sim-outorder: This simulator implements a very detailed out-of-order issue
 superscalar processor with a two-level memory system and speculative
@@ -249,6 +249,6 @@ ld_target_big_endian              0 # target executable endian-ness, non-zero if
 mem.page_count                   27 # total number of pages allocated
 mem.page_mem                   108k # total size of memory pages allocated
 mem.ptab_misses                  27 # total first level page table misses
-mem.ptab_accesses          64343670 # total page table accesses
+mem.ptab_accesses          64343712 # total page table accesses
 mem.ptab_miss_rate           0.0000 # first level page table miss rate
 

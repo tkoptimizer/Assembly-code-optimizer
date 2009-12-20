@@ -27,7 +27,7 @@ class blockBuilder:
         basicblock depending on what code is on the current line.
         """
 
-        lineNumber   = 0
+        lineNumber   = 1
         numBlocks    = 0
         currentBlock = None;
         newBlock     = True
@@ -36,7 +36,7 @@ class blockBuilder:
         for line in self.listing:
 
             try:
-                currentOpp = operation(line)
+                currentOpp = operation(line, lineNumber)
             except Exception as error:
                 # Keep a log of all exceptions.
                 self.exceptions.append(error)

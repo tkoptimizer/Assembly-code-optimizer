@@ -4,8 +4,10 @@ from basicblock import *
 from redundantLoadStore import *
 from redundantLabels import *
 from copyPropagation import *
+from subExpressionElimination import *
+from altCopyPropagation import *
 
-myBlock = blockBuilder("O0/pi.s")
+myBlock = blockBuilder("O0/acron.s")
 myBlock.analyze()
 myBlock.findBlockTargets()
 
@@ -15,12 +17,18 @@ myBlock.findBlockTargets()
 #if myBlock.hasErrors():
 #    myBlock.errorReport()
 
-opt = redundantLoadStore(myBlock.basicBlocks)
+
+opt = redundantLabels(myBlock.basicBlocks)
 opt.analyseBlocks()
-opt = redundantLabels(opt.optimizedBlocks)
+opt = subExpressionElimination(opt.optimizedBlocks)
 opt.analyseBlocks()
-opt = copyPropagation(opt.optimizedBlocks)
+opt = altCopyPropagation(opt.optimizedBlocks)
 opt.analyseBlocks()
+#opt = copyPropagation(opt.optimizedBlocks)
+#opt.analyseBlocks()
+#opt = redundantLoadStore(opt.optimizedBlocks)
+#opt.analyseBlocks()
+
 
 buffer = ""
 
@@ -33,4 +41,4 @@ for block in opt.optimizedBlocks:
 
     #buffer += "\n## basicblock ##\n\n"
 
-#print buffer
+print buffer

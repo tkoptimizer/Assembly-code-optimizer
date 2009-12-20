@@ -24,6 +24,7 @@ class operation:
 
     # Load operations
     load = [
+        'la',
         'lb',
         'lbu',
         'lhu',
@@ -149,7 +150,7 @@ class operation:
     WORD = 1
     UNKNOWN = 2
 
-    def __init__(self, line):
+    def __init__(self, line, lineNumber):
         """
         Defines what type of operation we've found and stores the line.
         """
@@ -168,9 +169,13 @@ class operation:
             self.type      = self.getType()
 
         self.code = line[0:-1]
+        
+        # Backup the code so we can always return to a certain status quo.
+        self.original_code = self.code
+
         self.included = True
         self.size = self.determineSize()
-
+        self.lineNumber = lineNumber
 
     
     def __str__(self):
@@ -182,9 +187,9 @@ class operation:
         code = code.replace('\t', ' ')
 
         if self.included:
-            return "[ " + self.verboseType(self.type) + " ]:  " + code
+            return str(self.lineNumber) + " [ " + self.verboseType(self.type) + " ]:  " + code
         else:
-            return "[ " + self.verboseType(self.type) + " ]:  " + code
+            return str(self.lineNumber) + " [ " + self.verboseType(self.type) + " ]:  " + code
 
 
     def determineSize(self):
@@ -206,6 +211,46 @@ class operation:
                 return operation.BYTE
             else:
                 return operation.UNKNOWN
+    
+
+    def hasArguments(self):
+        """
+        Method necessary to counter certain exceptions which are thrown if
+        arguments are sought, but are not there.
+        """
+
+        if self.getArguments() == None:
+            return False
+        
+        return True
+    
+    def getArguments(self):
+        """
+        Get a string list of all the arguments for an operation.
+        """
+
+        parts = self.code.split()
+        
+        if len(parts) > 1:
+            return parts[1].split(",")
+
+        return None
+    
+    def setArguments(self, arguments):
+        """
+        Change the arguments.
+        """
+
+
+        parts = self.code.split()
+
+        if len(parts) > 1:
+            self.code = "\t" + parts[0] + "\t"
+            for argument in arguments:
+                self.code += argument + ","
+            
+            # remove last ','
+            self.code = self.code[:-1]
 
 
     def verboseType(self, type):
@@ -304,6 +349,22 @@ class operation:
 
             return arguments[0]
 
+    
+    def setStoreSource(self, source):
+        """
+        This method exists mostly for semantic reasons and does the same as
+        setTarget. This method only works with STORE operations.
+        """
+        
+        if self.type is not operation.STORE:
+            raise Exception, "Only store operations have a source!"
+
+        parts = self.code.split()
+        first = parts[0]
+        parts = parts[1].split(",")
+        
+        self.code = "\t" + first + "\t" + source + "," + parts[1]
+
 
     def setTarget(self, target):
         """
@@ -335,10 +396,12 @@ class operation:
 
             self.code = first + target + parts[1:]
 
+
     def usesSource(self, reg):
         """
         Determines whether a command uses a particular source or not
         """
+
         if self.type == operation.CONTROL:
             "1. Control statement can use a register were a jump target is stored"
             parts = self.code.split(",")
@@ -347,25 +410,32 @@ class operation:
                 parts = parts.split()
 
             return reg == parts[-1]
+
         elif self.type == operation.LOAD:
             "2. Load statements have no sources. Throw exception"
             raise Exception, "Load statements don't use any source registers"
+
         elif self.type == operation.STORE:
             "3. Store statements have their source at the first argument"
+
             parts = self.code.split()
             arguments = parts[-1].split(",")
             return arguments[0] == reg 
+
         elif self.type == operation.INT_ARITHMETIC or \
             self.type == operation.FLOAT_ARITHMETIC:
             "4. Arithmetic functions can have two sources"
+
         else:
             "Raise exception - uncategorized operation"
             raise Exception, "Uncategorized operation"
+
 
     def setSource(self, source):
         """
         Sets the source register for a store operation.
         """
+
         if self.type != operation.STORE:
             raise Exception, "Not-store operations are not yet supported!"
 
@@ -391,6 +461,7 @@ class operation:
                 " Apparently we're trying to return empty data, skipping. "
         else:
             raise Exception, "Can't retrieve address for non-store / load operations."
+
 
     def setAddress(self, address):
         """
@@ -454,7 +525,7 @@ class operation:
         Gets the destination address of a move operation
         """
 
-        if self.ifMove():
+        if self.isMove():
             parts = self.code.split()
             parts = parts[1].split(",")
             
@@ -473,3 +544,12 @@ class operation:
             parts = self.code.split()
             parts = parts[1].split(",")
             self.code = self.code.replace(parts[0], address)
+
+    
+    def resetOperation(self):
+        """
+        Put back a backup of the original code.
+        """
+        
+        self.include()
+        self.code = self.original_code
