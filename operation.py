@@ -146,13 +146,15 @@ class operation:
     LABEL            = 6
 
     # Load and store sizes
-    BYTE = 0
-    WORD = 1
+    BYTE    = 0
+    WORD    = 1
     UNKNOWN = 2
+
 
     def __init__(self, line, lineNumber):
         """
         Defines what type of operation we've found and stores the line.
+        Fills in all the datafields for a single operation.
         """
 
         if len(line) == 0:
@@ -187,14 +189,16 @@ class operation:
         code = code.replace('\t', ' ')
 
         if self.included:
-            return str(self.lineNumber) + " [ " + self.verboseType(self.type) + " ]:  " + code
+            return str(self.lineNumber) + " [ " \
+                    + self.verboseType(self.type) + " ]:  " + code
         else:
-            return str(self.lineNumber) + " [ " + self.verboseType(self.type) + " ]:  " + code
+            return str(self.lineNumber) + " [ " \
+                    + self.verboseType(self.type) + " ]:  " + code
 
 
     def determineSize(self):
         """
-        Find out if we're loading a block, a byte or a word.
+        Find out if we're loading a byte or a word.
         """
         
         if self.type in (operation.STORE, operation.LOAD):
@@ -216,7 +220,7 @@ class operation:
     def hasArguments(self):
         """
         Method necessary to counter certain exceptions which are thrown if
-        arguments are sought, but are not there.
+        arguments are sought when they are not available.
         """
 
         if self.getArguments() == None:
@@ -224,6 +228,7 @@ class operation:
         
         return True
     
+
     def getArguments(self):
         """
         Get a string list of all the arguments for an operation.
@@ -236,11 +241,11 @@ class operation:
 
         return None
     
+
     def setArguments(self, arguments):
         """
-        Change the arguments.
+        Change the arguments of a single operation.
         """
-
 
         parts = self.code.split()
 
@@ -274,8 +279,8 @@ class operation:
     def exclude(self):
         """
         Makes sure the status of this operation is 'not included'. Operations
-        that are exclude will be commented out in the eventual code (or left
-        out).
+        that are excluded will be commented out in the code or left
+        out completely.
         """
 
         self.included = False
@@ -283,7 +288,7 @@ class operation:
 
     def include(self):
         """
-        Re-include the operation in the eventual code.
+        Re-include the operation in the code.
         """
 
         self.included = True
@@ -349,22 +354,6 @@ class operation:
 
             return arguments[0]
 
-    
-    def setStoreSource(self, source):
-        """
-        This method exists mostly for semantic reasons and does the same as
-        setTarget. This method only works with STORE operations.
-        """
-        
-        if self.type is not operation.STORE:
-            raise Exception, "Only store operations have a source!"
-
-        parts = self.code.split()
-        first = parts[0]
-        parts = parts[1].split(",")
-        
-        self.code = "\t" + first + "\t" + source + "," + parts[1]
-
 
     def setTarget(self, target):
         """
@@ -403,7 +392,7 @@ class operation:
         """
 
         if self.type == operation.CONTROL:
-            "1. Control statement can use a register were a jump target is stored"
+            # 1. Control statement can use a register as a jump target.
             parts = self.code.split(",")
             if len(parts) == 1:
                 parts = parts[0]
@@ -412,11 +401,11 @@ class operation:
             return reg == parts[-1]
 
         elif self.type == operation.LOAD:
-            "2. Load statements have no sources. Throw exception"
+            # 2. Load statements have no sources: throw exception.
             raise Exception, "Load statements don't use any source registers"
 
         elif self.type == operation.STORE:
-            "3. Store statements have their source at the first argument"
+            # 3. Store statements have their source at the first argument
 
             parts = self.code.split()
             arguments = parts[-1].split(",")
@@ -424,10 +413,10 @@ class operation:
 
         elif self.type == operation.INT_ARITHMETIC or \
             self.type == operation.FLOAT_ARITHMETIC:
-            "4. Arithmetic functions can have two sources"
+            "4. Arithmetic functions can have two sources."
 
         else:
-            "Raise exception - uncategorized operation"
+            "Raise exception - uncategorized operation."
             raise Exception, "Uncategorized operation"
 
 
@@ -436,14 +425,15 @@ class operation:
         Sets the source register for a store operation.
         """
 
-        if self.type != operation.STORE:
-            raise Exception, "Not-store operations are not yet supported!"
+        if self.type is not operation.STORE:
+            raise Exception, "Non-store operations are not yet supported!"
 
         parts = self.code.split()
         first = parts[0]
         parts = parts[1].split(",")
 
-        self.code = first + "\t" + source + "," + parts[1]
+        self.code = "\t" + first + "\t" + source + "," + parts[1]
+
 
     def getAddress(self):
         """
@@ -458,7 +448,7 @@ class operation:
             try:
                 return parts[1]
             except:
-                " Apparently we're trying to return empty data, skipping. "
+                "Apparently we're trying to return empty data, skipping."
         else:
             raise Exception, "Can't retrieve address for non-store / load operations."
 
@@ -505,7 +495,8 @@ class operation:
             try:
                 return parts[1]
             except:
-                raise Exception, "Fatal: move operation " + self.code + " has no source address."
+                raise Exception, "Fatal: move operation " \
+                        + self.code + " has no source address."
         
 
     def setMoveSource(self, address):
@@ -532,7 +523,8 @@ class operation:
             try:
                 return parts[0]
             except:
-                raise Exception, "Fatal: move operation " + self.code + " has no destination address..."
+                raise Exception, "Fatal: move operation " \
+                        + self.code + " has no destination address..."
 
 
     def setMoveDestination(self, address):

@@ -101,9 +101,9 @@ Proc0:
 	jal	times
 	lw	$2,120($fp)
 	sw	$2,104($fp)
-	move	$16,$0
+# 	move	$16,$0
 $L3:
-	sltu	$2,$16,5000
+	sltu	$2,$0,5000
 	bne	$2,$0,$L6
 	j	$L4
 $L6:
@@ -151,9 +151,9 @@ $L4:
 	jal	times
 	lw	$2,120($fp)
 	sw	$2,104($fp)
-	move	$16,$0
+# 	move	$16,$0
 $L7:
-	sltu	$2,$16,5000
+	sltu	$2,$0,5000
 	bne	$2,$0,$L10
 	j	$L8
 $L10:
@@ -185,8 +185,8 @@ $L11:
 	j	$L12
 $L13:
 	lw	$2,16($fp)
-	move	$4,$2
-	sll	$3,$4,2
+# 	move	$4,$2
+	sll	$3,$2,2
 	addu	$3,$3,$2
 	lw	$2,20($fp)
 	subu	$3,$3,$2
@@ -198,8 +198,8 @@ $L13:
 	jal	Proc7
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L11
 $L12:
 	la	$4,Array1Glob
@@ -232,8 +232,8 @@ $L18:
 $L16:
 	lbu	$2,29($fp)
 	addu	$3,$2,1
-	move	$2,$3
-	sb	$2,29($fp)
+# 	move	$2,$3
+	sb	$3,29($fp)
 	j	$L14
 $L15:
 	lw	$2,20($fp)
@@ -248,13 +248,13 @@ $L15:
 	lw	$2,24($fp)
 	lw	$3,20($fp)
 	subu	$2,$2,$3
-	move	$4,$2
-	sll	$3,$4,3
+# 	move	$4,$2
+	sll	$3,$2,3
 	subu	$3,$3,$2
 	lw	$2,16($fp)
 	subu	$3,$3,$2
 	sw	$3,20($fp)
-	addu	$4,$fp,16
+	addu	$2,$fp,16
 	jal	Proc2
 $L9:
 	addu	$16,$16,1
@@ -400,13 +400,13 @@ $L23:
 	bne	$2,$3,$L26
 	lw	$3,0($fp)
 	subu	$2,$3,1
-	move	$3,$2
-	sw	$3,0($fp)
+# 	move	$3,$2
+	sw	$2,0($fp)
 	lw	$2,16($fp)
 	lw	$3,0($fp)
 	lw	$4,IntGlob
-	subu	$3,$3,$4
-	sw	$3,0($2)
+	subu	$2,$2,$4
+	sw	$2,0($2)
 	sw	$0,4($fp)
 $L26:
 	lw	$2,4($fp)
@@ -622,7 +622,7 @@ Proc8:
 	addu	$3,$2,5
 	sw	$3,0($fp)
 	lw	$2,0($fp)
-	move	$3,$2
+# 	move	$3,$2
 	sll	$2,$3,2
 	lw	$3,16($fp)
 	addu	$2,$2,$3
@@ -643,34 +643,34 @@ Proc8:
 	sw	$4,0($2)
 	lw	$2,0($fp)
 	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	lw	$3,16($fp)
-	addu	$2,$2,$3
-	addu	$3,$2,120
+	addu	$2,$2,$2
+	addu	$2,$2,120
 	lw	$2,0($fp)
 	sw	$2,0($3)
 	lw	$2,0($fp)
 	sw	$2,4($fp)
 $L47:
 	lw	$3,0($fp)
-	addu	$2,$3,1
+	addu	$2,$2,1
 	lw	$3,4($fp)
-	slt	$2,$2,$3
+	slt	$2,$2,$2
 	beq	$2,$0,$L50
 	j	$L48
 $L50:
 	lw	$3,0($fp)
 	lw	$2,4($fp)
-	move	$4,$2
-	sll	$2,$4,2
+# 	move	$4,$2
+	sll	$2,$2,2
 	move	$5,$3
-	sll	$4,$5,1
-	addu	$4,$4,$3
-	sll	$3,$4,4
-	addu	$4,$4,$3
-	sll	$3,$4,2
+	sll	$2,$5,1
+	addu	$2,$2,$3
+	sll	$3,$2,4
+	addu	$2,$2,$3
+	sll	$3,$2,2
 	lw	$4,20($fp)
-	addu	$3,$3,$4
+	addu	$3,$3,$2
 	addu	$2,$2,$3
 	lw	$3,0($fp)
 	sw	$3,0($2)
@@ -697,7 +697,7 @@ $L48:
 	subu	$2,$4,4
 	lw	$3,0($fp)
 	lw	$2,0($fp)
-	move	$4,$2
+# 	move	$4,$2
 	sll	$2,$4,2
 	move	$5,$3
 	sll	$4,$5,1
@@ -747,7 +747,7 @@ $L48:
 	lw	$4,16($fp)
 	addu	$3,$3,$4
 	lw	$4,0($3)
-	sw	$4,0($2)
+	sw	$2,0($2)
 	li	$2,0x00000005		# 5
 	sw	$2,IntGlob
 $L46:
@@ -765,9 +765,9 @@ Func1:
 	subu	$sp,$sp,16
 	sw	$fp,8($sp)
 	move	$fp,$sp
-	move	$3,$4
-	move	$4,$5
-	sb	$3,0($fp)
+# 	move	$3,$4
+# 	move	$4,$5
+	sb	$4,0($fp)
 	sb	$4,1($fp)
 	lbu	$2,0($fp)
 	sb	$2,2($fp)
@@ -826,8 +826,8 @@ $L57:
 	sb	$2,20($fp)
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 $L58:
 	j	$L55
 $L56:
@@ -895,4 +895,3 @@ $L64:
 	addu	$sp,$sp,16
 	j	$31
 	.end	Func3
-

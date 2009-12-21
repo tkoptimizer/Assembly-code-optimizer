@@ -1,13 +1,8 @@
 from basicblock import *
 from operation import *
+from optimizationClass import *
 
-#
-# Optimization class.
-#
-# Iterates over all basicblocks and removes redundant loads and stores.
-#
-
-class redundantLoadStore:
+class redundantLoadStore(optimizationClass):
     """
     Optimizes assembly by removing any unecessary loads or stores.
     """
@@ -21,17 +16,6 @@ class redundantLoadStore:
         self.optimizedBlocks = blocks
         self.changed         = []
         self.exceptions      = []
-
-
-    def analyseBlocks(self):
-        """
-        Iterate over all the blocks and analyse each block separately. The
-        analysis of a single block returns a new block which is added to the
-        list of optimized basic blocks.
-        """
-
-        for block in self.optimizedBlocks:
-            self.analyseBasicBlock(block)
 
     
     def previouslyChanged(self, operation):

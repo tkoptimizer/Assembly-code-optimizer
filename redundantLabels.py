@@ -1,23 +1,15 @@
 from operation import *
+from optimizationClass import *
 
-class redundantLabels:
+class redundantLabels(optimizationClass):
     def __init__(self, blocks):
         """
+        Initializes all the necessary variables.
         """
         
         self.name            = "Remove redundant labels / jumps"
         self.optimizedBlocks = blocks
 
-
-    def analyseBlocks(self):
-        """
-        Iterate over all the blocks and analyse each block separately. The
-        analysis of a single block returns a new block which is added to the
-        list of optimized basic blocks.
-        """
-
-        for block in self.optimizedBlocks:
-            self.analyseBasicBlock(block)
 
     def analyseBasicBlock(self, block):
         """

@@ -1,16 +1,11 @@
 from basicblock import *
 from operation import *
+from optimizationClass import *
 import re
 
-#
-# Optimization class.
-#
-# Iterates over all basicblocks and removes redundant loads and stores.
-#
-
-class altCopyPropagation:
+class altCopyPropagation(optimizationClass):
     """
-    Optimizes assembly by removing any unecessary loads or stores.
+    Optimizes assembly by trying to remove unnecessary 'move' operations.
     """
 
     def __init__(self, blocks):
@@ -18,22 +13,11 @@ class altCopyPropagation:
         Initializes all the necessary variables.
         """
         
-        self.name            = "Remove redundant loads / stores"
+        self.name            = "Copy propagation"
         self.optimizedBlocks = blocks
         self.moves           = []
         self.updatedOps      = []
 
-
-    def analyseBlocks(self):
-        """
-        Iterate over all the blocks and analyse each block separately. The
-        analysis of a single block returns a new block which is added to the
-        list of optimized basic blocks.
-        """
-
-        for block in self.optimizedBlocks:
-            self.analyseBasicBlock(block)
-    
 
     def findUnnecessaryMove(self, operation):
         """
@@ -55,8 +39,14 @@ class altCopyPropagation:
     
 
     def resetOperations(self):
+        """
+        Restore the backed up code for each operation and re-include it in the
+        code.
+        """
+
         for operation in self.updatedOps:
             operation.resetOperation()
+
         
     def analyseBasicBlock(self, block):
         """
@@ -72,7 +62,9 @@ class altCopyPropagation:
             redundantMove = self.findUnnecessaryMove(operation)
 
             if operation.isMove():
-                if operation.getMoveSource() in ("$sp", "$fp") or operation.getMoveDestination() in ("$sp", "$fp"):
+                if operation.getMoveSource() in ("$sp", "$fp") \
+                    or operation.getMoveDestination() in ("$sp", "$fp"):
+
                     continue
 
                 self.moves.append(operation)
@@ -80,13 +72,15 @@ class altCopyPropagation:
             elif operation.type == operation.STORE:
                 if redundantMove is not None:
                     if redundantMove.getMoveDestination() == operation.getTarget():
-                        operation.setStoreSource(redundantMove.getMoveSource())
+
+                        operation.setSource(redundantMove.getMoveSource())
                         redundantMove.exclude()
                         self.updatedOps.append(operation)
                         self.updatedOps.append(redundantMove)
 
             elif operation.type == operation.LOAD:
                 if redundantMove is not None:
+
                     address = operation.getAddress()
                     #print redundantMove
                     if address[-1] == ")":
@@ -104,7 +98,9 @@ class altCopyPropagation:
 
                     #print "---"
 
-            elif operation.type in (operation.INT_ARITHMETIC, operation.FLOAT_ARITHMETIC, operation.CONTROL):
+            elif operation.type in (operation.INT_ARITHMETIC, \
+                    operation.FLOAT_ARITHMETIC, operation.CONTROL):
+
                 if redundantMove is not None:
                     destination = redundantMove.getMoveDestination()
                     source      = redundantMove.getMoveSource()

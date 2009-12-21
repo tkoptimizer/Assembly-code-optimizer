@@ -102,8 +102,8 @@ $L6:
 $L7:
 $L5:
 	lw	$3,16($fp)
-	addu	$2,$3,1
-# 	move	$3,$2
+	addu	$2,$2,1
+	move	$3,$2
 	sw	$2,16($fp)
 	j	$L3
 $L4:
@@ -128,4 +128,3 @@ $L1:
 	addu	$sp,$sp,56
 	j	$31
 	.end	main
-

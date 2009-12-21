@@ -1,12 +1,13 @@
 from basicblock import *
 from operation import *
+from optimizationClass import *
 
 #
 # Optimization class.
 #
 # Iterates over all basicblocks and removes redundant loads and stores.
 #
-class subExpressionElimination:
+class subExpressionElimination(optimizationClass):
 
     def __init__(self, blocks):
         """
@@ -16,15 +17,6 @@ class subExpressionElimination:
         self.name            = "Common subexpression elimination"
         self.optimizedBlocks = blocks
         self.expressions     = []
-
-
-    def analyseBlocks(self):
-        """
-        Analyse each block separately.
-        """
-
-        for block in self.optimizedBlocks:
-            self.analyseBlock(block)
 
 
     def findCommonExpression(self, operation):
@@ -48,7 +40,7 @@ class subExpressionElimination:
 
     
 
-    def analyseBlock(self, block):
+    def analyseBasicBlock(self, block):
         self.expressions = []
         for operation in block.operations:
             if operation.hasArguments():

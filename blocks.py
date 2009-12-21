@@ -15,10 +15,14 @@ class blockBuilder:
         stored in a list.
         """
 
-        self.file    = open(filename)
-        self.listing = self.file.readlines()
+        self.file     = open(filename)
+        self.filename = filename 
+        self.listing  = self.file.readlines()
         self.basicBlocks = []
         self.exceptions  = []
+
+        # We have the source we no longer need to read the file.
+        self.file.close()
 
 
     def analyze(self):
