@@ -192,6 +192,12 @@ class operation:
         self.included = True
         self.lineNumber = lineNumber
 
+    def isMove(self):
+        """
+        Determine if current operation is a 'move' operation
+        """
+        
+        return False
     
     def __str__(self):
         """
