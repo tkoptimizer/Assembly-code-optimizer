@@ -1,5 +1,5 @@
 from basicblock import *
-from operation import *
+from operations_new import *
 
 class blockBuilder:
     """
@@ -40,7 +40,7 @@ class blockBuilder:
         for line in self.listing:
 
             try:
-                currentOpp = operation(line, lineNumber)
+                currentOpp = operation.getInstance(line, lineNumber)
             except Exception as error:
                 # Keep a log of all exceptions.
                 self.exceptions.append(error)
