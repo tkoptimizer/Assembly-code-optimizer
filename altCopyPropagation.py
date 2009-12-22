@@ -16,7 +16,7 @@ class altCopyPropagation(optimizationClass):
         self.name            = "Copy propagation"
         self.optimizedBlocks = blocks
         self.moves           = []
-        self.output          = []
+        self.output          = [" ==== Copy propagation optimizer ==== "]
         self.updatedOps      = []
 
 
@@ -56,11 +56,16 @@ class altCopyPropagation(optimizationClass):
         code.
         """
         
-        ops = set(self.updatedOps)
+        ops = self.updatedOps
+        ops.reverse()
+        ops = set(ops)
 
         for op in ops:
-            self.output.append("Resetting operation ("+op.code+")")
+            self.output.append("\tResetting operation ("+op.code+")")
             op.resetOperation()
+
+            if op.isMove():
+                break
 
     def analyseBasicBlock(self, block):
         """
@@ -75,7 +80,7 @@ class altCopyPropagation(optimizationClass):
         self.output.append("\n>>>> Starting analysis of new block. <<<<\n")
 
         for operation in block.operations:
-            self.output.append("Analysing operation: " + str(operation))
+            self.output.append("  || Analysing operation: " + str(operation))
 
             redundantMove = self.findUnnecessaryMove(operation)
 
@@ -83,16 +88,17 @@ class altCopyPropagation(optimizationClass):
                 if operation.getMoveSource() in ("$sp", "$fp") \
                     or operation.getMoveDestination() in ("$sp", "$fp"):
                     
-                    self.output.append("Skipping move operation.")
+                    self.output.append("\tSkipping move operation.")
                     continue
 
                 if redundantMove is not None:
                     if redundantMove.getMoveSource() == operation.getMoveDestination():
                         self.moves.remove(redundantMove)
                         
-                        self.output.append("Removing move operation from redundant-moves-list.")
+                        self.output.append("\tRemoving move operation from redundant-moves-list.")
                         continue
-
+                
+                self.output.append("\tAdding move to list.")
                 self.moves.append(operation)
 
 
@@ -100,12 +106,12 @@ class altCopyPropagation(optimizationClass):
                 if redundantMove is not None:
                     if redundantMove.getMoveDestination() == operation.getTarget():
                         
-                        self.output.append("Updating store operation ("+operation.code+")")
+                        self.output.append("\tUpdating store operation ("+operation.code+")")
 
                         operation.setSource(redundantMove.getMoveSource())
                         redundantMove.exclude()
                         
-                        self.output.append("Operation updated ("+operation.code+")")
+                        self.output.append("\tOperation updated ("+operation.code+")")
 
                         self.updatedOps.append(redundantMove)
                         self.updatedOps.append(operation)
@@ -113,17 +119,15 @@ class altCopyPropagation(optimizationClass):
 
             elif operation.type == operation.LOAD:
                 if redundantMove is not None:        
-                    if redundantMove.getMoveDestination() == operation.getTarget():
-                        self.output.append("Move destination was updated by a load:")
-                        self.output.append("Move: " + redundantMove.code + ", load: " + operation.code)
+                    if redundantMove.getMoveDestination() == operation.getTarget() or redundantMove.getMoveSource() == operation.getTarget():
+                        self.output.append("\tMove source / destination was updated by a load, removing move from list: " +  operation.code)
 
                         self.moves.remove(redundantMove)
 
-                    if redundantMove.getMoveSource() == operation.getOffsetRegister():
-                        self.output.append("Complex load situation: reseting operations.")
+                    if redundantMove.getMoveSource() == operation.getOffsetRegister() or redundantMove.getMoveDestination() == operation.getOffsetRegister():
+                        self.output.append("\tComplex load situation: reseting operations.")
 
                         self.resetOperations()
-                        #self.moves.remove(redundantMove)
 
 
             elif operation.type in (operation.INT_ARITHMETIC, \
@@ -133,17 +137,18 @@ class altCopyPropagation(optimizationClass):
                     destination = redundantMove.getMoveDestination()
                     source      = redundantMove.getMoveSource()
                     arguments   = operation.getArguments()
-
-                    for i in range(len(arguments)):
-                        if arguments[i] == destination:
-                            arguments[i] = source
                     
-                    self.output.append("Updating arithmetic or control operation ("+operation.code+")")
+                    if destination in arguments:
+                        for i in range(len(arguments)):
+                            if arguments[i] == destination:
+                                arguments[i] = source
+                        
+                        self.output.append("\tUpdating arithmetic or control operation ("+operation.code+")")
 
-                    operation.setArguments(arguments)
-                    redundantMove.exclude()
-                    
-                    self.output.append("Operation updated ("+operation.code+")")
+                        operation.setArguments(arguments)
+                        redundantMove.exclude()
+                        
+                        self.output.append("\tOperation updated ("+operation.code+")")
 
-                    self.updatedOps.append(redundantMove)
-                    self.updatedOps.append(operation)
+                        self.updatedOps.append(redundantMove)
+                        self.updatedOps.append(operation)
