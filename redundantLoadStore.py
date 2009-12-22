@@ -14,6 +14,7 @@ class redundantLoadStore(optimizationClass):
         
         self.name            = "Remove redundant loads / stores"
         self.optimizedBlocks = blocks
+        self.output          = []
         self.changed         = []
         self.exceptions      = []
 

@@ -157,8 +157,8 @@ class operation:
         if len(parts) == 1:
             return LabelOp(line, lineNumber)
 
-
         op = parts[0]
+
         if op in operation.control:
             return ControlOp(line, lineNumber)
 
@@ -172,10 +172,10 @@ class operation:
             return IntArithmeticOp(line, lineNumber)
 
         elif op in operation.floatArithmetic:
-            return FloatArtithmeticOp(line, lineNumber)
-
+            return FloatArithmeticOp(line, lineNumber)
         else:
             return SystemOp(line, lineNumber)
+
 
     def __init__(self, line, lineNumber):
         if len(line) == 0:
@@ -192,12 +192,14 @@ class operation:
         self.included = True
         self.lineNumber = lineNumber
 
+
     def isMove(self):
         """
         Determine if current operation is a 'move' operation
         """
         
         return False
+
     
     def __str__(self):
         """
@@ -211,7 +213,6 @@ class operation:
             return str(self.lineNumber) + " [ " + self.verboseType(self.type) + " ]:  " + code
         else:
             return str(self.lineNumber) + " [ " + self.verboseType(self.type) + " ]:  " + code
-
     
 
     def hasArguments(self):
@@ -224,6 +225,7 @@ class operation:
             return False
         
         return True
+
     
     def getArguments(self):
         """
@@ -236,6 +238,7 @@ class operation:
             return parts[1].split(",")
 
         return None
+
     
     def setArguments(self, arguments):
         """
@@ -281,12 +284,14 @@ class operation:
 
         self.included = False
 
+
     def include(self):
         """
         Re-include the operation in the eventual code.
         """
 
         self.included = True
+
 
     def getType(self):
         """
@@ -323,7 +328,6 @@ class operation:
         arguments = parts[-1].split(",")
 
         return arguments[0]
-
     
 
     def setTarget(self, target):
@@ -356,6 +360,7 @@ class operation:
 
             self.code = first + target + parts[1:]
 
+
     def resetOperation(self):
         """
         Put back a backup of the original code.
@@ -364,16 +369,19 @@ class operation:
         self.include()
         self.code = self.original_code
         
+
 class ControlOp(operation):
 
     def __init__(self, line, lineNumber):
         """
         Stores the line.
         """
+
         operation.__init__(self, line, lineNumber)
         parts = line.split()
         self.operation = parts[0]
         self.type      = operation.CONTROL
+
 
     def getTarget(self):
         # For branch operations the last argument is the target (or offset).
@@ -390,6 +398,8 @@ class LoadStore(operation):
     
     def __init__(self, line, lineNumber):
         operation.__init__(self, line, lineNumber)
+        parts = line.split()
+        self.operation = parts[0]
         self.size = self.determineSize()
 
 
@@ -407,6 +417,7 @@ class LoadStore(operation):
         except:
             " Apparently we're trying to return empty data, skipping. "
     
+
     def setAddress(self, address):
         """
         Change the address of a load or store operation using python's 'split'
@@ -418,6 +429,34 @@ class LoadStore(operation):
         parts = parts[1].split(",")
 
         self.code = first + address + parts[:1]
+
+    
+    def usesOffset(self):
+        """
+        Determine wether a load or a store uses an offset.
+        """
+
+        address = self.getAddress()
+
+        if address[-1] == ")":
+            return True
+        
+        return False
+
+    
+    def getOffsetRegister(self):
+        """
+        Get the register that is used as an offset.
+        """
+        
+        address = self.getAddress()
+
+        if address[-1] == ")":
+            parts = address.split("(")
+            register = parts[1][:-1]
+
+            return register
+
 
     def determineSize(self):
         """
@@ -439,26 +478,24 @@ class LoadStore(operation):
             return operation.UNKNOWN
 
 class LoadOp(LoadStore):
-
     def __init__(self, line, lineNumber):
         """
         Stores the line.
         """
+
         LoadStore.__init__(self, line, lineNumber)
-        parts = line.split()
-        self.operation = parts[0]
         self.type      = operation.LOAD
-    
+
 class StoreOp(LoadStore):
     def __init__(self, line, lineNumber):
         """
         Stores the line.
         """
+
         LoadStore.__init__(self, line, lineNumber)
-        parts = line.split()
-        self.operation = parts[0]
         self.type      = operation.STORE
-    
+
+
     def setSource(self, source):
         """
         This method exists mostly for semantic reasons and does the same as
@@ -471,15 +508,18 @@ class StoreOp(LoadStore):
         
         self.code = "\t" + first + "\t" + source + "," + parts[1]
 
+
 class IntArithmeticOp(operation):
     def __init__(self, line, lineNumber):
         """
         Stores the line.
         """
+
         operation.__init__(self, line, lineNumber)
         parts = line.split()
         self.operation = parts[0]
         self.type      = operation.INT_ARITHMETIC
+
 
     def isMove(self):
         """
@@ -540,38 +580,43 @@ class IntArithmeticOp(operation):
             parts = parts[1].split(",")
             self.code = self.code.replace(parts[0], address)
 
-class FloathArithmeticOp(operation):
+class FloatArithmeticOp(operation):
     def __init__(self, line, lineNumber):
         """
         Stores the line.
         """
+
         operation.__init__(self, line, lineNumber)
         parts = line.split()
         self.operation = parts[0]
         self.type      = operation.FLOAT_ARITHMETIC
+
 
 class SystemOp(operation):
     def __init__(self, line, lineNumber):
         """
         Stores the line.
         """
+
         operation.__init__(self, line, lineNumber)
         parts = line.split()
         self.operation = parts[0]
         self.type      = operation.SYSTEM
 
+
     def getTarget(self):
         raise Exception, "System operations don't have a target!"
-
 
 class LabelOp(operation):
     def __init__(self, line, lineNumber):
         """
         Stores the line.
         """
+
         operation.__init__(self, line, lineNumber)
         self.labelName = line
         self.type      = operation.LABEL
+
 
     def getLabelName(self):
         """

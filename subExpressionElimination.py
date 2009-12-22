@@ -16,6 +16,7 @@ class subExpressionElimination(optimizationClass):
         
         self.name            = "Common subexpression elimination"
         self.optimizedBlocks = blocks
+        self.output          = []
         self.expressions     = []
 
 

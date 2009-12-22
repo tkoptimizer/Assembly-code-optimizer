@@ -22,6 +22,15 @@ class basicBlock:
     def __str__(self):
         return str(self.startLine) + ": " + self.name
 
+
+    def interval(self):
+        """
+        Gives a string representation if the line interval.
+        """
+
+        return str(self.operations[0].lineNumber) + " - " + str(self.operations[len(self.operations) - 1].lineNumber)
+
+
     def addOperation(self, line):
         """
         Method for adding an operation to the operations allready inside this

@@ -8,6 +8,7 @@ class redundantLabels(optimizationClass):
         """
         
         self.name            = "Remove redundant labels / jumps"
+        self.output          = []
         self.optimizedBlocks = blocks
 
 
