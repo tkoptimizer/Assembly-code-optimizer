@@ -15,24 +15,26 @@ De code is in verschillende lagen onder te verdelen.
 Het bestand waar de code zich in bevindt is de hoogste ``laag'' die binnen de
 compiler als geheel gezien kan worden.  Aangezien een bestand al een geheel is,
 zou hier geen representatie van hoeven zijn binnen de optimizer. Aangezien het
-bestand echter ook de ``container'' is van de eerstvolgende laag (basic blocks),
-bestaat binnen de optimizer de class ``blockBuilder''. Hierin bevinden zich
-methoden om basic blocks te herkennen en te achterhalen wat de targets zijn
-waar vanaf een basic block naartoe gesprongen wordt.
+bestand echter ook verzameling en opslagplaats is van basic blocks (de
+eerstvolgende laag), bestaat binnen de optimizer de klasse ``blockBuilder'' die
+codebestanden representeert. Binnen de klasse bevinden zich methoden om basic
+blocks te herkennen en te achterhalen wat de targets zijn waar vanaf een basic
+block naartoe gesprongen wordt.
 
 
 \subsection{De basic blocks}
 Binnen het bestand is de code onder te verdelen in basic blocks. Basic blocks
 beginnen met een mogelijke jump-target en eindigen met een jump of branch
 operatie. Binnen de optimizer worden deze gerepresenteerd door instanties 
-van de ``basicBlock'' class. Binnen deze class bevinden zich methoden om
+van de ``basicBlock'' klasse. Binnen deze klasse bevinden zich methoden om
 informatie over basic blocks te verkrijgen en om veranderingen aan te brengen
-aan een basic block.
+op basic block-niveau.
 
 \subsection{Operations en labels}
-Het laagste niveau zijn labels en operations. Binnen de optimizer zijn deze 
-instructies in zes categorieen verdeeld. Samen met de categorie voor labels
-kunnen de regels code in \'e\'en van de volgende categorie"en vallen:
+Het laagste niveau zijn de afzonderlijke labels en operations. Binnen de
+optimizer zijn deze instructies in zes categorie\"en verdeeld. Samen met de
+categorie voor labels valt elke regel code in \'e\'en van de volgende
+categorie\"en:
 \begin{itemize}
 \item Control
 \item Load
@@ -43,19 +45,21 @@ kunnen de regels code in \'e\'en van de volgende categorie"en vallen:
 \item Label
 \end{itemize}
 
-Elke categorie heeft een eigen class, met als parent-class ``operation''. 
-Op deze manier kunnen generieke methoden op hoger niveau geimplementeerd 
-worden en specifiekere methoden op een dieper niveau. Naast de ``operation''
-class hebben de classes voor de categorie"en Load en Store nog een 
-gezamelijke parent-class, aangezien zij somige acties delen.
+\subsubsection{Categorie\"en en klassen}
+Elke categorie heeft een eigen klasse. Boven alle klassen staat de
+parent-klasse ``operation''. Generieke methoden worden in deze klasse
+ge\"implementeerd, specifiekere methoden worden overridden of gespecifieerd
+binnen de kind-klassen. Naast de ``operation'' klasse hebben de klassen voor de
+categorie\"en Load en Store nog een gezamelijke parent-klasse, aangezien zij
+sommige acties delen. Binnen de ``operation''-klasse is een static methode die
+bij aanroep automatisch een instantie van de juiste klasse teruggeeft.
 
-Binnen de ``operation''-class is een static methode die bij aanroep 
-automatisch een instantie van de juiste klasse teruggeeft.
-
+\subsubsection{Bewerkingen op code}
 Wijzigingen aan operations worden altijd via methoden gedaan. Aangezien elke
 operation door een instantiatie wordt vertegenwoordigd, is dit een vrij
-intu"itieve methode.
-
+intu"itieve methode. Het is ook een veilige methode, aangezien de mogelijkheden
+om wijzigingen aan te brengen getest kunnen worden en daarna ``gegarandeerd''
+werken.
 
 \section{Optimalisatie}
 De optimizer heeft de volgende optimalisaties ge"implementeerd:
