@@ -1,0 +1,48 @@
+for each basic block __b:
+    clear list of operations that change a register
+
+    for each operation __op in __b:
+        if __op was previously excluded (by another optimized):
+            skip operation
+        else:
+            search for an operation, __op2, in the list that uses the same
+            registers as __op
+
+            if __op is a LOAD:
+                if __op2 exists:
+                    if __op2 is a load or a store:
+                        if the target of __op2 is the target of __op and the address of
+                            __op2 is the address of __op:
+
+                            exclude __op from the code.
+
+                        else if the targets of __op2 and __op are the same but the
+                            addresses are not:
+
+                            remove __op2 from the list.
+                            add __op to the list.
+                    else:
+                        if the target of __op2 and __op are the same:
+
+                                remove __op2 from the list.
+                                add __op to the list.
+                else if __op was previously stored:
+                    exclude __op from the code.
+
+                else:
+                    add __op to the list of operations
+
+            else if __op is a STORE:
+                if __op was previously stored:
+                    exclude __op from the code.
+                else:
+                    if __op2 exists:
+                        remove __op2 from the list of operations.
+                    else:
+                        add __op to the list of operations.
+
+            else if __op is an ARITHMETIC operation:
+                if __op2 exists:
+                    remove __op2 from the list/
+
+                add __op to the list of operations.

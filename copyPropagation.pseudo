@@ -3,7 +3,7 @@ for each basic block __b:
     clear list of dead_moves
     clear list of updatedOperations
 
-    for each operation __op:
+    for each operation __op in __b:
         if __op was previously excluded (by another optimizer):
             skip operation
         else:
