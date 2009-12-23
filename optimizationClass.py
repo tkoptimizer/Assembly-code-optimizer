@@ -14,8 +14,17 @@ class optimizationClass:
         self.name            = "Optimization class"
         self.optimizedBlocks = blocks
         self.exceptions      = []
+        self.output          = []
 
     
+    def getOutput(self):
+        """
+        Used by any class that wants debug output.
+        """
+
+        return self.output
+
+
     def setBlocks(self, blocks):
         """
         Alter the set of blocks that will be optimized.

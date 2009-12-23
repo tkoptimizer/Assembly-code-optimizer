@@ -16,6 +16,7 @@ class altCopyPropagation(optimizationClass):
         self.name            = "Copy propagation"
         self.optimizedBlocks = blocks
         self.moves           = []
+        self.output          = [" ==== Copy propagation optimizer ==== "]
         self.updatedOps      = []
 
 
@@ -24,15 +25,26 @@ class altCopyPropagation(optimizationClass):
         Look for moves that use the same registers as the current operation.
         Details are handled in 'analyseBasicBlock'.
         """
+        
+        if len(self.moves) > 0:
+            moves = self.moves
+            moves.reverse()
+        else:
+            return None
 
         if operation.hasArguments():
-            opArgs = operation.getArguments()
+            opArgs   = operation.getArguments()
+            register = ""
 
-            for move in self.moves:
+            if operation.type == operation.LOAD or operation.type == operation.STORE:
+                if operation.usesOffset():
+                    register = operation.getOffsetRegister()
+
+            for move in moves:
                 moveArgs = move.getArguments()
 
                 for argument in moveArgs:
-                    if argument in opArgs:
+                    if argument in opArgs or argument == register:
                         return move
 
         return None
@@ -43,60 +55,80 @@ class altCopyPropagation(optimizationClass):
         Restore the backed up code for each operation and re-include it in the
         code.
         """
-
-        for operation in self.updatedOps:
-            operation.resetOperation()
-
         
+        ops = self.updatedOps
+        ops.reverse()
+        ops = set(ops)
+
+        for op in ops:
+            self.output.append("\tResetting operation ("+op.code+")")
+            op.resetOperation()
+
+            if op.isMove():
+                break
+
     def analyseBasicBlock(self, block):
         """
         Analyse each operation in a basic block. If we find a move, try to
         remove it and fix any registers affected by the change. If there is a
         problem, we roll back.
         """
-
+        
         self.moves      = []
         self.updatedOps = []
 
+        self.output.append("\n>>>> Starting analysis of new block. <<<<\n")
+
         for operation in block.operations:
+            self.output.append("  || Analysing operation: " + str(operation))
+
             redundantMove = self.findUnnecessaryMove(operation)
 
-            if operation.isMove():
+            if operation.isMove():                
                 if operation.getMoveSource() in ("$sp", "$fp") \
                     or operation.getMoveDestination() in ("$sp", "$fp"):
-
+                    
+                    self.output.append("\tSkipping move operation.")
                     continue
 
+                if redundantMove is not None:
+                    if redundantMove.getMoveSource() == operation.getMoveDestination():
+                        self.moves.remove(redundantMove)
+                        
+                        self.output.append("\tRemoving move operation from redundant-moves-list.")
+                        continue
+                
+                self.output.append("\tAdding move to list.")
                 self.moves.append(operation)
+
 
             elif operation.type == operation.STORE:
                 if redundantMove is not None:
                     if redundantMove.getMoveDestination() == operation.getTarget():
+                        
+                        self.output.append("\tUpdating store operation ("+operation.code+")")
 
                         operation.setSource(redundantMove.getMoveSource())
                         redundantMove.exclude()
-                        self.updatedOps.append(operation)
+                        
+                        self.output.append("\tOperation updated ("+operation.code+")")
+
                         self.updatedOps.append(redundantMove)
+                        self.updatedOps.append(operation)
+
 
             elif operation.type == operation.LOAD:
-                if redundantMove is not None:
+                if redundantMove is not None:        
+                    if redundantMove.getMoveDestination() == operation.getTarget() or redundantMove.getMoveSource() == operation.getTarget():
+                        self.output.append("\tMove source / destination was updated by a load, removing move from list: " +  operation.code)
 
-                    address = operation.getAddress()
-                    #print redundantMove
-                    if address[-1] == ")":
-                        parts = address.split("(")
-                        register = parts[1][:-1]
+                        self.moves.remove(redundantMove)
 
-                        if register not in ("$sp", "$fp"):
-                            # It turns out that if the register is used as an
-                            # offset it becomes very hard to keep al the changes
-                            # to registers correct. Therefor we reset the recent
-                            # changes.
-                            #print operation
-                            self.resetOperations()
-                            self.moves.remove(redundantMove)
+                    if redundantMove.getMoveSource() == operation.getOffsetRegister() or redundantMove.getMoveDestination() == operation.getOffsetRegister():
+                        self.output.append("\tComplex load situation: reseting operations.")
 
-                    #print "---"
+                        self.resetOperations()
+
 
             elif operation.type in (operation.INT_ARITHMETIC, \
                     operation.FLOAT_ARITHMETIC, operation.CONTROL):
@@ -105,13 +137,18 @@ class altCopyPropagation(optimizationClass):
                     destination = redundantMove.getMoveDestination()
                     source      = redundantMove.getMoveSource()
                     arguments   = operation.getArguments()
-
-                    for i in range(len(arguments)):
-                        if arguments[i] == destination:
-                            arguments[i] = source
                     
+                    if destination in arguments:
+                        for i in range(len(arguments)):
+                            if arguments[i] == destination:
+                                arguments[i] = source
+                        
+                        self.output.append("\tUpdating arithmetic or control operation ("+operation.code+")")
 
-                    operation.setArguments(arguments)
-                    redundantMove.exclude()
-                    self.updatedOps.append(operation)
-                    self.updatedOps.append(redundantMove)
+                        operation.setArguments(arguments)
+                        redundantMove.exclude()
+                        
+                        self.output.append("\tOperation updated ("+operation.code+")")
+
+                        self.updatedOps.append(redundantMove)
+                        self.updatedOps.append(operation)

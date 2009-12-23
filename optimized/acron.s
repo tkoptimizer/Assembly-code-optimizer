@@ -68,10 +68,9 @@ is_vowel:
 	subu	$sp,$sp,16
 	sw	$fp,8($sp)
 	move	$fp,$sp
-# 	move	$3,$4
 	sb	$4,0($fp)
 	move	$2,$0
-# 	lb	$4,0($fp)
+	lb	$4,0($fp)
 	li	$5,0x00000041		# 65
 	beq	$4,$5,$L3
 	lb	$4,0($fp)
@@ -121,8 +120,7 @@ do_perm:
 	li	$3,0x00000001		# 1
 	bne	$2,$3,$L5
 	lw	$2,pindex
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,w
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -131,8 +129,7 @@ do_perm:
 	jal	is_vowel
 	bne	$2,$0,$L5
 	lw	$2,56($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,w
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -146,38 +143,35 @@ $L5:
 	slt	$3,$2,2
 	bne	$3,$0,$L6
 	lw	$2,64($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,pindex-8
 	addu	$2,$2,$3
 	lw	$3,0($2)
 	move	$2,$3
-	sll	$3,$2,2
+	sll	$3,$3,2
 	la	$4,w
 	addu	$2,$3,$4
-# 	lw	$3,0($2)
+	lw	$3,0($2)
 	lb	$2,0($3)
 	move	$4,$2
 	jal	is_vowel
 	move	$16,$2
 	lw	$2,64($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,pindex-4
 	addu	$2,$2,$3
 	lw	$3,0($2)
 	move	$2,$3
-	sll	$3,$2,2
+	sll	$3,$3,2
 	la	$4,w
 	addu	$2,$3,$4
-# 	lw	$3,0($2)
+	lw	$3,0($2)
 	lb	$2,0($3)
 	move	$4,$2
 	jal	is_vowel
 	move	$17,$2
 	lw	$2,56($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,w
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -188,13 +182,13 @@ $L5:
 	addu	$2,$3,$2
 	sw	$2,24($fp)
 	lw	$2,24($fp)
-	beq	$2,$0,$L4
+	beq	$2,$0,$L8
 	lw	$2,24($fp)
 	li	$3,0x00000003		# 3
-	beq	$2,$3,$L4
+	beq	$2,$3,$L8
 	j	$L7
-# $L8:
-# 	j	$L4
+$L8:
+	j	$L4
 $L7:
 $L6:
 	lw	$2,64($fp)
@@ -210,7 +204,6 @@ $L6:
 	beq	$3,$0,$L9
 	lw	$3,68($fp)
 	subu	$2,$3,1
-# 	move	$3,$2
 	sw	$2,68($fp)
 	beq	$2,$0,$L9
 	sw	$0,16($fp)
@@ -221,35 +214,31 @@ $L10:
 	j	$L11
 $L13:
 	lw	$2,16($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	lw	$3,60($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
 	bne	$3,$0,$L14
 	lw	$2,16($fp)
-# 	move	$3,$2
 	sll	$2,$2,2
 	lw	$3,60($fp)
-	addu	$2,$2,$2
+	addu	$2,$2,$3
 	li	$3,0x00000001		# 1
-	sw	$2,0($2)
+	sw	$3,0($2)
 	lw	$4,16($fp)
 	lw	$5,60($fp)
 	lw	$6,64($fp)
 	lw	$7,68($fp)
 	jal	do_perm
 	lw	$2,16($fp)
-# 	move	$3,$2
 	sll	$2,$2,2
 	lw	$3,60($fp)
-	addu	$2,$2,$2
+	addu	$2,$2,$3
 	sw	$0,0($2)
 $L14:
 $L12:
 	lw	$3,16($fp)
-	addu	$2,$2,1
-	move	$3,$2
+	addu	$2,$3,1
 	sw	$2,16($fp)
 	j	$L10
 $L11:
@@ -267,16 +256,15 @@ $L19:
 	sw	$0,32($fp)
 $L20:
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,pindex
 	addu	$2,$2,$3
 	lw	$3,0($2)
 	move	$2,$3
-	sll	$3,$2,2
+	sll	$3,$3,2
 	la	$4,w
 	addu	$2,$3,$4
-# 	lw	$3,0($2)
+	lw	$3,0($2)
 	lw	$4,32($fp)
 	addu	$2,$3,$4
 	lb	$3,0($2)
@@ -289,12 +277,11 @@ $L22:
 	addu	$3,$2,1
 	sw	$3,28($fp)
 	lw	$3,20($fp)
-	move	$4,$3
-	sll	$3,$4,2
+	sll	$3,$3,2
 	la	$4,pindex
 	addu	$3,$3,$4
 	lw	$4,0($3)
-	move	$3,$4
+ 	move	$3,$4
 	sll	$4,$3,2
 	la	$5,w
 	addu	$3,$4,$5
@@ -310,7 +297,6 @@ $L21:
 $L18:
 	lw	$3,20($fp)
 	addu	$2,$3,1
-# 	move	$3,$2
 	sw	$2,20($fp)
 	j	$L16
 $L17:
@@ -330,22 +316,20 @@ $L23:
 	j	$L24
 $L26:
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,pindex
 	addu	$2,$2,$3
 	lw	$3,0($2)
-# 	move	$2,$3
+	move	$2,$3
 	sll	$3,$3,2
 	la	$4,w
-	addu	$3,$3,$4
+	addu	$2,$3,$4
 	la	$4,$LC7
 	lw	$5,0($2)
 	jal	printf
 $L25:
 	lw	$3,20($fp)
 	addu	$2,$3,1
-# 	move	$3,$2
 	sw	$2,20($fp)
 	j	$L23
 $L24:
@@ -375,7 +359,7 @@ main:
 	li	$2,0x00000004		# 4
 	sw	$2,20($fp)
 $L28:
-# 	lw	$2,20($fp)
+	lw	$2,20($fp)
 	slt	$3,$2,7
 	bne	$3,$0,$L31
 	j	$L29
@@ -388,34 +372,30 @@ $L32:
 	j	$L33
 $L35:
 	lw	$2,16($fp)
-# 	move	$3,$2
 	sll	$2,$2,2
 	la	$3,done
-	addu	$2,$2,$2
+	addu	$2,$2,$3
 	li	$3,0x00000001		# 1
-	sw	$2,0($2)
+	sw	$3,0($2)
 	lw	$4,16($fp)
 	la	$5,done
 	move	$6,$0
 	lw	$7,20($fp)
 	jal	do_perm
 	lw	$2,16($fp)
-# 	move	$3,$2
 	sll	$2,$2,2
 	la	$3,done
-	addu	$2,$2,$2
+	addu	$2,$2,$3
 	sw	$0,0($2)
 $L34:
 	lw	$3,16($fp)
-	addu	$2,$2,1
-	move	$3,$2
+	addu	$2,$3,1
 	sw	$2,16($fp)
 	j	$L32
 $L33:
 $L30:
 	lw	$3,20($fp)
 	addu	$2,$3,1
-# 	move	$3,$2
 	sw	$2,20($fp)
 	j	$L28
 $L29:

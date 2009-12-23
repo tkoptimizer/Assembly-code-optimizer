@@ -109,6 +109,10 @@ def optimize():
                 parseAndStore(blockBuilder(input_folder + "/" + file))
         
     else:
+        if BE_VERBOSE:
+            print "Optimizing: ", input_file
+            print "----------"
+
         parseAndStore(blockBuilder(input_folder + "/" + input_file))
 
 
@@ -124,6 +128,7 @@ def parseAndStore(blockHolder):
     blocks = blockHolder.basicBlocks
     
     buffer = ""
+    output = []
 
     # Execute each optimizer in the given order.
     for optimization in optimizations:
@@ -135,15 +140,19 @@ def parseAndStore(blockHolder):
 
         optimizer.analyseBlocks()
         blocks = optimizer.getBlocks()
+        output.append(optimizer.getOutput())
     
     for block in blocks:
+        if DEBUG:
+            buffer += "## basic block (" + block.interval() + ") ##\n"
+
         for operation in block.operations:
             if operation.included:
                 buffer += operation.code + "\n"
             else:
                 if DEBUG:
                     buffer += "# " + operation.code + "\n"
-    
+
 
     filename = blockHolder.filename.split("/")
 
@@ -156,6 +165,13 @@ def parseAndStore(blockHolder):
         print "----------\n"
         print "Storing file: ", output_folder + "/" + filename
         print "\n"
+
+    if DEBUG:
+        print "Debug: \n"
+
+        for lines in output:
+            for line in lines: 
+                print line
 
     FILE = open(output_folder + "/" + filename, 'w')
     FILE.write(buffer)
