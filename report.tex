@@ -57,16 +57,18 @@ bij aanroep automatisch een instantie van de juiste klasse teruggeeft.
 \subsubsection{Bewerkingen op code}
 Wijzigingen aan operations worden altijd via methoden gedaan. Aangezien elke
 operation door een instantiatie wordt vertegenwoordigd, is dit een vrij
-intu"itieve methode. Het is ook een veilige methode, aangezien de mogelijkheden
-om wijzigingen aan te brengen getest kunnen worden en daarna ``gegarandeerd''
-werken.
+intu\"itieve methode. ((NIET ZEKER OF DIT ERIN MOET: Het is ook een veilige
+methode, aangezien de mogelijkheden om wijzigingen aan te brengen getest kunnen
+worden en daarna ``gegarandeerd'' werken.))
 
 \section{Optimalisatie}
-De optimizer heeft de volgende optimalisaties ge"implementeerd:
-- redundant labels
-- redundant load / stores
-- copy propagation
-- common subexpression elimination
+De optimizer heeft de volgende optimalisaties ge\"implementeerd:
+\begin{itemize}
+\item redundant labels
+\item redundant load / stores
+\item copy propagation
+\item common subexpression elimination
+\end{itemize}
 
 \subsection{Redundant labels}
 De redundant labels-optimalisatie kijkt of een basic block a als enige
@@ -77,21 +79,21 @@ Met deze optimalisatie hebben we de volgende versnellingen weten te
 realiseren:
 
 \subsection{Redundant load / stores}
-Redundant load / store optimalisatie heeft als doel geen waarde uit het 
-geheugen te laden die zich al in een register bevindt (redundant load), en 
-geen ongewijzigde waarde terug te schrijven naar het geheugen (redundant 
-store). Aangezien load- en store-operaties door de writeback erg traag 
-zijn, kan dit al snel uitvoertijd schelen, met name wanneer bijvoorbeeld 
+Redundant load / store optimalisatie heeft als doel geen waarde uit het
+geheugen te laden die zich al in een register bevindt (redundant load), en geen
+waarde terug te schrijven naar het geheugen wanneer deze niet gewijzigd is
+(redundant store). Aangezien load- en store-operaties door de writeback erg
+traag zijn, kan dit al snel uitvoertijd schelen, met name wanneer bijvoorbeeld
 binnen een loop hierdoor geheugen-operaties weggelaten kunnen worden.
 
-((Ook staan operaties nu soms achter een load
+((NIET ZEKER OF DIT ERIN MOET: Ook staan operaties soms achter een load
 gescheduled omdat de waarde daarvoor nog niet beschikbaar zou zijn, maar
 wanneer deze load redundant blijkt te zijn is er voor niets gewacht met het
 uitvoeren van de instructie, kan de instructie verplaatst worden en daarmee
 tijd gewonnen worden))
 
-Met redundant load / store hebben we de volgende versnellingen weten te
-realiseren:
+Met redundant load / store optimalisaties hebben we de volgende versnellingen
+weten te realiseren:
 
 \subsection{Copy propagation}
 Copy propagation zou ook omschreven kunnen worden als "redundant moves

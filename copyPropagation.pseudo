@@ -1,4 +1,3 @@
-
 for each basic block __b:
     for each operation __op:
         if __op is a MOVE:
@@ -9,7 +8,8 @@ for each basic block __b:
 
 
         if __op is a STORE:
-            if there is a move in the list of moves that has the same target as __op:
+            if there is a move in the list of moves that has a target that __op
+                uses as source:
                 update __op and set the target to the source of the move.
                 exclude the move from the code.
 
@@ -26,8 +26,8 @@ for each basic block __b:
                 altered operations.
         
         if __op is an ARITHMETIC or CONTROL operation:
-            if there is a move in the list of moves that has the same target as
-                __op:
+            if there is a move in the list of moves that has a target that is
+                the a source of __op:
 
                 update __op by replacing the old register with the source of the
                 move.
@@ -35,3 +35,42 @@ for each basic block __b:
                 exclude the move from the code.
 
                 add __op and move to the list of altered operations.
+
+
+for each basic block __b:
+    for each operation __op:
+        if __op is a MOVE:
+            uses $fp / $sp ? --> skip operation
+            if source is identical to a destination of a move on the list:
+                replace source of __op with source of move on the list
+            if destination is identical to a destination of a move on the list:
+                the destination register of the move on the list has come to
+                the end of it's life - exclude the move from the code
+
+            add __op to list of moves
+
+        if __op is a STORE:
+            if there is a move in the list of moves that has a target that __op
+                uses as source:
+                update __op and set the target to the source of the move.
+
+        if __op is a LOAD:
+            if there is a move in the list of moves that has the same target as
+                __op or __op uses the source of the move as target:
+
+                remove move from list
+        
+        if __op is an ARITHMETIC or CONTROL operation:
+            if there is a move in the list of moves that has a target that is
+                the source of __op:
+
+                update __op by replacing the old register with the source of the
+                move.
+
+            if the destination register of __op is the same as a source
+                register from one of the moves on the list:
+
+                remove the move from the list
+
+    remove all move ops existing in list from the code - since they're still in
+    the list means that their source register is still alive.
