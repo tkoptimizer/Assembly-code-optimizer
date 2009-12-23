@@ -148,9 +148,10 @@ $L5:
 	addu	$2,$2,$3
 	lw	$3,0($2)
 	move	$2,$3
-	sll	$3,$3,2
+	sll	$3,$2,2
 	la	$4,w
 	addu	$2,$3,$4
+	lw	$3,0($2)
 	lb	$2,0($3)
 	move	$4,$2
 	jal	is_vowel
@@ -161,10 +162,10 @@ $L5:
 	la	$3,pindex-4
 	addu	$2,$2,$3
 	lw	$3,0($2)
-	move	$2,$3
 	sll	$3,$3,2
 	la	$4,w
 	addu	$2,$3,$4
+	lw	$3,0($2)
 	lb	$2,0($3)
 	move	$4,$2
 	jal	is_vowel
@@ -254,6 +255,7 @@ $L19:
 	sw	$0,32($fp)
 $L20:
 	lw	$2,20($fp)
+	move	$3,$2
 	sll	$2,$2,2
 	la	$3,pindex
 	addu	$2,$2,$3
@@ -261,9 +263,9 @@ $L20:
 	sll	$3,$3,2
 	la	$4,w
 	addu	$2,$3,$4
+	lw	$3,0($2)
 	lw	$4,32($fp)
 	addu	$2,$3,$4
-	lb	$3,0($2)
 	move	$4,$3
 	jal	isupper
 	bne	$2,$0,$L22
