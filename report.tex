@@ -31,6 +31,7 @@ informatie over basic blocks te verkrijgen en om veranderingen aan te brengen
 op basic block-niveau.
 
 \subsection{Operations en labels}
+\subsubsection{Categorie\"en}
 Het laagste niveau zijn de afzonderlijke labels en operations. Binnen de
 optimizer zijn deze instructies in zes categorie\"en verdeeld. Samen met de
 categorie voor labels valt elke regel code in \'e\'en van de volgende
@@ -45,7 +46,7 @@ categorie\"en:
 \item Label
 \end{itemize}
 
-\subsubsection{Categorie\"en en klassen}
+\subsubsection{Klassen}
 Elke categorie heeft een eigen klasse. Boven alle klassen staat de
 parent-klasse ``operation''. Generieke methoden worden in deze klasse
 ge\"implementeerd, specifiekere methoden worden overridden of gespecifieerd
@@ -64,21 +65,47 @@ worden en daarna ``gegarandeerd'' werken.))
 \section{Optimalisatie}
 De optimizer heeft de volgende optimalisaties ge\"implementeerd:
 \begin{itemize}
-\item redundant labels
-\item redundant load / stores
-\item copy propagation
-\item common subexpression elimination
+\item Redundant labels
+\item Redundant load / stores
+\item Copy propagation
+\item Common subexpression elimination
 \end{itemize}
 
+\subsection{Structuur}
+Er is een parent-klasse ``optimizationClass''. Deze voorziet in de generieke
+functionaliteit die elke optimalisatie nodig heeft, zoals het opslaan en
+weergeven van basic blocks. 
+
 \subsection{Redundant labels}
+\subsubsection{Doel}
 De redundant labels-optimalisatie kijkt of een basic block a als enige
 operatie een jump heeft (naar basic block b). In dat geval wordt geheel basic
 block a verwijderd. Verwijzingen naar basic block a worden vervangen door
 verwijzingen naar basic block b. Dit scheelt dan een jump-operatie.
+
+\subsubsection{Implementatie}
+Het algoritme ge\"implementeerd volgens onderstaand pseudocode. Wanneer er over
+een ``target'' van een block gesproken wordt wordt hier altijd een block
+bedoelt waar een jump-operatie naar toe springt.
+\begin{verbatim}
+for each basic block __b:
+  if __b has a target __t and __t has exactly two operations 
+
+    if the last operation of __t is a CONTROL:
+      save the target of __t as __l
+    
+    if __l is a label and the last operation __o of __b is a CONTROL:
+      set the target of __o to __l
+
+      exclude __t from the code
+\end{verbatim}
+
+\subsubsection{Resultaten}
 Met deze optimalisatie hebben we de volgende versnellingen weten te 
 realiseren:
 
 \subsection{Redundant load / stores}
+\subsubsection{Doel}
 Redundant load / store optimalisatie heeft als doel geen waarde uit het
 geheugen te laden die zich al in een register bevindt (redundant load), en geen
 waarde terug te schrijven naar het geheugen wanneer deze niet gewijzigd is
@@ -86,47 +113,200 @@ waarde terug te schrijven naar het geheugen wanneer deze niet gewijzigd is
 traag zijn, kan dit al snel uitvoertijd schelen, met name wanneer bijvoorbeeld
 binnen een loop hierdoor geheugen-operaties weggelaten kunnen worden.
 
-((NIET ZEKER OF DIT ERIN MOET: Ook staan operaties soms achter een load
-gescheduled omdat de waarde daarvoor nog niet beschikbaar zou zijn, maar
-wanneer deze load redundant blijkt te zijn is er voor niets gewacht met het
-uitvoeren van de instructie, kan de instructie verplaatst worden en daarmee
-tijd gewonnen worden))
+Ook staan operaties soms achter een load gescheduled omdat de waarde daarvoor
+nog niet beschikbaar zou zijn. Wanneer deze load redundant blijkt te zijn is er
+voor niets gewacht met het uitvoeren van de instructie.
 
+\subsubsection{Implementatie}
+Het algoritme is als volgt ge\"implementeerd:
+\begin{verbatim}
+for each basic block __b:
+  clear list of operations that change a register
+
+  for each operation __op in __b:
+    if __op was previously excluded (by another optimized):
+      skip operation
+    else:
+      search for an operation, __op2, in the list that uses the same
+      registers as __op
+
+      if __op is a LOAD:
+        if __op2 exists:
+          if __op2 is a load or a store:
+            if the target of __op2 is the target of __op and the address of
+              __op2 is the address of __op:
+
+              exclude __op from the code.
+
+            else if the targets of __op2 and __op are the same but the
+              addresses are not:
+
+              remove __op2 from the list.
+              add __op to the list.
+          else:
+            if the target of __op2 and __op are the same:
+
+                remove __op2 from the list.
+                add __op to the list.
+        else if __op was previously stored:
+          exclude __op from the code.
+
+        else:
+          add __op to the list of operations
+
+      else if __op is a STORE:
+        if __op was previously stored:
+          exclude __op from the code.
+        else:
+          if __op2 exists:
+            remove __op2 from the list of operations.
+          else:
+            add __op to the list of operations.
+
+      else if __op is an ARITHMETIC operation:
+        if __op2 exists:
+          remove __op2 from the list/
+
+        add __op to the list of operations.
+\end{verbatim}
+
+\subsubsection{Resultaten}
 Met redundant load / store optimalisaties hebben we de volgende versnellingen
 weten te realiseren:
 
 \subsection{Copy propagation}
+\subsubsection{Doel}
 Copy propagation zou ook omschreven kunnen worden als "redundant moves
-elimination". Het gaat namelijk hier om de move-instructie die een register 
-kopieert, maar waarbij tegen de tijd dat het nieuwe register wordt 
-uitgelezen door een instructie, het oude register de oude waarde nog heeft.
+elimination". Het gaat hier namelijk om move-instructie die een register
+kopi\"eren, maar waar het oude register niet overschreven wordt voordat een
+operatie het nieuwe register uitleest. Het vervangen van het ``doelregister''
+door het ``bronregister'' heet copy propagation. Wanneer uiteindelijk het
+doelregister niet meer gebruikt wordt, of een nieuwe waarde krijgt, terwijl het
+bronregister tot de laatste aanroep aan toe beschikbaar was, kan de gehele
+move-operatie verwijderd worden.
 
-De analyse om te bepalen tot waar een register zijn oude waarde behoudt, 
-heet een liveness-analyse. Deze analyse wordt gestart zodra in de code een
-move-operatie voorkomt. Op dat moment worden de kenmerken van de move-
-operatie aan een lijst toegevoegd. Wanneer nu verderop in de code 
-instructies voorkomen die registers uitlezen, wordt gekeken of deze 
-registers misschien gekopieerd zijn op een plek waarna het bronregister nog 
-niet overschreven is. Wanneer dat het geval is, wordt het register vervangen
-door het oorspronkelijke register.
+\subsubsection{Implementatie}
 
-Wanneer een bronregister overschreven wordt, wordt de move-operatie weer uit de
-lijst gehaald. Wanneer echter het doelregister overschreven wordt terwijl het
-bronregister nog bestaat, of wanneer het doelregister nooit meer gebruikt wordt
-nadat het bronregister overschreven is, kan de volledige move-operatie
-verwijderd worden.
+\begin{verbatim}
+for each basic block __b:
+  clear list of moves
+  clear list of dead_moves
+  clear list of updatedOperations
+
+  for each operation __op in __b:
+    if __op was previously excluded (by another optimizer):
+      skip operation
+    else:
+      if __op is a MOVE:
+        if __op uses $fp / $sp:
+          skip operation
+
+        if there is a reverse move on list:
+          remove old operation
+
+        add __op to list of moves
+
+
+      if __op is a STORE:
+        if there is a move in the list of moves that has a target that __op
+          uses as source:
+
+          update __op and set the target to the source of the move.
+          exclude the move from the code.
+
+          add __op and move to a list of altered operations
+
+
+      if __op is a LOAD:
+        if there is a move in the list of moves that has the same target as
+          __op or __op uses the source of the move as target:
+
+          remove move from list
+          add move to list of dead_moves
+
+        if the source or destination of the move is used as an offset in __op:
+
+          rollback all edits until the last added move on the list of
+          altered operations.
+
+        if there is a move in the list of dead moves:
+          if the destination of the move is the target of the load or
+            the source of the move is the target of the load:
+
+            remove move from list of dead_moves
+
+          if the source or destination of the move is used as an offset in __op:
+
+            rollback all edits until the last added move on the list of
+            altered operations.
+
+      
+      if __op is an ARITHMETIC or CONTROL operation:
+        if there is a move in the list of moves that has a target that is
+          the a source of __op:
+
+          update __op by replacing the old register with the source of the
+          move.
+
+          exclude the move from the code.
+
+          add __op and move to the list of altered operations.
+
+        else if there is a move in the list of dead moves:
+          if the destination or the source of the move is the target
+            of __op:
+
+            remove the move from the list of dead moves.
+\end{verbatim}
+
+\subsubsection{Resultaten}
 
 \subsection{Common subexpression elimination}
+\subsubsection{Doel}
 Wanneer dezelfde berekening meerdere keren uitgevoerd wordt (met dezelfde
 argumenten, dus dezelfde uitkomst) heet dit een common subexpression. De 
-tweede berekening kan dan vervangen worden door een move-instructie.
+tweede berekening kan dan vervangen worden door een move-instructie, of,
+wanneer zowel de operatie als de parameters hetzelfde zijn, de hele operatie
+verwijderd worden.
 
-De versnellingen die we met deze optimalisatie konden realiseren zijn:
-
-In beginsel lijkt dit een vrij zinloze optimalisatie, aangezien er geen 
+In beginsel lijkt het eerste een vrij zinloze optimalisatie, aangezien er geen
 direct resultaat is. Een move-operatie is namelijk even duur als een
 berekening. Echter, het impliceert wel dat registers eerder vrij komen, wat
 weer kan resulteren in nieuwe redundant stores (die met move-operaties
 eenvoudig te herkennen zijn), copy propagation en vervolgens dead code
 elimination.
+
+\subsubsection{Implementatie}
+In de optimizer is alleen het tweede deel van de common subexpression
+elimination ge\"implementeerd. Houd bij het lezen van de pseudocode in
+gedachten dat er per block een lijst wordt bijgehouden met op dit moment
+aanwezige expressions.
+\begin{verbatim}
+for each basic block in __b:
+  for each operation __op in __b:
+    if __op was previously excluded (by another optimizer):
+      skip operation
+    else:
+
+      if __op has arguments:
+        look in the list of expressions already passed by if current
+          expression is updating an earlier used one.
+      else:
+        current operation is no expression
+
+      if __op is of an INT_ARITHMETIC or FLOAT_ARITHMETIC
+        commonExpression = self.findCommonExpression(__op )
+        
+        if __op has a common expression
+          exclude __op from block
+        else if __op is not updating another expression:
+          add __op to the list of expressions
+
+      if __op is a LOAD and op is updating an expression:
+        remove the expression __op is updating from the list
+\end{verbatim}
+
+\subsubsection{Resultaten}
+De versnellingen die we met deze optimalisatie konden realiseren zijn:
+
 \end{document}
