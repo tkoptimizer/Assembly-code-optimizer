@@ -44,6 +44,10 @@ class subExpressionElimination(optimizationClass):
     def analyseBasicBlock(self, block):
         self.expressions = []
         for operation in block.operations:
+            if operation.included == False:
+                self.output.append("  {{ operation previously excluded: "+operation.code+" }}")
+                continue
+
             if operation.hasArguments():
                 updatingExpression = self.getUpdatingExpression(operation.getArguments())
             else:

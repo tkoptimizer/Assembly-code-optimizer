@@ -39,11 +39,11 @@ class redundantLoadStore(optimizationClass):
                         address2 = oldOperation.getTarget()
 
                         if register1 == register2 and address1 == address2:
-                            self.output.append("\tFound an identical load / store operation: " + operation.code)
+                            self.output.append("\tFound an identical load / store operation: " + oldOperation.code)
 
                             return oldOperation
                         elif address1 == address2:
-                            self.output.append("\tFound a load / store using the same address: " + operation.code)
+                            self.output.append("\tFound a load / store using the same address: " + oldOperation.code)
 
                             return oldOperation
 
@@ -53,7 +53,7 @@ class redundantLoadStore(optimizationClass):
                     register2 = oldOperation.getTarget()
 
                     if register1 == register2:
-                        self.output.append("\tFound an arithmetic operation with the same target register: " + operation.code)
+                        self.output.append("\tFound an arithmetic operation with the same target register: " + oldOperation.code)
 
                         return oldOperation
 
@@ -62,7 +62,7 @@ class redundantLoadStore(optimizationClass):
                 register2 = oldOperation.getTarget()
 
                 if register1 == register2:
-                    self.output.append("\tFound an arithmetic operation with the same target register: " + operation.code)
+                    self.output.append("\tFound an arithmetic operation with the same target register: " + oldOperation.code)
 
                     return oldOperation
         return None
@@ -99,6 +99,10 @@ class redundantLoadStore(optimizationClass):
         self.output.append("\n>>>> Starting analysis of new block. <<<<\n")
 
         for operation in block.operations:
+            if operation.included == False:
+                self.output.append("  {{ operation previously excluded: "+operation.code+" }}")
+                continue
+
             self.output.append("  || Analysing operation: " + str(operation))
             previousEditor = self.previouslyChanged(operation)
 

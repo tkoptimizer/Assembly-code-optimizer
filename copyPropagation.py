@@ -81,6 +81,10 @@ class copyPropagation(optimizationClass):
         self.output.append("\n>>>> Starting analysis of new block. <<<<\n")
 
         for operation in block.operations:
+            if operation.included == False:
+                self.output.append("  {{ operation previously excluded: "+operation.code+" }}")
+                continue
+
             self.output.append("  || Analysing operation: " + str(operation))
 
             redundantMove = self.findUnnecessaryMove(operation)

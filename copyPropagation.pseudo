@@ -1,4 +1,7 @@
 for each basic block __b:
+    clear list of moves
+    clear list of updatedOperations
+
     for each operation __op:
         if __op is a MOVE:
             uses $fp / $sp ? --> skip operation
@@ -41,8 +44,10 @@ for each basic block __b:
     for each operation __op:
         if __op is a MOVE:
             uses $fp / $sp ? --> skip operation
+
             if source is identical to a destination of a move on the list:
                 replace source of __op with source of move on the list
+
             if destination is identical to a destination of a move on the list:
                 the destination register of the move on the list has come to
                 the end of it's life - exclude the move from the code
