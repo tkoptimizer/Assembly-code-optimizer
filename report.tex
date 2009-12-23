@@ -1,0 +1,124 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{multicol}
+\usepackage{listings}
+\author{Koos van Strien (5783437), Tim van Deurzen ()}
+\title{Verslag}
+
+\begin{document}
+
+\maketitle
+
+\section{Code representatie}
+De code is in verschillende lagen onder te verdelen.
+
+\subsection{De code-file}
+Het bestand waar de code zich in bevindt is het hoogste niveau van 
+abstractie. Aangezien een file al een geheel is, zou hier geen representatie
+van hoeven zijn binnen de optimizer. Echter, aangezien de file ook de 
+``container'' is van de eerstvolgende laag, basic blocks, bestaat binnen de
+optimizer de class ``blockBuilder''. Hierin bevinden zich methoden om basic
+blocks te herkennen en te achterhalen wat de targets zijn waar vanaf een 
+basic block naartoe gesprongen wordt.
+
+\subsection{De basic blocks}
+Binnen de file is de code onder te verdelen in basic blocks. Basic blocks
+beginnen met een mogelijke jump-target en eindigen met een jump of branch
+operatie. Binnen de optimizer worden deze gerepresenteerd door instanties 
+van de ``basicBlock'' class. Binnen deze class bevinden zich methoden om
+informatie over basic blocks te verkrijgen en om veranderingen aan te brengen
+aan een basic block.
+
+\subsection{Operations en labels}
+Het laagste niveau zijn labels en operations. Binnen de optimizer zijn deze 
+instructies in zes categorieen verdeeld. Samen met de categorie voor labels
+kunnen de regels code in \'e\'en van de volgende categorie"en vallen:
+\begin{itemize}
+\item Control
+\item Load
+\item Store
+\item Integer Arithmetic
+\item Float Arithmetic
+\item System
+\item Label
+\end{itemize}
+
+Elke categorie heeft een eigen class, met als parent-class ``operation''. 
+Op deze manier kunnen generieke methoden op hoger niveau geimplementeerd 
+worden en specifiekere methoden op een dieper niveau. Naast de ``operation''
+class hebben de classes voor de categorie"en Load en Store nog een 
+gezamelijke parent-class, aangezien zij somige acties delen.
+
+Binnen de ``operation''-class is een static methode die bij aanroep 
+automatisch een instantie van de juiste klasse teruggeeft.
+
+Wijzigingen aan operations worden altijd via methoden gedaan. Aangezien elke
+operation door een instantiatie wordt vertegenwoordigd, is dit een vrij
+intu"itieve methode.
+
+
+\section{Optimalisatie}
+De optimizer heeft de volgende optimalisaties ge"implementeerd:
+- redundant labels
+- redundant load / stores
+- copy propagation
+- common subexpression elimination
+
+\subsection{Redundant labels}
+De redundant labels-optimalisatie kijkt of een basic block a als enige
+operatie een jump heeft (naar basic block b). In dat geval wordt geheel basic
+block a verwijderd. Verwijzingen naar basic block a worden vervangen door
+verwijzingen naar basic block b. Dit scheelt dan een jump-operatie.
+Met deze optimalisatie hebben we de volgende versnellingen weten te 
+realiseren:
+
+\subsection{Redundant load / stores}
+Redundant load / store optimalisatie heeft als doel geen waarde uit het 
+geheugen te laden die zich al in een register bevindt (redundant load), en 
+geen ongewijzigde waarde terug te schrijven naar het geheugen (redundant 
+store). Aangezien load- en store-operaties door de writeback erg traag 
+zijn, kan dit al snel uitvoertijd schelen, met name wanneer bijvoorbeeld 
+binnen een loop hierdoor geheugen-operaties weggelaten kunnen worden.
+
+((Ook staan operaties nu soms achter een load
+gescheduled omdat de waarde daarvoor nog niet beschikbaar zou zijn, maar
+wanneer deze load redundant blijkt te zijn is er voor niets gewacht met het
+uitvoeren van de instructie, kan de instructie verplaatst worden en daarmee
+tijd gewonnen worden))
+
+Met redundant load / store hebben we de volgende versnellingen weten te
+realiseren:
+
+\subsection{Copy propagation}
+Copy propagation zou ook omschreven kunnen worden als "redundant moves
+elimination". Het gaat namelijk hier om de move-instructie die een register 
+kopieert, maar waarbij tegen de tijd dat het nieuwe register wordt 
+uitgelezen door een instructie, het oude register de oude waarde nog heeft.
+
+De analyse om te bepalen tot waar een register zijn oude waarde behoudt, 
+heet een liveness-analyse. Deze analyse wordt gestart zodra in de code een
+move-operatie voorkomt. Op dat moment worden de kenmerken van de move-
+operatie aan een lijst toegevoegd. Wanneer nu verderop in de code 
+instructies voorkomen die registers uitlezen, wordt gekeken of deze 
+registers misschien gekopieerd zijn op een plek waarna het bronregister nog 
+niet overschreven is. Wanneer dat het geval is, wordt het register vervangen
+door het oorspronkelijke register.
+
+Wanneer een bronregister overschreven wordt, wordt de move-operatie weer uit de
+lijst gehaald. Wanneer echter het doelregister overschreven wordt terwijl het
+bronregister nog bestaat, of wanneer het doelregister nooit meer gebruikt wordt
+nadat het bronregister overschreven is, kan de volledige move-operatie
+verwijderd worden.
+
+\subsection{Common subexpression elimination}
+Wanneer dezelfde berekening meerdere keren uitgevoerd wordt (met dezelfde
+argumenten, dus dezelfde uitkomst) heet dit een common subexpression. De 
+tweede berekening kan dan vervangen worden door een move-instructie.
+
+De versnellingen die we met deze optimalisatie konden realiseren zijn:
+
+In beginsel lijkt dit een vrij zinloze optimalisatie, aangezien er geen 
+direct resultaat is. Een move-operatie is namelijk even duur als een
+berekening. Echter, het impliceert wel dat registers eerder vrij komen, wat
+weer kan resulteren in nieuwe redundant stores (die met move-operaties
+eenvoudig te herkennen zijn), copy propagation en vervolgens dead code
+elimination.
