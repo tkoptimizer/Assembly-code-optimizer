@@ -436,12 +436,13 @@ class LoadStore(operation):
         Determine wether a load or a store uses an offset.
         """
 
-        address = self.getAddress()
-
-        if address[-1] == ")":
-            return True
-        
-        return False
+        try: 
+            address = self.getAddress()
+            
+            if address[-1] == ")":
+                return True
+        except:
+            return False
 
     
     def getOffsetRegister(self):

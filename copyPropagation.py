@@ -16,7 +16,8 @@ class copyPropagation(optimizationClass):
         self.name            = "Copy propagation"
         self.optimizedBlocks = blocks
         self.moves           = []
-        self.output          = [" ==== Copy propagation optimizer ==== "]
+        self.dead_moves      = []
+        self.output          = ["#\n#\n ==== Copy propagation optimizer ==== \n#\n#"]
         self.updatedOps      = []
 
 
@@ -41,6 +42,36 @@ class copyPropagation(optimizationClass):
                     register = operation.getOffsetRegister()
 
             for move in moves:
+                moveArgs = move.getArguments()
+
+                for argument in moveArgs:
+                    if argument in opArgs or argument == register:
+                        return move
+
+        return None
+
+
+    def findDeadMove(self, operation):
+        """
+        Look for dead moves that use the same registers as the current operation.
+        Details are handled in 'analyseBasicBlock'.
+        """
+        
+        if len(self.dead_moves) > 0:
+            dead_moves = self.dead_moves
+            dead_moves.reverse()
+        else:
+            return None
+
+        if operation.hasArguments():
+            opArgs   = operation.getArguments()
+            register = ""
+
+            if operation.type == operation.LOAD or operation.type == operation.STORE:
+                if operation.usesOffset():
+                    register = operation.getOffsetRegister()
+
+            for move in dead_moves:
                 moveArgs = move.getArguments()
 
                 for argument in moveArgs:
@@ -76,6 +107,7 @@ class copyPropagation(optimizationClass):
         """
         
         self.moves      = []
+        self.dead_moves = []
         self.updatedOps = []
 
         self.output.append("\n>>>> Starting analysis of new block. <<<<\n")
@@ -128,11 +160,26 @@ class copyPropagation(optimizationClass):
                         self.output.append("\tMove source / destination was updated by a load, removing move from list: " +  operation.code)
                         
                         self.moves.remove(redundantMove)
+                        self.dead_moves.append(redundantMove)
 
                     if redundantMove.getMoveSource() == operation.getOffsetRegister() or redundantMove.getMoveDestination() == operation.getOffsetRegister():
                         self.output.append("\tComplex load situation: reseting operations.")
 
                         self.resetOperations()
+                else:
+                    deadMove = self.findDeadMove(operation)
+
+                    if deadMove is not None:
+                        if deadMove.getMoveDestination() == operation.getTarget() or deadMove.getMoveSource() == operation.getTarget():
+                            self.output.append("\tMove source / destination was updated by a load, removing move from list: " +  operation.code)
+                            
+                            self.dead_moves.remove(deadMove)
+
+                        if deadMove.getMoveSource() == operation.getOffsetRegister() or deadMove.getMoveDestination() == operation.getOffsetRegister():
+                            self.output.append("\tComplex load situation: reseting operations.")
+
+                            self.resetOperations()
+
 
 
             elif operation.type in (operation.INT_ARITHMETIC, \
@@ -157,3 +204,9 @@ class copyPropagation(optimizationClass):
 
                         self.updatedOps.append(redundantMove)
                         self.updatedOps.append(operation)
+                else:
+                    deadMove = self.findDeadMove(operation)
+                    
+                    if deadMove is not None:
+                        if deadMove.getMoveDestination() == operation.getTarget() or deadMove.getMoveSource() == operation.getTarget():
+                                self.dead_moves.remove(deadMove)

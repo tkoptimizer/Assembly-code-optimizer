@@ -7,7 +7,7 @@ of SimpleScalar, LLC (info@simplescalar.com).
 
 sim: command line: sim-outorder -redir:prog output_original/acron.output -redir:sim output_original/acron.cycles acron_ori 
 
-sim: simulation started @ Sun Dec 20 19:20:58 2009, options follow:
+sim: simulation started @ Wed Dec 23 14:55:12 2009, options follow:
 
 sim-outorder: This simulator implements a very detailed out-of-order issue
 superscalar processor with a two-level memory system and speculative
