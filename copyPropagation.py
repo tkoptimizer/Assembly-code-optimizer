@@ -191,7 +191,12 @@ class copyPropagation(optimizationClass):
                     arguments   = operation.getArguments()
                     
                     if destination in arguments:
-                        for i in range(1, len(arguments)):
+                        if operation.type == operation.CONTROL:
+                            start = 0
+                        else:
+                            #first argument is write register
+                            start = 1
+                        for i in range(start, len(arguments)):
                             if arguments[i] == destination:
                                 arguments[i] = source
                         
@@ -204,6 +209,11 @@ class copyPropagation(optimizationClass):
 
                         self.updatedOps.append(redundantMove)
                         self.updatedOps.append(operation)
+
+                    if arguments[0] == destination:
+                        self.output.append("\tArithmetic overwrites register with new result")
+                        self.moves.remove(redundantMove)
+                        self.dead_moves.append(redundantMove)
                 else:
                     deadMove = self.findDeadMove(operation)
                     

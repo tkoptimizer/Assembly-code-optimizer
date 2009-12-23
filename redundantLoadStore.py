@@ -26,12 +26,10 @@ class redundantLoadStore(optimizationClass):
         """
         
         self.output.append("\n  || Searching for an operation that might have changed the registers of: " + operation.code)
-
         for oldOperation in self.changed:
             if operation.type in (operation.LOAD, operation.STORE):
                 if oldOperation.type in (operation.LOAD, operation.STORE):
-                    
-                    if oldOperation.size == operation.size:
+                    #if oldOperation.size == operation.size:
                         register1 = operation.getTarget()
                         register2 = oldOperation.getTarget()
 
@@ -103,7 +101,7 @@ class redundantLoadStore(optimizationClass):
                 self.output.append("  {{ operation previously excluded: "+operation.code+" }}")
                 continue
 
-            self.output.append("  || Analysing operation: " + str(operation))
+            self.output.append("  || Analysing operation: " + str(operation) + " on line " + str(operation.lineNumber))
             previousEditor = self.previouslyChanged(operation)
 
             if operation.type == operation.LOAD:
@@ -112,7 +110,7 @@ class redundantLoadStore(optimizationClass):
                     # or the targets are not the same but the addresses are.
 
                     if previousEditor.type in (operation.LOAD, operation.STORE):
-                        if previousEditor.getTarget() == operation.getTarget() and previousEditor.getAddress() == operation.getAddress():  
+                        if previousEditor.size == operation.size and previousEditor.getTarget() == operation.getTarget() and previousEditor.getAddress() == operation.getAddress():  
                             self.output.append("\tExcluding identical load / store operation from output.")
                             operation.exclude()
                         

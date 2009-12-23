@@ -313,7 +313,7 @@ $L20:
 	lw	$3,0($2)
 	lw	$4,32($fp)
 	addu	$2,$3,$4
-# 	lb	$3,0($2)
+	lb	$3,0($2)
 	move	$4,$3
 	jal	isupper
 ## basic block (285 - 285) ##
