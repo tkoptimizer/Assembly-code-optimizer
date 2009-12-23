@@ -100,10 +100,6 @@ for each basic block __b:
       exclude __t from the code
 \end{verbatim}
 
-\subsubsection{Resultaten}
-Met deze optimalisatie hebben we de volgende versnellingen weten te 
-realiseren:
-
 \subsection{Redundant load / stores}
 \subsubsection{Doel}
 Redundant load / store optimalisatie heeft als doel geen waarde uit het
@@ -169,10 +165,6 @@ for each basic block __b:
 
         add __op to the list of operations.
 \end{verbatim}
-
-\subsubsection{Resultaten}
-Met redundant load / store optimalisaties hebben we de volgende versnellingen
-weten te realiseren:
 
 \subsection{Copy propagation}
 \subsubsection{Doel}
@@ -259,8 +251,6 @@ for each basic block __b:
             remove the move from the list of dead moves.
 \end{verbatim}
 
-\subsubsection{Resultaten}
-
 \subsection{Common subexpression elimination}
 \subsubsection{Doel}
 Wanneer dezelfde berekening meerdere keren uitgevoerd wordt (met dezelfde
@@ -306,7 +296,13 @@ for each basic block in __b:
         remove the expression __op is updating from the list
 \end{verbatim}
 
-\subsubsection{Resultaten}
-De versnellingen die we met deze optimalisatie konden realiseren zijn:
+\section{Resultaten}
+De versnellingen die er gerealiseerd zijn:
+\begin{itemize}
+    \item acron | van 4436540 naar 4360426 cycles | 2.8\%
+    \item clinpack | van 1556370 naar 60067 cycles | inconsistent
+    \item pi | van 1715292 naar 1708329 cycles | 2\%
+    \item whet | van 2864289 naar 2970553 cycles | 4.6\%
+\end{itemize}
 
 \end{document}

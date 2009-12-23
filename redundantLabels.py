@@ -23,10 +23,11 @@ class redundantLabels(optimizationClass):
             if block.target.operations[-1].type == operation.CONTROL:
                 target = block.target.operations[-1].getTarget()
             else:
-                raise Exception, "Basicblock has no control operation on the last line!"
+                raise Exception, "Basicblock has no control operation on the\
+                    last line!"
             
-            if target[0] == "$":
-                if block.operations[-1].type == operation.CONTROL:
+            if target[0] == "$" and \
+                block.operations[-1].type == operation.CONTROL:
                     block.operations[-1].setTarget(target)
                     
                     # Exclude the old block from the code.

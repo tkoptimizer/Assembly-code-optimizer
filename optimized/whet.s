@@ -243,10 +243,8 @@ $L4:
 $L6:
 	lw	$2,0($fp)
 	slt	$3,$2,6
-	bne	$3,$0,$L7
+	bne	$3,$0,$L4
 	j	$L5
-$L7:
-	j	$L4
 $L5:
 $L3:
 	move	$sp,$fp			# sp not trusted here
@@ -264,31 +262,37 @@ P0:
 	sw	$fp,0($sp)
 	move	$fp,$sp
 	lw	$2,J
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,E1-4
 	addu	$2,$2,$3
 	lw	$3,K
-	sll	$3,$3,2
+	move	$4,$3
+	sll	$3,$4,2
 	la	$4,E1-4
 	addu	$3,$3,$4
 	l.s	$f0,0($3)
 	s.s	$f0,0($2)
 	lw	$2,K
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,E1-4
 	addu	$2,$2,$3
 	lw	$3,L
-	sll	$3,$3,2
+	move	$4,$3
+	sll	$3,$4,2
 	la	$4,E1-4
 	addu	$3,$3,$4
 	l.s	$f0,0($3)
 	s.s	$f0,0($2)
 	lw	$2,L
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,E1-4
 	addu	$2,$2,$3
 	lw	$3,J
-	sll	$3,$3,2
+	move	$4,$3
+	sll	$3,$4,2
 	la	$4,E1-4
 	addu	$3,$3,$4
 	l.s	$f0,0($3)
@@ -373,51 +377,59 @@ main:
 	sw	$2,64($fp)
 	sw	$0,68($fp)
 	lw	$2,60($fp)
-	sll	$3,$2,1
+	move	$4,$2
+	sll	$3,$4,1
 	addu	$3,$3,$2
 	sll	$2,$3,2
 	sw	$2,72($fp)
 	lw	$2,60($fp)
-	sll	$3,$2,3
+	move	$4,$2
+	sll	$3,$4,3
 	subu	$3,$3,$2
 	sll	$2,$3,1
 	sw	$2,76($fp)
 	lw	$2,60($fp)
-	sll	$3,$2,1
+	move	$4,$2
+	sll	$3,$4,1
 	addu	$3,$3,$2
-	sll	$2,$3,2
-	subu	$2,$2,$2
-	sll	$3,$2,3
+	sll	$4,$3,2
+	subu	$4,$4,$2
+	sll	$3,$4,3
 	subu	$3,$3,$2
 	sll	$2,$3,2
 	sw	$2,80($fp)
 	sw	$0,84($fp)
 	lw	$2,60($fp)
-	sll	$3,$2,3
+	move	$4,$2
+	sll	$3,$4,3
 	subu	$3,$3,$2
 	sll	$2,$3,4
 	subu	$2,$2,$3
 	sll	$3,$2,1
 	sw	$3,88($fp)
 	lw	$2,60($fp)
-	sll	$2,$2,5
+	move	$3,$2
+	sll	$2,$3,5
 	sw	$2,92($fp)
 	lw	$2,60($fp)
-	sll	$3,$2,3
+	move	$4,$2
+	sll	$3,$4,3
 	subu	$3,$3,$2
-	sll	$2,$3,5
-	addu	$2,$2,$2
-	sll	$3,$2,2
+	sll	$4,$3,5
+	addu	$4,$4,$2
+	sll	$3,$4,2
 	subu	$2,$3,$2
 	sw	$2,96($fp)
 	lw	$2,60($fp)
-	sll	$3,$2,7
+	move	$4,$2
+	sll	$3,$4,7
 	addu	$3,$3,$2
 	sll	$2,$3,2
 	sw	$2,100($fp)
 	sw	$0,104($fp)
 	lw	$2,60($fp)
-	sll	$3,$2,1
+	move	$4,$2
+	sll	$3,$4,1
 	addu	$3,$3,$2
 	sll	$2,$3,5
 	subu	$3,$2,$3
@@ -483,7 +495,8 @@ $L14:
 $L13:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	sw	$2,60($fp)
+	move	$3,$2
+	sw	$3,60($fp)
 	j	$L11
 $L12:
 	l.s	$f0,36($fp)
@@ -557,7 +570,8 @@ $L18:
 $L17:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	sw	$2,60($fp)
+	move	$3,$2
+	sw	$3,60($fp)
 	j	$L15
 $L16:
 	l.s	$f0,E1+4
@@ -584,7 +598,8 @@ $L22:
 $L21:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	sw	$2,60($fp)
+	move	$3,$2
+	sw	$3,60($fp)
 	j	$L19
 $L20:
 	l.s	$f0,E1+4
@@ -638,7 +653,8 @@ $L32:
 $L25:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	sw	$2,60($fp)
+	move	$3,$2
+	sw	$3,60($fp)
 	j	$L23
 $L24:
 	l.s	$f0,36($fp)
@@ -697,7 +713,8 @@ $L36:
 	mflo	$2
 	sw	$2,L
 	lw	$2,L
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,E1-8
 	addu	$2,$2,$3
 	lw	$3,J
@@ -710,7 +727,8 @@ $L36:
 	cvt.s.w	$f0,$f0
 	s.s	$f0,0($2)
 	lw	$2,K
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,E1-8
 	addu	$2,$2,$3
 	lw	$3,J
@@ -727,7 +745,8 @@ $L36:
 $L35:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	sw	$2,60($fp)
+	move	$3,$2
+	sw	$3,60($fp)
 	j	$L33
 $L34:
 	l.s	$f0,E1+4
@@ -814,7 +833,8 @@ $L40:
 $L39:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	sw	$2,60($fp)
+	move	$3,$2
+	sw	$3,60($fp)
 	j	$L37
 $L38:
 	s.s	$f20,48($fp)
@@ -853,7 +873,8 @@ $L44:
 $L43:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	sw	$2,60($fp)
+	move	$3,$2
+	sw	$3,60($fp)
 	j	$L41
 $L42:
 	l.s	$f0,52($fp)
@@ -891,7 +912,8 @@ $L48:
 $L47:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	sw	$2,60($fp)
+	move	$3,$2
+	sw	$3,60($fp)
 	j	$L45
 $L46:
 	l.s	$f0,E1+4
@@ -938,7 +960,8 @@ $L52:
 $L51:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	sw	$2,60($fp)
+	move	$3,$2
+	sw	$3,60($fp)
 	j	$L49
 $L50:
 	l.s	$f0,36($fp)
@@ -977,7 +1000,8 @@ $L56:
 $L55:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	sw	$2,60($fp)
+	move	$3,$2
+	sw	$3,60($fp)
 	j	$L53
 $L54:
 	s.s	$f20,48($fp)
