@@ -11,17 +11,18 @@
 \section{Code representatie}
 De code is in verschillende lagen onder te verdelen.
 
-\subsection{De code-file}
-Het bestand waar de code zich in bevindt is het hoogste niveau van 
-abstractie. Aangezien een file al een geheel is, zou hier geen representatie
-van hoeven zijn binnen de optimizer. Echter, aangezien de file ook de 
-``container'' is van de eerstvolgende laag, basic blocks, bestaat binnen de
-optimizer de class ``blockBuilder''. Hierin bevinden zich methoden om basic
-blocks te herkennen en te achterhalen wat de targets zijn waar vanaf een 
-basic block naartoe gesprongen wordt.
+\subsection{Het bestand}
+Het bestand waar de code zich in bevindt is de hoogste ``laag'' die binnen de
+compiler als geheel gezien kan worden.  Aangezien een bestand al een geheel is,
+zou hier geen representatie van hoeven zijn binnen de optimizer. Aangezien het
+bestand echter ook de ``container'' is van de eerstvolgende laag (basic blocks),
+bestaat binnen de optimizer de class ``blockBuilder''. Hierin bevinden zich
+methoden om basic blocks te herkennen en te achterhalen wat de targets zijn
+waar vanaf een basic block naartoe gesprongen wordt.
+
 
 \subsection{De basic blocks}
-Binnen de file is de code onder te verdelen in basic blocks. Basic blocks
+Binnen het bestand is de code onder te verdelen in basic blocks. Basic blocks
 beginnen met een mogelijke jump-target en eindigen met een jump of branch
 operatie. Binnen de optimizer worden deze gerepresenteerd door instanties 
 van de ``basicBlock'' class. Binnen deze class bevinden zich methoden om
@@ -122,3 +123,4 @@ berekening. Echter, het impliceert wel dat registers eerder vrij komen, wat
 weer kan resulteren in nieuwe redundant stores (die met move-operaties
 eenvoudig te herkennen zijn), copy propagation en vervolgens dead code
 elimination.
+\end{document}
