@@ -150,7 +150,7 @@ $L5:
 	move	$2,$3
 	sll	$3,$2,2
 	la	$4,w
-	addu	$3,$3,$4
+	addu	$2,$3,$4
 	lb	$2,0($3)
 	move	$4,$2
 	jal	is_vowel
@@ -161,9 +161,10 @@ $L5:
 	la	$3,pindex-4
 	addu	$2,$2,$3
 	lw	$3,0($2)
+	move	$2,$3
 	sll	$3,$3,2
 	la	$4,w
-	addu	$3,$3,$4
+	addu	$2,$3,$4
 	lb	$2,0($3)
 	move	$4,$2
 	jal	is_vowel
@@ -202,7 +203,7 @@ $L6:
 	lw	$3,68($fp)
 	subu	$2,$3,1
 	sw	$2,68($fp)
-	beq	$2,$0,$L9
+	beq	$3,$0,$L9
 	sw	$0,16($fp)
 $L10:
 	lw	$2,16($fp)
@@ -273,14 +274,14 @@ $L22:
 	addu	$3,$2,1
 	sw	$3,28($fp)
 	lw	$3,20($fp)
-	move	$4,$3
 	sll	$3,$3,2
 	la	$4,pindex
 	addu	$3,$3,$4
 	lw	$4,0($3)
+	move	$3,$4
 	sll	$4,$4,2
 	la	$5,w
-	addu	$4,$4,$5
+	addu	$3,$4,$5
 	lw	$4,32($fp)
 	addu	$5,$4,1
 	sw	$5,32($fp)
@@ -319,7 +320,7 @@ $L26:
 	move	$2,$3
 	sll	$3,$3,2
 	la	$4,w
-	addu	$3,$3,$4
+	addu	$2,$3,$4
 	la	$4,$LC7
 	lw	$5,0($2)
 	jal	printf
