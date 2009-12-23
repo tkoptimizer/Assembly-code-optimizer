@@ -1,0 +1,37 @@
+
+for each basic block __b:
+    for each operation __op:
+        if __op is a MOVE:
+            uses $fp / $sp ? --> skip operation
+            identical move on list? --> remove old operation
+
+            add __op to list of moves
+
+
+        if __op is a STORE:
+            if there is a move in the list of moves that has the same target as __op:
+                update __op and set the target to the source of the move.
+                exclude the move from the code.
+
+                add __op and move to a list of altered operations
+
+        if __op is a LOAD:
+            if there is a move in the list of moves that has the same target as
+                __op or __op uses the source of the move as target:
+
+                remove move from list
+            if the source or destination of the move is used as an offset in __op:
+
+                rollback all edits until the last added move on the list of
+                altered operations.
+        
+        if __op is an ARITHMETIC or CONTROL operation:
+            if there is a move in the list of moves that has the same target as
+                __op:
+
+                update __op by replacing the old register with the source of the
+                move.
+
+                exclude the move from the code.
+
+                add __op and move to the list of altered operations.

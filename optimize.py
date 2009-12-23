@@ -8,7 +8,6 @@ from redundantLoadStore import *
 from redundantLabels import *
 from copyPropagation import *
 from subExpressionElimination import *
-from altCopyPropagation import *
 
 #
 # A simple script that runs a set of optimization classes on a set of assembly
@@ -27,7 +26,7 @@ output_folder = "optimized/"
 optimizations = []
 
 optimizers = ({
-    'copy_propagation': altCopyPropagation(None),
+    'copy_propagation': copyPropagation(None),
     'redundant_labels': redundantLabels(None),
     'redundant_load_store': redundantLoadStore(None),
     'common_subexpression': subExpressionElimination(None)

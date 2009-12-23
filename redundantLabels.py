@@ -1,4 +1,4 @@
-from operation import *
+from operations_new import *
 from optimizationClass import *
 
 class redundantLabels(optimizationClass):
