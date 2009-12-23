@@ -190,7 +190,8 @@ class copyPropagation(optimizationClass):
                     source      = redundantMove.getMoveSource()
                     arguments   = operation.getArguments()
                     
-                    if destination in arguments:
+                    if destination in arguments and\
+                        operation.getTarget() != source:
                         for i in range(len(arguments)):
                             if arguments[i] == destination:
                                 arguments[i] = source

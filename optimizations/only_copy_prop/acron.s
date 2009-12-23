@@ -120,7 +120,8 @@ do_perm:
 	li	$3,0x00000001		# 1
 	bne	$2,$3,$L5
 	lw	$2,pindex
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,w
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -129,7 +130,8 @@ do_perm:
 	jal	is_vowel
 	bne	$2,$0,$L5
 	lw	$2,56($fp)
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,w
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -151,7 +153,7 @@ $L5:
 	move	$2,$3
 	sll	$3,$2,2
 	la	$4,w
-	addu	$3,$3,$4
+	addu	$2,$3,$4
 	lw	$3,0($2)
 	lb	$2,0($3)
 	move	$4,$2
@@ -159,11 +161,12 @@ $L5:
 	move	$16,$2
 	lw	$2,64($fp)
 	move	$3,$2
-	sll	$2,$2,2
+	sll	$2,$3,2
 	la	$3,pindex-4
 	addu	$2,$2,$3
 	lw	$3,0($2)
-	sll	$3,$3,2
+	move	$2,$3
+	sll	$3,$2,2
 	la	$4,w
 	addu	$2,$3,$4
 	lw	$3,0($2)
@@ -173,7 +176,7 @@ $L5:
 	move	$17,$2
 	lw	$2,56($fp)
 	move	$3,$2
-	sll	$2,$2,2
+	sll	$2,$3,2
 	la	$3,w
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -216,13 +219,15 @@ $L10:
 	j	$L11
 $L13:
 	lw	$2,16($fp)
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	lw	$3,60($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
 	bne	$3,$0,$L14
 	lw	$2,16($fp)
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	lw	$3,60($fp)
 	addu	$2,$2,$3
 	li	$3,0x00000001		# 1
@@ -233,7 +238,8 @@ $L13:
 	lw	$7,68($fp)
 	jal	do_perm
 	lw	$2,16($fp)
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	lw	$3,60($fp)
 	addu	$2,$2,$3
 	sw	$0,0($2)
@@ -259,11 +265,12 @@ $L19:
 $L20:
 	lw	$2,20($fp)
 	move	$3,$2
-	sll	$2,$2,2
+	sll	$2,$3,2
 	la	$3,pindex
 	addu	$2,$2,$3
 	lw	$3,0($2)
-	sll	$3,$3,2
+	move	$2,$3
+	sll	$3,$2,2
 	la	$4,w
 	addu	$3,$3,$4
 	lw	$3,0($2)
@@ -279,12 +286,13 @@ $L22:
 	addu	$3,$2,1
 	sw	$3,28($fp)
 	lw	$3,20($fp)
-	sll	$3,$3,2
+	move	$4,$3
+	sll	$3,$4,2
 	la	$4,pindex
 	addu	$3,$3,$4
 	lw	$4,0($3)
 	move	$3,$4
-	sll	$4,$4,2
+	sll	$4,$3,2
 	la	$5,w
 	addu	$4,$4,$5
 	lw	$4,32($fp)
@@ -318,12 +326,13 @@ $L23:
 	j	$L24
 $L26:
 	lw	$2,20($fp)
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,pindex
 	addu	$2,$2,$3
 	lw	$3,0($2)
 	move	$2,$3
-	sll	$3,$3,2
+	sll	$3,$2,2
 	la	$4,w
 	addu	$3,$3,$4
 	la	$4,$LC7
@@ -374,7 +383,8 @@ $L32:
 	j	$L33
 $L35:
 	lw	$2,16($fp)
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,done
 	addu	$2,$2,$3
 	li	$3,0x00000001		# 1
@@ -385,7 +395,8 @@ $L35:
 	lw	$7,20($fp)
 	jal	do_perm
 	lw	$2,16($fp)
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,done
 	addu	$2,$2,$3
 	sw	$0,0($2)

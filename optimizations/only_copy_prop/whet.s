@@ -264,31 +264,37 @@ P0:
 	sw	$fp,0($sp)
 	move	$fp,$sp
 	lw	$2,J
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,E1-4
 	addu	$2,$2,$3
 	lw	$3,K
-	sll	$3,$3,2
+	move	$4,$3
+	sll	$3,$4,2
 	la	$4,E1-4
 	addu	$3,$3,$4
 	l.s	$f0,0($3)
 	s.s	$f0,0($2)
 	lw	$2,K
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,E1-4
 	addu	$2,$2,$3
 	lw	$3,L
-	sll	$3,$3,2
+	move	$4,$3
+	sll	$3,$4,2
 	la	$4,E1-4
 	addu	$3,$3,$4
 	l.s	$f0,0($3)
 	s.s	$f0,0($2)
 	lw	$2,L
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,E1-4
 	addu	$2,$2,$3
 	lw	$3,J
-	sll	$3,$3,2
+	move	$4,$3
+	sll	$3,$4,2
 	la	$4,E1-4
 	addu	$3,$3,$4
 	l.s	$f0,0($3)
@@ -400,7 +406,8 @@ main:
 	sll	$3,$2,1
 	sw	$3,88($fp)
 	lw	$2,60($fp)
-	sll	$2,$2,5
+	move	$3,$2
+	sll	$2,$3,5
 	sw	$2,92($fp)
 	lw	$2,60($fp)
 	sll	$3,$2,3
@@ -697,7 +704,8 @@ $L36:
 	mflo	$2
 	sw	$2,L
 	lw	$2,L
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,E1-8
 	addu	$2,$2,$3
 	lw	$3,J
@@ -710,7 +718,8 @@ $L36:
 	cvt.s.w	$f0,$f0
 	s.s	$f0,0($2)
 	lw	$2,K
-	sll	$2,$2,2
+	move	$3,$2
+	sll	$2,$3,2
 	la	$3,E1-8
 	addu	$2,$2,$3
 	lw	$3,J
