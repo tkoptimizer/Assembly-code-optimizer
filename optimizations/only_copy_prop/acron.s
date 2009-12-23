@@ -144,11 +144,10 @@ $L5:
 	bne	$3,$0,$L6
 	lw	$2,64($fp)
 	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,pindex-8
 	addu	$2,$2,$3
 	lw	$3,0($2)
-	move	$2,$3
 	sll	$3,$3,2
 	la	$4,w
 	addu	$2,$3,$4
@@ -159,12 +158,12 @@ $L5:
 	move	$16,$2
 	lw	$2,64($fp)
 	move	$3,$2
-	sll	$2,$2,2
+	sll	$2,$3,2
 	la	$3,pindex-4
 	addu	$2,$2,$3
 	lw	$3,0($2)
 	move	$2,$3
-	sll	$3,$2,2
+	sll	$3,$3,2
 	la	$4,w
 	addu	$2,$3,$4
 	lw	$3,0($2)
@@ -208,7 +207,7 @@ $L6:
 	lw	$3,68($fp)
 	subu	$2,$3,1
 	sw	$2,68($fp)
-	beq	$3,$0,$L9
+	beq	$2,$0,$L9
 	sw	$0,16($fp)
 $L10:
 	lw	$2,16($fp)
@@ -259,11 +258,11 @@ $L19:
 	sw	$0,32($fp)
 $L20:
 	lw	$2,20($fp)
-	move	$3,$2
 	sll	$2,$2,2
 	la	$3,pindex
 	addu	$2,$2,$3
 	lw	$3,0($2)
+	move	$2,$3
 	sll	$3,$3,2
 	la	$4,w
 	addu	$2,$3,$4
@@ -280,7 +279,6 @@ $L22:
 	addu	$3,$2,1
 	sw	$3,28($fp)
 	lw	$3,20($fp)
-	move	$4,$3
 	sll	$3,$3,2
 	la	$4,pindex
 	addu	$3,$3,$4
@@ -319,11 +317,11 @@ $L23:
 	j	$L24
 $L26:
 	lw	$2,20($fp)
+	move	$3,$2
 	sll	$2,$2,2
 	la	$3,pindex
 	addu	$2,$2,$3
 	lw	$3,0($2)
-	move	$2,$3
 	sll	$3,$3,2
 	la	$4,w
 	addu	$2,$3,$4
