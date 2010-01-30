@@ -144,6 +144,7 @@ class operation:
     FLOAT_ARITHMETIC = 4
     SYSTEM           = 5
     LABEL            = 6
+    NONE             = 7
 
     # Load and store sizes
     BYTE = 0
@@ -153,9 +154,11 @@ class operation:
     @staticmethod
     def getInstance(line, lineNumber):
         parts = line.split()
-
+        
         if len(parts) == 1:
             return LabelOp(line, lineNumber)
+        elif len(parts) < 1:
+            return NoOp(line, lineNumber)
 
         op = parts[0]
 
@@ -173,9 +176,10 @@ class operation:
 
         elif op in operation.floatArithmetic:
             return FloatArithmeticOp(line, lineNumber)
-        else:
+        elif op in operation.system:
             return SystemOp(line, lineNumber)
-
+        else:
+            return NoOp(line, lineNumber)
 
     def __init__(self, line, lineNumber):
         if len(line) == 0:
@@ -269,7 +273,8 @@ class operation:
             3: 'INTEGER ARITHMETIC',
             4: 'FLOAT ARITHMETIC',
             5: 'SYSTEM',
-            6: 'LABEL'
+            6: 'LABEL',
+            7: 'NONE'
         })
 
         return typeList[type]
@@ -626,3 +631,13 @@ class LabelOp(operation):
 
         if self.type == operation.LABEL:
             return self.labelName
+
+class NoOp(operation):
+    def __init__(self, line, lineNumber):
+        """
+        Stores the line.
+        """
+
+        operation.__init__(self, line, lineNumber)
+        self.labelName = line
+        self.type      = operation.NONE

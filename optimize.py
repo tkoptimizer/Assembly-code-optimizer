@@ -2,7 +2,7 @@ import getopt
 import sys
 import os
 
-from blocks import *
+from blockBuilder import *
 from basicblock import *
 from redundantLoadStore import *
 from redundantLabels import *
