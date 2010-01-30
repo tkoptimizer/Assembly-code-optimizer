@@ -1,9 +1,13 @@
 	.file	1 "pi.c"
+
  # GNU C 2.7.2.3 [AL 1.1, MM 40, tma 0.1] SimpleScalar running sstrix compiled by GNU C
+
  # Cc1 defaults:
  # -mgas -mgpOPT
+
  # Cc1 arguments (-G value = 8, Cpu = default, ISA = 1):
  # -quiet -dumpbase -O0 -o
+
 gcc2_compiled.:
 __gnu_compiled_c:
 	.rdata
@@ -29,8 +33,11 @@ $LC4:
 	.text
 	.align	2
 	.globl	main
+
 	.extern	stderr, 4
+
 	.text
+
 	.loc	1 5
 	.ent	main
 main:
@@ -97,14 +104,12 @@ $L6:
 	bc1f	$L7
 	lw	$3,24($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,24($fp)
+	sw	$2,24($fp)
 $L7:
 $L5:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+	sw	$2,16($fp)
 	j	$L3
 $L4:
 	l.s	$f0,24($fp)

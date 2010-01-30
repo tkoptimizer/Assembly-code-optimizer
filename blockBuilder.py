@@ -38,7 +38,7 @@ class blockBuilder:
         for line in self.listing:
             try:
                 currentOpp = operation.getInstance(line, lineNumber)
-            except Exception as error:
+            except Exception, (error):
                 # Keep a log of all exceptions.
                 self.exceptions.append(error)
             
@@ -92,7 +92,7 @@ class blockBuilder:
             for l in range(fromLine, toLine):
                 try:
                     currentOpp = operation.getInstance(self.listing[l - 1], l)
-                except Exception as error:
+                except Exception, (error):
                     # This error should already have been logged in the
                     # ``findLeaders'' function
                     self.exceptions.append(error)
@@ -119,7 +119,7 @@ class blockBuilder:
 
             try:
                 currentOpp = operation.getInstance(line, lineNumber)
-            except Exception as error:
+            except Exception, (error):
                 # Keep a log of all exceptions.
                 self.exceptions.append(error)
             else:

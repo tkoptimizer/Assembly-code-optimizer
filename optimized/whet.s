@@ -1,9 +1,13 @@
 	.file	1 "whet.c"
+
  # GNU C 2.7.2.3 [AL 1.1, MM 40, tma 0.1] SimpleScalar running sstrix compiled by GNU C
+
  # Cc1 defaults:
  # -mgas -mgpOPT
+
  # Cc1 arguments (-G value = 8, Cpu = default, ISA = 1):
  # -quiet -dumpbase -O0 -o
+
 gcc2_compiled.:
 __gnu_compiled_c:
 	.sdata
@@ -72,14 +76,23 @@ $LC12:
 	.text
 	.align	2
 	.globl	main
+
 	.comm	T,4
+
 	.comm	T1,4
+
 	.comm	T2,4
+
 	.comm	E1,16
+
 	.comm	J,4
+
 	.comm	K,4
+
 	.comm	L,4
+
 	.text
+
 	.loc	1 20
 	.ent	second
 second:
@@ -107,6 +120,7 @@ $L1:
 	addu	$sp,$sp,24
 	j	$31
 	.end	second
+
 	.loc	1 30
 	.ent	POUT
 POUT:
@@ -149,6 +163,7 @@ $L2:
 	addu	$sp,$sp,64
 	j	$31
 	.end	POUT
+
 	.loc	1 36
 	.ent	PA
 PA:
@@ -243,8 +258,10 @@ $L4:
 $L6:
 	lw	$2,0($fp)
 	slt	$3,$2,6
-	bne	$3,$0,$L4
+	bne	$3,$0,$L7
 	j	$L5
+$L7:
+	j	$L4
 $L5:
 $L3:
 	move	$sp,$fp			# sp not trusted here
@@ -252,6 +269,7 @@ $L3:
 	addu	$sp,$sp,16
 	j	$31
 	.end	PA
+
 	.loc	1 51
 	.ent	P0
 P0:
@@ -262,37 +280,31 @@ P0:
 	sw	$fp,0($sp)
 	move	$fp,$sp
 	lw	$2,J
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,E1-4
 	addu	$2,$2,$3
 	lw	$3,K
-	move	$4,$3
-	sll	$3,$4,2
+	sll	$3,$3,2
 	la	$4,E1-4
 	addu	$3,$3,$4
 	l.s	$f0,0($3)
 	s.s	$f0,0($2)
 	lw	$2,K
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,E1-4
 	addu	$2,$2,$3
 	lw	$3,L
-	move	$4,$3
-	sll	$3,$4,2
+	sll	$3,$3,2
 	la	$4,E1-4
 	addu	$3,$3,$4
 	l.s	$f0,0($3)
 	s.s	$f0,0($2)
 	lw	$2,L
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,E1-4
 	addu	$2,$2,$3
 	lw	$3,J
-	move	$4,$3
-	sll	$3,$4,2
+	sll	$3,$3,2
 	la	$4,E1-4
 	addu	$3,$3,$4
 	l.s	$f0,0($3)
@@ -303,6 +315,7 @@ $L8:
 	addu	$sp,$sp,8
 	j	$31
 	.end	P0
+
 	.loc	1 58
 	.ent	P3
 P3:
@@ -346,6 +359,7 @@ $L9:
 	addu	$sp,$sp,16
 	j	$31
 	.end	P3
+
 	.loc	1 85
 	.ent	main
 main:
@@ -377,20 +391,17 @@ main:
 	sw	$2,64($fp)
 	sw	$0,68($fp)
 	lw	$2,60($fp)
-	move	$4,$2
-	sll	$3,$4,1
+	sll	$3,$2,1
 	addu	$3,$3,$2
 	sll	$2,$3,2
 	sw	$2,72($fp)
 	lw	$2,60($fp)
-	move	$4,$2
-	sll	$3,$4,3
+	sll	$3,$2,3
 	subu	$3,$3,$2
 	sll	$2,$3,1
 	sw	$2,76($fp)
 	lw	$2,60($fp)
-	move	$4,$2
-	sll	$3,$4,1
+	sll	$3,$2,1
 	addu	$3,$3,$2
 	sll	$4,$3,2
 	subu	$4,$4,$2
@@ -400,20 +411,17 @@ main:
 	sw	$2,80($fp)
 	sw	$0,84($fp)
 	lw	$2,60($fp)
-	move	$4,$2
-	sll	$3,$4,3
+	sll	$3,$2,3
 	subu	$3,$3,$2
 	sll	$2,$3,4
 	subu	$2,$2,$3
 	sll	$3,$2,1
 	sw	$3,88($fp)
 	lw	$2,60($fp)
-	move	$3,$2
-	sll	$2,$3,5
+	sll	$2,$2,5
 	sw	$2,92($fp)
 	lw	$2,60($fp)
-	move	$4,$2
-	sll	$3,$4,3
+	sll	$3,$2,3
 	subu	$3,$3,$2
 	sll	$4,$3,5
 	addu	$4,$4,$2
@@ -421,15 +429,13 @@ main:
 	subu	$2,$3,$2
 	sw	$2,96($fp)
 	lw	$2,60($fp)
-	move	$4,$2
-	sll	$3,$4,7
+	sll	$3,$2,7
 	addu	$3,$3,$2
 	sll	$2,$3,2
 	sw	$2,100($fp)
 	sw	$0,104($fp)
 	lw	$2,60($fp)
-	move	$4,$2
-	sll	$3,$4,1
+	sll	$3,$2,1
 	addu	$3,$3,$2
 	sll	$2,$3,5
 	subu	$3,$2,$3
@@ -495,8 +501,7 @@ $L14:
 $L13:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+	sw	$2,60($fp)
 	j	$L11
 $L12:
 	l.s	$f0,36($fp)
@@ -570,8 +575,7 @@ $L18:
 $L17:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+	sw	$2,60($fp)
 	j	$L15
 $L16:
 	l.s	$f0,E1+4
@@ -598,8 +602,7 @@ $L22:
 $L21:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+	sw	$2,60($fp)
 	j	$L19
 $L20:
 	l.s	$f0,E1+4
@@ -653,8 +656,7 @@ $L32:
 $L25:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+	sw	$2,60($fp)
 	j	$L23
 $L24:
 	l.s	$f0,36($fp)
@@ -713,8 +715,7 @@ $L36:
 	mflo	$2
 	sw	$2,L
 	lw	$2,L
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,E1-8
 	addu	$2,$2,$3
 	lw	$3,J
@@ -727,8 +728,7 @@ $L36:
 	cvt.s.w	$f0,$f0
 	s.s	$f0,0($2)
 	lw	$2,K
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,E1-8
 	addu	$2,$2,$3
 	lw	$3,J
@@ -745,8 +745,7 @@ $L36:
 $L35:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+	sw	$2,60($fp)
 	j	$L33
 $L34:
 	l.s	$f0,E1+4
@@ -833,8 +832,7 @@ $L40:
 $L39:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+	sw	$2,60($fp)
 	j	$L37
 $L38:
 	s.s	$f20,48($fp)
@@ -873,8 +871,7 @@ $L44:
 $L43:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+	sw	$2,60($fp)
 	j	$L41
 $L42:
 	l.s	$f0,52($fp)
@@ -912,8 +909,7 @@ $L48:
 $L47:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+	sw	$2,60($fp)
 	j	$L45
 $L46:
 	l.s	$f0,E1+4
@@ -960,8 +956,7 @@ $L52:
 $L51:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+	sw	$2,60($fp)
 	j	$L49
 $L50:
 	l.s	$f0,36($fp)
@@ -1000,8 +995,7 @@ $L56:
 $L55:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+	sw	$2,60($fp)
 	j	$L53
 $L54:
 	s.s	$f20,48($fp)

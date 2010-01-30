@@ -1,9 +1,13 @@
 	.file	1 "dhrystone.c"
+
  # GNU C 2.7.2.3 [AL 1.1, MM 40, tma 0.1] SimpleScalar running sstrix compiled by GNU C
+
  # Cc1 defaults:
  # -mgas -mgpOPT
+
  # Cc1 arguments (-G value = 8, Cpu = default, ISA = 1):
  # -quiet -dumpbase -O0 -o
+
 gcc2_compiled.:
 __gnu_compiled_c:
 	.globl	Version
@@ -55,15 +59,25 @@ $LC4:
 	.globl	Func2
 	.align	2
 	.globl	Func3
+
 	.comm	IntGlob,4
+
 	.comm	BoolGlob,4
+
 	.comm	Char1Glob,1
+
 	.comm	Char2Glob,1
+
 	.comm	Array1Glob,204
+
 	.comm	Array2Glob,10404
+
 	.comm	PtrGlb,4
+
 	.comm	PtrGlbNext,4
+
 	.text
+
 	.loc	1 414
 	.ent	main
 main:
@@ -85,6 +99,7 @@ $L1:
 	addu	$sp,$sp,24
 	j	$31
 	.end	main
+
 	.loc	1 432
 	.ent	Proc0
 Proc0:
@@ -185,8 +200,7 @@ $L11:
 	j	$L12
 $L13:
 	lw	$2,16($fp)
-	move	$4,$2
-	sll	$3,$4,2
+	sll	$3,$2,2
 	addu	$3,$3,$2
 	lw	$2,20($fp)
 	subu	$3,$3,$2
@@ -198,8 +212,7 @@ $L13:
 	jal	Proc7
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+	sw	$2,16($fp)
 	j	$L11
 $L12:
 	la	$4,Array1Glob
@@ -232,8 +245,7 @@ $L18:
 $L16:
 	lbu	$2,29($fp)
 	addu	$3,$2,1
-	move	$2,$3
-	sb	$2,29($fp)
+	sb	$3,29($fp)
 	j	$L14
 $L15:
 	lw	$2,20($fp)
@@ -248,8 +260,7 @@ $L15:
 	lw	$2,24($fp)
 	lw	$3,20($fp)
 	subu	$2,$2,$3
-	move	$4,$2
-	sll	$3,$4,3
+	sll	$3,$2,3
 	subu	$3,$3,$2
 	lw	$2,16($fp)
 	subu	$3,$3,$2
@@ -298,6 +309,7 @@ $L2:
 	addu	$sp,$sp,152
 	j	$31
 	.end	Proc0
+
 	.loc	1 540
 	.ent	Proc1
 Proc1:
@@ -380,6 +392,7 @@ $L19:
 	addu	$sp,$sp,24
 	j	$31
 	.end	Proc1
+
 	.loc	1 563
 	.ent	Proc2
 Proc2:
@@ -400,8 +413,7 @@ $L23:
 	bne	$2,$3,$L26
 	lw	$3,0($fp)
 	subu	$2,$3,1
-	move	$3,$2
-	sw	$3,0($fp)
+	sw	$2,0($fp)
 	lw	$2,16($fp)
 	lw	$3,0($fp)
 	lw	$4,IntGlob
@@ -422,6 +434,7 @@ $L22:
 	addu	$sp,$sp,16
 	j	$31
 	.end	Proc2
+
 	.loc	1 583
 	.ent	Proc3
 Proc3:
@@ -457,6 +470,7 @@ $L28:
 	addu	$sp,$sp,24
 	j	$31
 	.end	Proc3
+
 	.loc	1 593
 	.ent	Proc4
 Proc4:
@@ -482,6 +496,7 @@ $L31:
 	addu	$sp,$sp,16
 	j	$31
 	.end	Proc4
+
 	.loc	1 602
 	.ent	Proc5
 Proc5:
@@ -500,6 +515,7 @@ $L32:
 	addu	$sp,$sp,8
 	j	$31
 	.end	Proc5
+
 	.loc	1 610
 	.ent	Proc6
 Proc6:
@@ -526,8 +542,7 @@ $L34:
 	sltu	$3,$2,5
 	beq	$3,$0,$L44
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	la	$3,$L43
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -579,6 +594,7 @@ $L33:
 	addu	$sp,$sp,24
 	j	$31
 	.end	Proc6
+
 	.loc	1 629
 	.ent	Proc7
 Proc7:
@@ -605,6 +621,7 @@ $L45:
 	addu	$sp,$sp,16
 	j	$31
 	.end	Proc7
+
 	.loc	1 640
 	.ent	Proc8
 Proc8:
@@ -622,28 +639,24 @@ Proc8:
 	addu	$3,$2,5
 	sw	$3,0($fp)
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	lw	$3,16($fp)
 	addu	$2,$2,$3
 	lw	$3,28($fp)
 	sw	$3,0($2)
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	lw	$4,16($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,4
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,2
+	sll	$3,$3,2
 	lw	$4,16($fp)
 	addu	$3,$3,$4
 	lw	$4,0($3)
 	sw	$4,0($2)
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	lw	$3,16($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,120
@@ -661,11 +674,9 @@ $L47:
 $L50:
 	lw	$3,0($fp)
 	lw	$2,4($fp)
-	move	$4,$2
-	sll	$2,$4,2
-	move	$5,$3
-	sll	$4,$5,1
-	addu	$4,$4,$3
+	sll	$2,$2,2
+	sll	$4,$3,1
+	addu	$4,$2,$3
 	sll	$3,$4,4
 	addu	$4,$4,$3
 	sll	$3,$4,2
@@ -677,17 +688,14 @@ $L50:
 $L49:
 	lw	$3,4($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,4($fp)
+	sw	$2,4($fp)
 	j	$L47
 $L48:
 	lw	$3,0($fp)
 	lw	$2,0($fp)
-	move	$4,$2
-	sll	$2,$4,2
-	move	$5,$3
-	sll	$4,$5,1
-	addu	$4,$4,$3
+	sll	$2,$2,2
+	sll	$4,$3,1
+	addu	$4,$2,$3
 	sll	$3,$4,4
 	addu	$4,$4,$3
 	sll	$3,$4,2
@@ -698,10 +706,9 @@ $L48:
 	lw	$3,0($fp)
 	lw	$2,0($fp)
 	move	$4,$2
-	sll	$2,$4,2
-	move	$5,$3
+	sll	$2,$2,2
 	sll	$4,$5,1
-	addu	$4,$4,$3
+	addu	$4,$2,$3
 	sll	$3,$4,4
 	addu	$4,$4,$3
 	sll	$3,$4,2
@@ -711,11 +718,9 @@ $L48:
 	subu	$2,$4,4
 	lw	$4,0($fp)
 	lw	$3,0($fp)
-	move	$5,$3
 	sll	$3,$5,2
-	move	$6,$4
-	sll	$5,$6,1
-	addu	$5,$5,$4
+	sll	$5,$4,1
+	addu	$5,$3,$4
 	sll	$4,$5,4
 	addu	$5,$5,$4
 	sll	$4,$5,2
@@ -729,11 +734,10 @@ $L48:
 	sw	$4,0($2)
 	lw	$3,0($fp)
 	lw	$2,0($fp)
-	move	$4,$2
-	sll	$2,$4,2
+	sll	$2,$2,2
 	move	$5,$3
 	sll	$4,$5,1
-	addu	$4,$4,$3
+	addu	$4,$2,$3
 	sll	$3,$4,4
 	addu	$4,$4,$3
 	sll	$3,$4,2
@@ -742,8 +746,7 @@ $L48:
 	addu	$4,$2,$3
 	addu	$2,$4,4080
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,2
+	sll	$3,$3,2
 	lw	$4,16($fp)
 	addu	$3,$3,$4
 	lw	$4,0($3)
@@ -756,6 +759,7 @@ $L46:
 	addu	$sp,$sp,16
 	j	$31
 	.end	Proc8
+
 	.loc	1 660
 	.ent	Func1
 Func1:
@@ -789,6 +793,7 @@ $L51:
 	addu	$sp,$sp,16
 	j	$31
 	.end	Func1
+
 	.loc	1 675
 	.ent	Func2
 Func2:
@@ -826,8 +831,7 @@ $L57:
 	sb	$2,20($fp)
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+	sw	$2,16($fp)
 $L58:
 	j	$L55
 $L56:
@@ -869,6 +873,7 @@ $L54:
 	addu	$sp,$sp,32
 	j	$31
 	.end	Func2
+
 	.loc	1 705
 	.ent	Func3
 Func3:

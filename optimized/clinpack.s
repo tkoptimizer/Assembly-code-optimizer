@@ -1,22 +1,38 @@
 	.file	1 "clinpack.c"
+
  # GNU C 2.7.2.3 [AL 1.1, MM 40, tma 0.1] SimpleScalar running sstrix compiled by GNU C
+
  # Cc1 defaults:
  # -mgas -mgpOPT
+
  # Cc1 arguments (-G value = 8, Cpu = default, ISA = 1):
  # -quiet -dumpbase -O0 -o
+
 gcc2_compiled.:
 __gnu_compiled_c:
+
 	.lcomm	aa.2,320000
+
 	.lcomm	a.3,321600
+
 	.lcomm	b.4,1600
+
 	.lcomm	x.5,1600
+
 	.lcomm	ipvt.6,800
+
 	.lcomm	n.7,4
+
 	.lcomm	i.8,4
+
 	.lcomm	ntimes.9,4
+
 	.lcomm	info.10,4
+
 	.lcomm	lda.11,4
+
 	.lcomm	ldaa.12,4
+
 	.lcomm	kflops.13,4
 	.rdata
 	.align	2
@@ -144,9 +160,13 @@ $LC24:
 	.text
 	.align	2
 	.globl	dtime
+
 	.lcomm	st,384
+
 	.comm	rusage,72
+
 	.text
+
 	.loc	1 72
 	.ent	main
 main:
@@ -244,13 +264,11 @@ $L2:
 	j	$L3
 $L5:
 	lw	$2,i.8
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	la	$3,x.5
 	addu	$2,$2,$3
 	lw	$3,i.8
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	la	$4,b.4
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
@@ -258,8 +276,7 @@ $L5:
 $L4:
 	lw	$3,i.8
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,i.8
+	sw	$2,i.8
 	j	$L2
 $L3:
 	addu	$2,$fp,72
@@ -278,13 +295,11 @@ $L6:
 	j	$L7
 $L9:
 	lw	$2,i.8
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	la	$3,b.4
 	addu	$2,$2,$3
 	lw	$3,i.8
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	la	$4,b.4
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
@@ -293,8 +308,7 @@ $L9:
 $L8:
 	lw	$3,i.8
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,i.8
+	sw	$2,i.8
 	j	$L6
 $L7:
 	la	$2,x.5
@@ -317,8 +331,7 @@ $L10:
 	j	$L11
 $L13:
 	lw	$2,i.8
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	la	$3,b.4
 	addu	$2,$2,$3
 	l.d	$f2,0($2)
@@ -330,8 +343,7 @@ $L13:
 	j	$L15
 $L14:
 	lw	$2,i.8
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	la	$3,b.4
 	addu	$2,$2,$3
 	l.d	$f2,0($2)
@@ -339,8 +351,7 @@ $L14:
 $L15:
 	s.d	$f0,88($fp)
 	lw	$2,i.8
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	la	$3,x.5
 	addu	$2,$2,$3
 	l.d	$f2,0($2)
@@ -352,8 +363,7 @@ $L15:
 	j	$L17
 $L16:
 	lw	$2,i.8
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	la	$3,x.5
 	addu	$2,$2,$3
 	l.d	$f2,0($2)
@@ -363,8 +373,7 @@ $L17:
 $L12:
 	lw	$3,i.8
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,i.8
+	sw	$2,i.8
 	j	$L10
 $L11:
 	l.d	$f12,$LC5
@@ -395,8 +404,7 @@ $L11:
 	sub.d	$f0,$f0,$f2
 	s.d	$f0,32($sp)
 	lw	$2,n.7
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	la	$3,x.5-8
 	addu	$2,$2,$3
 	l.d	$f0,0($2)
@@ -580,8 +588,7 @@ $L21:
 $L20:
 	lw	$3,i.8
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,i.8
+	sw	$2,i.8
 	j	$L18
 $L19:
 	jal	dtime
@@ -615,8 +622,7 @@ $L25:
 $L24:
 	lw	$3,i.8
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,i.8
+	sw	$2,i.8
 	j	$L22
 $L23:
 	jal	dtime
@@ -853,8 +859,7 @@ $L29:
 $L28:
 	lw	$3,i.8
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,i.8
+	sw	$2,i.8
 	j	$L26
 $L27:
 	jal	dtime
@@ -888,8 +893,7 @@ $L33:
 $L32:
 	lw	$3,i.8
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,i.8
+	sw	$2,i.8
 	j	$L30
 $L31:
 	jal	dtime
@@ -976,6 +980,7 @@ $L1:
 	addu	$sp,$sp,168
 	j	$31
 	.end	main
+
 	.loc	1 300
 	.ent	print_time
 print_time:
@@ -988,41 +993,35 @@ print_time:
 	move	$fp,$sp
 	sw	$4,64($fp)
 	lw	$2,64($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	la	$3,st
 	addu	$2,$2,$3
 	lw	$3,64($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	la	$4,st+48
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
 	s.d	$f0,16($sp)
 	lw	$3,64($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	la	$4,st+96
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
 	s.d	$f0,24($sp)
 	lw	$3,64($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	la	$4,st+144
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
 	s.d	$f0,32($sp)
 	lw	$3,64($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	la	$4,st+192
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
 	s.d	$f0,40($sp)
 	lw	$3,64($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	la	$4,st+240
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
@@ -1037,6 +1036,7 @@ $L37:
 	addu	$sp,$sp,64
 	j	$31
 	.end	print_time
+
 	.loc	1 309
 	.ent	matgen
 matgen:
@@ -1071,8 +1071,7 @@ $L43:
 	j	$L44
 $L46:
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$2,$4,1
+	sll	$2,$3,1
 	addu	$2,$2,$3
 	sll	$4,$2,6
 	addu	$2,$2,$4
@@ -1080,14 +1079,12 @@ $L46:
 	addu	$4,$4,$3
 	sll	$2,$4,2
 	addu	$2,$2,$3
-	move	$3,$2
-	bgez	$3,$L47
+	bgez	$2,$L47
 	li	$4,0x0000ffff		# 65535
 	addu	$3,$3,$4
 $L47:
 	sra	$3,$3,16
-	move	$4,$3
-	sll	$3,$4,16
+	sll	$3,$3,16
 	subu	$2,$2,$3
 	sw	$2,0($fp)
 	lw	$2,28($fp)
@@ -1096,8 +1093,7 @@ $L47:
 	mflo	$2
 	lw	$3,4($fp)
 	addu	$2,$2,$3
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,24($fp)
 	addu	$2,$2,$3
 	l.s	$f0,0($fp)
@@ -1115,8 +1111,7 @@ $L47:
 	mflo	$3
 	lw	$4,4($fp)
 	addu	$3,$3,$4
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,24($fp)
 	addu	$3,$3,$4
 	lw	$4,40($fp)
@@ -1130,8 +1125,7 @@ $L47:
 	mflo	$3
 	lw	$4,4($fp)
 	addu	$3,$3,$4
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,24($fp)
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
@@ -1144,15 +1138,13 @@ $L49:
 $L45:
 	lw	$3,4($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,4($fp)
+	sw	$2,4($fp)
 	j	$L43
 $L44:
 $L41:
 	lw	$3,8($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,8($fp)
+	sw	$2,8($fp)
 	j	$L39
 $L40:
 	.set	noreorder
@@ -1167,16 +1159,14 @@ $L50:
 	j	$L51
 $L53:
 	lw	$2,4($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,36($fp)
 	addu	$2,$2,$3
 	dsz	0($2)
 $L52:
 	lw	$3,4($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,4($fp)
+	sw	$2,4($fp)
 	j	$L50
 $L51:
 	.set	noreorder
@@ -1199,13 +1189,11 @@ $L58:
 	j	$L59
 $L61:
 	lw	$2,4($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,36($fp)
 	addu	$2,$2,$3
 	lw	$3,4($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,36($fp)
 	addu	$3,$3,$4
 	lw	$4,28($fp)
@@ -1214,8 +1202,7 @@ $L61:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,24($fp)
 	addu	$4,$4,$5
 	l.d	$f0,0($3)
@@ -1225,15 +1212,13 @@ $L61:
 $L60:
 	lw	$3,4($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,4($fp)
+	sw	$2,4($fp)
 	j	$L58
 $L59:
 $L56:
 	lw	$3,8($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,8($fp)
+	sw	$2,8($fp)
 	j	$L54
 $L55:
 $L38:
@@ -1242,6 +1227,7 @@ $L38:
 	addu	$sp,$sp,24
 	j	$31
 	.end	matgen
+
 	.loc	1 339
 	.ent	dgefa
 dgefa:
@@ -1283,8 +1269,7 @@ $L67:
 	mflo	$3
 	lw	$4,44($fp)
 	addu	$3,$3,$4
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,72($fp)
 	addu	$3,$3,$4
 	move	$4,$2
@@ -1295,8 +1280,7 @@ $L67:
 	addu	$2,$2,$3
 	sw	$2,52($fp)
 	lw	$2,44($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	lw	$3,84($fp)
 	addu	$2,$2,$3
 	lw	$3,52($fp)
@@ -1307,8 +1291,7 @@ $L67:
 	mflo	$2
 	lw	$3,52($fp)
 	addu	$2,$2,$3
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,72($fp)
 	addu	$2,$2,$3
 	l.d	$f0,0($2)
@@ -1325,8 +1308,7 @@ $L67:
 	mflo	$2
 	lw	$3,52($fp)
 	addu	$2,$2,$3
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,72($fp)
 	addu	$2,$2,$3
 	l.d	$f0,0($2)
@@ -1337,8 +1319,7 @@ $L67:
 	mflo	$2
 	lw	$3,52($fp)
 	addu	$2,$2,$3
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,72($fp)
 	addu	$2,$2,$3
 	lw	$3,76($fp)
@@ -1347,8 +1328,7 @@ $L67:
 	mflo	$3
 	lw	$4,44($fp)
 	addu	$3,$3,$4
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,72($fp)
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
@@ -1359,8 +1339,7 @@ $L67:
 	mflo	$2
 	lw	$3,44($fp)
 	addu	$2,$2,$3
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,72($fp)
 	addu	$2,$2,$3
 	l.d	$f0,32($fp)
@@ -1372,8 +1351,7 @@ $L69:
 	mflo	$2
 	lw	$3,44($fp)
 	addu	$2,$2,$3
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,72($fp)
 	addu	$2,$2,$3
 	l.d	$f0,$LC21
@@ -1390,8 +1368,7 @@ $L69:
 	mflo	$3
 	lw	$4,44($fp)
 	addu	$3,$3,$4
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	addu	$4,$3,8
 	lw	$3,72($fp)
 	addu	$4,$3,$4
@@ -1416,8 +1393,7 @@ $L73:
 	mflo	$2
 	lw	$3,52($fp)
 	addu	$2,$2,$3
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,72($fp)
 	addu	$2,$2,$3
 	l.d	$f0,0($2)
@@ -1431,8 +1407,7 @@ $L73:
 	mflo	$2
 	lw	$3,52($fp)
 	addu	$2,$2,$3
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,72($fp)
 	addu	$2,$2,$3
 	lw	$3,76($fp)
@@ -1441,8 +1416,7 @@ $L73:
 	mflo	$3
 	lw	$4,44($fp)
 	addu	$3,$3,$4
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,72($fp)
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
@@ -1453,8 +1427,7 @@ $L73:
 	mflo	$2
 	lw	$3,44($fp)
 	addu	$2,$2,$3
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,72($fp)
 	addu	$2,$2,$3
 	l.d	$f0,32($fp)
@@ -1470,8 +1443,7 @@ $L74:
 	mflo	$3
 	lw	$4,44($fp)
 	addu	$3,$3,$4
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	addu	$4,$3,8
 	lw	$3,72($fp)
 	addu	$4,$3,$4
@@ -1484,8 +1456,7 @@ $L74:
 	mflo	$3
 	lw	$4,44($fp)
 	addu	$3,$3,$4
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	addu	$4,$3,8
 	lw	$3,72($fp)
 	addu	$4,$3,$4
@@ -1498,8 +1469,7 @@ $L74:
 $L72:
 	lw	$3,40($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,40($fp)
+	sw	$2,40($fp)
 	j	$L70
 $L71:
 	j	$L75
@@ -1511,14 +1481,12 @@ $L75:
 $L66:
 	lw	$3,44($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,44($fp)
+	sw	$2,44($fp)
 	j	$L64
 $L65:
 $L63:
 	lw	$2,80($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	lw	$4,84($fp)
 	addu	$3,$2,$4
 	subu	$2,$3,4
@@ -1532,8 +1500,7 @@ $L63:
 	mflo	$2
 	lw	$3,80($fp)
 	addu	$2,$2,$3
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,72($fp)
 	addu	$2,$2,$3
 	subu	$3,$2,8
@@ -1554,6 +1521,7 @@ $L62:
 	addu	$sp,$sp,72
 	j	$31
 	.end	dgefa
+
 	.loc	1 455
 	.ent	dgesl
 dgesl:
@@ -1584,15 +1552,13 @@ $L80:
 	j	$L81
 $L83:
 	lw	$2,40($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	lw	$3,76($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
 	sw	$3,48($fp)
 	lw	$2,48($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,80($fp)
 	addu	$2,$2,$3
 	l.d	$f0,0($2)
@@ -1601,20 +1567,17 @@ $L83:
 	lw	$3,40($fp)
 	beq	$2,$3,$L84
 	lw	$2,48($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,80($fp)
 	addu	$2,$2,$3
 	lw	$3,40($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,80($fp)
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
 	s.d	$f0,0($2)
 	lw	$2,40($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,80($fp)
 	addu	$2,$2,$3
 	l.d	$f0,32($fp)
@@ -1630,8 +1593,7 @@ $L84:
 	mflo	$3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	addu	$4,$3,8
 	lw	$3,64($fp)
 	addu	$4,$3,$4
@@ -1639,8 +1601,7 @@ $L84:
 	li	$3,0x00000001		# 1
 	sw	$3,20($sp)
 	lw	$3,40($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	addu	$4,$3,8
 	lw	$3,80($fp)
 	addu	$4,$3,$4
@@ -1653,8 +1614,7 @@ $L84:
 $L82:
 	lw	$3,40($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,40($fp)
+	sw	$2,40($fp)
 	j	$L80
 $L81:
 $L79:
@@ -1675,13 +1635,11 @@ $L88:
 	subu	$2,$2,$3
 	sw	$2,40($fp)
 	lw	$2,40($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,80($fp)
 	addu	$2,$2,$3
 	lw	$3,40($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,80($fp)
 	addu	$3,$3,$4
 	lw	$4,68($fp)
@@ -1690,8 +1648,7 @@ $L88:
 	mflo	$4
 	lw	$5,40($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,64($fp)
 	addu	$4,$4,$5
 	l.d	$f0,0($3)
@@ -1699,8 +1656,7 @@ $L88:
 	div.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,40($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,80($fp)
 	addu	$2,$2,$3
 	l.d	$f0,0($2)
@@ -1710,8 +1666,7 @@ $L88:
 	lw	$3,40($fp)
 	mult	$2,$3
 	mflo	$2
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,64($fp)
 	addu	$2,$3,$2
 	sw	$2,16($sp)
@@ -1727,8 +1682,7 @@ $L88:
 $L87:
 	lw	$3,44($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,44($fp)
+	sw	$2,44($fp)
 	j	$L85
 $L86:
 	j	$L89
@@ -1745,8 +1699,7 @@ $L93:
 	lw	$3,40($fp)
 	mult	$2,$3
 	mflo	$2
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,64($fp)
 	addu	$2,$2,$3
 	li	$3,0x00000001		# 1
@@ -1758,13 +1711,11 @@ $L93:
 	jal	ddot
 	s.d	$f0,32($fp)
 	lw	$2,40($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,80($fp)
 	addu	$2,$2,$3
 	lw	$3,40($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,80($fp)
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
@@ -1776,8 +1727,7 @@ $L93:
 	mflo	$3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,64($fp)
 	addu	$3,$3,$4
 	l.d	$f2,0($3)
@@ -1786,8 +1736,7 @@ $L93:
 $L92:
 	lw	$3,40($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,40($fp)
+	sw	$2,40($fp)
 	j	$L90
 $L91:
 	lw	$2,52($fp)
@@ -1816,14 +1765,12 @@ $L98:
 	mflo	$3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	addu	$4,$3,8
 	lw	$5,64($fp)
 	addu	$3,$4,$5
 	lw	$4,40($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	addu	$5,$4,8
 	lw	$4,80($fp)
 	addu	$7,$5,$4
@@ -1834,21 +1781,18 @@ $L98:
 	li	$6,0x00000001		# 1
 	jal	ddot
 	lw	$2,40($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,80($fp)
 	addu	$2,$2,$3
 	lw	$3,40($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,80($fp)
 	addu	$3,$3,$4
 	l.d	$f2,0($3)
 	add.d	$f0,$f2,$f0
 	s.d	$f0,0($2)
 	lw	$2,40($fp)
-	move	$3,$2
-	sll	$2,$3,2
+	sll	$2,$2,2
 	lw	$3,76($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -1857,27 +1801,23 @@ $L98:
 	lw	$3,40($fp)
 	beq	$2,$3,$L99
 	lw	$2,48($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,80($fp)
 	addu	$2,$2,$3
 	l.d	$f0,0($2)
 	s.d	$f0,32($fp)
 	lw	$2,48($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,80($fp)
 	addu	$2,$2,$3
 	lw	$3,40($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,80($fp)
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
 	s.d	$f0,0($2)
 	lw	$2,40($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,80($fp)
 	addu	$2,$2,$3
 	l.d	$f0,32($fp)
@@ -1886,8 +1826,7 @@ $L99:
 $L97:
 	lw	$3,44($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,44($fp)
+	sw	$2,44($fp)
 	j	$L95
 $L96:
 $L94:
@@ -1899,6 +1838,7 @@ $L77:
 	addu	$sp,$sp,64
 	j	$31
 	.end	dgesl
+
 	.loc	1 585
 	.ent	daxpy
 daxpy:
@@ -1967,18 +1907,15 @@ $L107:
 	j	$L108
 $L110:
 	lw	$2,8($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,56($fp)
 	addu	$2,$2,$3
 	lw	$3,8($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,56($fp)
 	addu	$3,$3,$4
 	lw	$4,4($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,48($fp)
 	addu	$4,$4,$5
 	l.d	$f0,40($fp)
@@ -1998,20 +1935,17 @@ $L110:
 $L109:
 	lw	$3,0($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,0($fp)
+	sw	$2,0($fp)
 	j	$L107
 $L108:
 	j	$L100
 $L103:
 	lw	$2,32($fp)
-	move	$3,$2
-	bgez	$3,$L111
+	bgez	$2,$L111
 	addu	$3,$3,3
 $L111:
 	sra	$3,$3,2
-	move	$4,$3
-	sll	$3,$4,2
+	sll	$3,$3,2
 	subu	$2,$2,$3
 	sw	$2,12($fp)
 	lw	$2,12($fp)
@@ -2025,18 +1959,15 @@ $L113:
 	j	$L114
 $L116:
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,56($fp)
 	addu	$2,$2,$3
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,56($fp)
 	addu	$3,$3,$4
 	lw	$4,0($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,48($fp)
 	addu	$4,$4,$5
 	l.d	$f0,40($fp)
@@ -2048,8 +1979,7 @@ $L116:
 $L115:
 	lw	$3,0($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,0($fp)
+	sw	$2,0($fp)
 	j	$L113
 $L114:
 	lw	$2,32($fp)
@@ -2071,18 +2001,15 @@ $L118:
 	j	$L119
 $L121:
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,56($fp)
 	addu	$2,$2,$3
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,56($fp)
 	addu	$3,$3,$4
 	lw	$4,0($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,48($fp)
 	addu	$4,$4,$5
 	l.d	$f0,40($fp)
@@ -2092,20 +2019,17 @@ $L121:
 	add.d	$f0,$f2,$f0
 	s.d	$f0,0($2)
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$4,56($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,8
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,56($fp)
 	addu	$4,$3,$5
 	addu	$3,$4,8
 	lw	$4,0($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,48($fp)
 	addu	$4,$4,$5
 	addu	$5,$4,8
@@ -2116,20 +2040,17 @@ $L121:
 	add.d	$f0,$f2,$f0
 	s.d	$f0,0($2)
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$4,56($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,16
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,56($fp)
 	addu	$4,$3,$5
 	addu	$3,$4,16
 	lw	$4,0($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,48($fp)
 	addu	$4,$4,$5
 	addu	$5,$4,16
@@ -2140,20 +2061,17 @@ $L121:
 	add.d	$f0,$f2,$f0
 	s.d	$f0,0($2)
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$4,56($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,24
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,56($fp)
 	addu	$4,$3,$5
 	addu	$3,$4,24
 	lw	$4,0($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,48($fp)
 	addu	$4,$4,$5
 	addu	$5,$4,24
@@ -2175,6 +2093,7 @@ $L100:
 	addu	$sp,$sp,32
 	j	$31
 	.end	daxpy
+
 	.loc	1 641
 	.ent	ddot
 ddot:
@@ -2237,13 +2156,11 @@ $L128:
 	j	$L129
 $L131:
 	lw	$2,12($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,44($fp)
 	addu	$2,$2,$3
 	lw	$3,16($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,52($fp)
 	addu	$3,$3,$4
 	l.d	$f0,0($2)
@@ -2263,8 +2180,7 @@ $L131:
 $L130:
 	lw	$3,8($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,8($fp)
+	sw	$2,8($fp)
 	j	$L128
 $L129:
 	l.d	$f0,0($fp)
@@ -2280,8 +2196,7 @@ $L124:
 	sra	$3,$6,1
 	sra	$4,$2,31
 	subu	$3,$3,$4
-	move	$5,$3
-	sll	$4,$5,2
+	sll	$4,$3,2
 	addu	$4,$4,$3
 	subu	$2,$2,$4
 	sw	$2,20($fp)
@@ -2296,13 +2211,11 @@ $L133:
 	j	$L134
 $L136:
 	lw	$2,8($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,44($fp)
 	addu	$2,$2,$3
 	lw	$3,8($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,52($fp)
 	addu	$3,$3,$4
 	l.d	$f0,0($2)
@@ -2314,8 +2227,7 @@ $L136:
 $L135:
 	lw	$3,8($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,8($fp)
+	sw	$2,8($fp)
 	j	$L133
 $L134:
 	lw	$2,40($fp)
@@ -2338,13 +2250,11 @@ $L138:
 	j	$L139
 $L141:
 	lw	$2,8($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,44($fp)
 	addu	$2,$2,$3
 	lw	$3,8($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,52($fp)
 	addu	$3,$3,$4
 	l.d	$f0,0($2)
@@ -2353,14 +2263,12 @@ $L141:
 	l.d	$f2,0($fp)
 	add.d	$f0,$f0,$f2
 	lw	$2,8($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$4,44($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,8
 	lw	$3,8($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,52($fp)
 	addu	$3,$3,$4
 	addu	$4,$3,8
@@ -2369,14 +2277,12 @@ $L141:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$2,8($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$4,44($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,16
 	lw	$3,8($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,52($fp)
 	addu	$3,$3,$4
 	addu	$4,$3,16
@@ -2385,14 +2291,12 @@ $L141:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$2,8($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$4,44($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,24
 	lw	$3,8($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,52($fp)
 	addu	$3,$3,$4
 	addu	$4,$3,24
@@ -2401,14 +2305,12 @@ $L141:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$2,8($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$4,44($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,32
 	lw	$3,8($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,52($fp)
 	addu	$3,$3,$4
 	addu	$4,$3,32
@@ -2431,6 +2333,7 @@ $L122:
 	addu	$sp,$sp,40
 	j	$31
 	.end	ddot
+
 	.loc	1 699
 	.ent	dscal
 dscal:
@@ -2463,13 +2366,11 @@ $L145:
 	j	$L146
 $L148:
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,40($fp)
 	addu	$2,$2,$3
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
 	l.d	$f0,32($fp)
@@ -2495,8 +2396,7 @@ $L144:
 	sra	$3,$6,1
 	sra	$4,$2,31
 	subu	$3,$3,$4
-	move	$5,$3
-	sll	$4,$5,2
+	sll	$4,$3,2
 	addu	$4,$4,$3
 	subu	$2,$2,$4
 	sw	$2,4($fp)
@@ -2511,13 +2411,11 @@ $L150:
 	j	$L151
 $L153:
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,40($fp)
 	addu	$2,$2,$3
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
 	l.d	$f0,32($fp)
@@ -2527,8 +2425,7 @@ $L153:
 $L152:
 	lw	$3,0($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,0($fp)
+	sw	$2,0($fp)
 	j	$L150
 $L151:
 	lw	$2,24($fp)
@@ -2550,13 +2447,11 @@ $L155:
 	j	$L156
 $L158:
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,40($fp)
 	addu	$2,$2,$3
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
 	l.d	$f0,32($fp)
@@ -2564,14 +2459,12 @@ $L158:
 	mul.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$4,40($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,8
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
 	addu	$4,$3,8
@@ -2580,14 +2473,12 @@ $L158:
 	mul.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$4,40($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,16
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
 	addu	$4,$3,16
@@ -2596,14 +2487,12 @@ $L158:
 	mul.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$4,40($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,24
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
 	addu	$4,$3,24
@@ -2612,14 +2501,12 @@ $L158:
 	mul.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,0($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$4,40($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,32
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
 	addu	$4,$3,32
@@ -2639,6 +2526,7 @@ $L142:
 	addu	$sp,$sp,24
 	j	$31
 	.end	dscal
+
 	.loc	1 748
 	.ent	idamax
 idamax:
@@ -2685,8 +2573,7 @@ $L163:
 	j	$L164
 $L166:
 	lw	$2,12($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,36($fp)
 	addu	$2,$2,$3
 	l.d	$f2,0($2)
@@ -2697,8 +2584,7 @@ $L166:
 	lw	$2,8($fp)
 	sw	$2,16($fp)
 	lw	$2,12($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,36($fp)
 	addu	$2,$2,$3
 	l.d	$f0,0($2)
@@ -2712,8 +2598,7 @@ $L167:
 $L165:
 	lw	$3,8($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,8($fp)
+	sw	$2,8($fp)
 	j	$L163
 $L164:
 	j	$L168
@@ -2733,8 +2618,7 @@ $L169:
 	j	$L170
 $L172:
 	lw	$2,8($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,36($fp)
 	addu	$2,$2,$3
 	l.d	$f2,0($2)
@@ -2745,8 +2629,7 @@ $L172:
 	lw	$2,8($fp)
 	sw	$2,16($fp)
 	lw	$2,8($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,36($fp)
 	addu	$2,$2,$3
 	l.d	$f0,0($2)
@@ -2756,8 +2639,7 @@ $L173:
 $L171:
 	lw	$3,8($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,8($fp)
+	sw	$2,8($fp)
 	j	$L169
 $L170:
 $L168:
@@ -2769,6 +2651,7 @@ $L159:
 	addu	$sp,$sp,32
 	j	$31
 	.end	idamax
+
 	.loc	1 789
 	.ent	epslon
 epslon:
@@ -2819,6 +2702,7 @@ $L174:
 	addu	$sp,$sp,40
 	j	$31
 	.end	epslon
+
 	.loc	1 836
 	.ent	dmxpy
 dmxpy:
@@ -2837,8 +2721,7 @@ dmxpy:
 	srl	$4,$3,31
 	addu	$5,$2,$4
 	sra	$3,$5,1
-	move	$4,$3
-	sll	$3,$4,1
+	sll	$3,$3,1
 	subu	$2,$2,$3
 	sw	$2,0($fp)
 	lw	$2,0($fp)
@@ -2855,18 +2738,15 @@ $L180:
 	j	$L181
 $L183:
 	lw	$2,4($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,28($fp)
 	addu	$2,$2,$3
 	lw	$3,4($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,28($fp)
 	addu	$3,$3,$4
 	lw	$4,0($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,40($fp)
 	addu	$4,$4,$5
 	lw	$5,36($fp)
@@ -2875,8 +2755,7 @@ $L183:
 	mflo	$5
 	lw	$6,4($fp)
 	addu	$5,$5,$6
-	move	$6,$5
-	sll	$5,$6,3
+	sll	$5,$5,3
 	lw	$6,44($fp)
 	addu	$5,$5,$6
 	l.d	$f0,0($4)
@@ -2888,19 +2767,16 @@ $L183:
 $L182:
 	lw	$3,4($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,4($fp)
+	sw	$2,4($fp)
 	j	$L180
 $L181:
 $L179:
 	lw	$2,32($fp)
-	move	$3,$2
-	bgez	$3,$L184
+	bgez	$2,$L184
 	addu	$3,$3,3
 $L184:
 	sra	$3,$3,2
-	move	$4,$3
-	sll	$3,$4,2
+	sll	$3,$3,2
 	subu	$2,$2,$3
 	sw	$2,0($fp)
 	lw	$2,0($fp)
@@ -2918,18 +2794,15 @@ $L186:
 	j	$L187
 $L189:
 	lw	$2,4($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,28($fp)
 	addu	$2,$2,$3
 	lw	$3,4($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,28($fp)
 	addu	$3,$3,$4
 	lw	$4,0($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$6,40($fp)
 	addu	$5,$4,$6
 	subu	$4,$5,8
@@ -2940,8 +2813,7 @@ $L189:
 	mflo	$5
 	lw	$6,4($fp)
 	addu	$5,$5,$6
-	move	$6,$5
-	sll	$5,$6,3
+	sll	$5,$5,3
 	lw	$6,44($fp)
 	addu	$5,$5,$6
 	l.d	$f0,0($4)
@@ -2950,8 +2822,7 @@ $L189:
 	l.d	$f2,0($3)
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
 	lw	$4,36($fp)
@@ -2960,8 +2831,7 @@ $L189:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -2972,19 +2842,16 @@ $L189:
 $L188:
 	lw	$3,4($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,4($fp)
+	sw	$2,4($fp)
 	j	$L186
 $L187:
 $L185:
 	lw	$2,32($fp)
-	move	$3,$2
-	bgez	$3,$L190
+	bgez	$2,$L190
 	addu	$3,$3,7
 $L190:
 	sra	$3,$3,3
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	subu	$2,$2,$3
 	sw	$2,0($fp)
 	lw	$2,0($fp)
@@ -3002,18 +2869,15 @@ $L192:
 	j	$L193
 $L195:
 	lw	$2,4($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,28($fp)
 	addu	$2,$2,$3
 	lw	$3,4($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,28($fp)
 	addu	$3,$3,$4
 	lw	$4,0($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$6,40($fp)
 	addu	$5,$4,$6
 	subu	$4,$5,24
@@ -3024,8 +2888,7 @@ $L195:
 	mflo	$5
 	lw	$6,4($fp)
 	addu	$5,$5,$6
-	move	$6,$5
-	sll	$5,$6,3
+	sll	$5,$5,3
 	lw	$6,44($fp)
 	addu	$5,$5,$6
 	l.d	$f0,0($4)
@@ -3034,8 +2897,7 @@ $L195:
 	l.d	$f2,0($3)
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,16
@@ -3046,8 +2908,7 @@ $L195:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3055,8 +2916,7 @@ $L195:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,8
@@ -3067,8 +2927,7 @@ $L195:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3076,8 +2935,7 @@ $L195:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
 	lw	$4,36($fp)
@@ -3086,8 +2944,7 @@ $L195:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3098,19 +2955,16 @@ $L195:
 $L194:
 	lw	$3,4($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,4($fp)
+	sw	$2,4($fp)
 	j	$L192
 $L193:
 $L191:
 	lw	$2,32($fp)
-	move	$3,$2
-	bgez	$3,$L196
+	bgez	$2,$L196
 	addu	$3,$3,15
 $L196:
 	sra	$3,$3,4
-	move	$4,$3
-	sll	$3,$4,4
+	sll	$3,$3,4
 	subu	$2,$2,$3
 	sw	$2,0($fp)
 	lw	$2,0($fp)
@@ -3128,18 +2982,15 @@ $L198:
 	j	$L199
 $L201:
 	lw	$2,4($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,28($fp)
 	addu	$2,$2,$3
 	lw	$3,4($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,28($fp)
 	addu	$3,$3,$4
 	lw	$4,0($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$6,40($fp)
 	addu	$5,$4,$6
 	subu	$4,$5,56
@@ -3150,8 +3001,7 @@ $L201:
 	mflo	$5
 	lw	$6,4($fp)
 	addu	$5,$5,$6
-	move	$6,$5
-	sll	$5,$6,3
+	sll	$5,$5,3
 	lw	$6,44($fp)
 	addu	$5,$5,$6
 	l.d	$f0,0($4)
@@ -3160,8 +3010,7 @@ $L201:
 	l.d	$f2,0($3)
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,48
@@ -3172,8 +3021,7 @@ $L201:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3181,8 +3029,7 @@ $L201:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,40
@@ -3193,8 +3040,7 @@ $L201:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3202,8 +3048,7 @@ $L201:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,32
@@ -3214,8 +3059,7 @@ $L201:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3223,8 +3067,7 @@ $L201:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,24
@@ -3235,8 +3078,7 @@ $L201:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3244,8 +3086,7 @@ $L201:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,16
@@ -3256,8 +3097,7 @@ $L201:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3265,8 +3105,7 @@ $L201:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,8
@@ -3277,8 +3116,7 @@ $L201:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3286,8 +3124,7 @@ $L201:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
 	lw	$4,36($fp)
@@ -3296,8 +3133,7 @@ $L201:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3308,19 +3144,16 @@ $L201:
 $L200:
 	lw	$3,4($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,4($fp)
+	sw	$2,4($fp)
 	j	$L198
 $L199:
 $L197:
 	lw	$2,32($fp)
-	move	$3,$2
-	bgez	$3,$L202
+	bgez	$2,$L202
 	addu	$3,$3,15
 $L202:
 	sra	$3,$3,4
-	move	$4,$3
-	sll	$3,$4,4
+	sll	$3,$3,4
 	subu	$2,$2,$3
 	addu	$3,$2,16
 	sw	$3,8($fp)
@@ -3343,18 +3176,15 @@ $L207:
 	j	$L208
 $L210:
 	lw	$2,4($fp)
-	move	$3,$2
-	sll	$2,$3,3
+	sll	$2,$2,3
 	lw	$3,28($fp)
 	addu	$2,$2,$3
 	lw	$3,4($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,28($fp)
 	addu	$3,$3,$4
 	lw	$4,0($fp)
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$6,40($fp)
 	addu	$5,$4,$6
 	subu	$4,$5,120
@@ -3365,8 +3195,7 @@ $L210:
 	mflo	$5
 	lw	$6,4($fp)
 	addu	$5,$5,$6
-	move	$6,$5
-	sll	$5,$6,3
+	sll	$5,$5,3
 	lw	$6,44($fp)
 	addu	$5,$5,$6
 	l.d	$f0,0($4)
@@ -3375,8 +3204,7 @@ $L210:
 	l.d	$f2,0($3)
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,112
@@ -3387,8 +3215,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3396,8 +3223,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,104
@@ -3408,8 +3234,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3417,8 +3242,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,96
@@ -3429,8 +3253,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3438,8 +3261,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,88
@@ -3450,8 +3272,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3459,8 +3280,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,80
@@ -3471,8 +3291,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3480,8 +3299,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,72
@@ -3492,8 +3310,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3501,8 +3318,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,64
@@ -3513,8 +3329,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3522,8 +3337,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,56
@@ -3534,8 +3348,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3543,8 +3356,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,48
@@ -3555,8 +3367,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3564,8 +3375,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,40
@@ -3576,8 +3386,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3585,8 +3394,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,32
@@ -3597,8 +3405,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3606,8 +3413,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,24
@@ -3618,8 +3424,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3627,8 +3432,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,16
@@ -3639,8 +3443,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3648,8 +3451,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$5,40($fp)
 	addu	$4,$3,$5
 	subu	$3,$4,8
@@ -3660,8 +3462,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3669,8 +3470,7 @@ $L210:
 	mul.d	$f2,$f2,$f4
 	add.d	$f0,$f0,$f2
 	lw	$3,0($fp)
-	move	$4,$3
-	sll	$3,$4,3
+	sll	$3,$3,3
 	lw	$4,40($fp)
 	addu	$3,$3,$4
 	lw	$4,36($fp)
@@ -3679,8 +3479,7 @@ $L210:
 	mflo	$4
 	lw	$5,4($fp)
 	addu	$4,$4,$5
-	move	$5,$4
-	sll	$4,$5,3
+	sll	$4,$4,3
 	lw	$5,44($fp)
 	addu	$4,$4,$5
 	l.d	$f2,0($3)
@@ -3691,8 +3490,7 @@ $L210:
 $L209:
 	lw	$3,4($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,4($fp)
+	sw	$2,4($fp)
 	j	$L207
 $L208:
 $L205:
@@ -3707,6 +3505,7 @@ $L178:
 	addu	$sp,$sp,24
 	j	$31
 	.end	dmxpy
+
 	.loc	1 995
 	.ent	dtime
 dtime:

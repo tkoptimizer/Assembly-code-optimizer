@@ -1,0 +1,17 @@
+Unrolled Double Precision Linpack
+
+   norm. resid      resid           machep         x[0]-1        x[n-1]-1
+1582249.2        4.30969983e+11  3.33333333e-01  5.¢ŠõçÿÖÀÄÝëw{Á*ó­YiAe-01
+ titpWCí(ù@reported for matrices of¨ª×V)A  25
+      dgefa      dgesl      total       kflops     unit      ratio
+ times for array with leading dimension of  201
+       0.31       0.03       0.35          5     415.14       6.18
+       0.31       0.03       0.34          5     410.34       6.11
+       0.31       0.03       0.34          5     411.54       6.12
+       0.31       0.03       0.34          5     412.74       6.14
+ times for array with leading dimension of 200
+       0.31       0.04       0.35          5     417.54       6.21
+       0.31       0.04       0.34          5     411.54       6.12
+       0.31       0.03       0.34          5     411.54       6.12
+       0.31       0.03       0.34          5     411.54       6.12
+Unrolled Double  Precision     5 Kflops ; 1 Reps 
