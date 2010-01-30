@@ -1,10 +1,13 @@
-## basic block (1 - 93) ##
 	.file	1 "whet.c"
+
  # GNU C 2.7.2.3 [AL 1.1, MM 40, tma 0.1] SimpleScalar running sstrix compiled by GNU C
+
  # Cc1 defaults:
  # -mgas -mgpOPT
+
  # Cc1 arguments (-G value = 8, Cpu = default, ISA = 1):
  # -quiet -dumpbase -O0 -o
+
 gcc2_compiled.:
 __gnu_compiled_c:
 	.sdata
@@ -73,14 +76,23 @@ $LC12:
 	.text
 	.align	2
 	.globl	main
+
 	.comm	T,4
+
 	.comm	T1,4
+
 	.comm	T2,4
+
 	.comm	E1,16
+
 	.comm	J,4
+
 	.comm	K,4
+
 	.comm	L,4
+
 	.text
+
 	.loc	1 20
 	.ent	second
 second:
@@ -92,7 +104,6 @@ second:
 	sw	$fp,16($sp)
 	move	$fp,$sp
 	jal	clock
-## basic block (94 - 102) ##
 	mtc1	$2,$f0
 	#nop
 	cvt.s.w	$f0,$f0
@@ -102,15 +113,14 @@ second:
 	cvt.s.d	$f2,$f0
 	mov.s	$f0,$f2
 	j	$L1
-## basic block (103 - 108) ##
 $L1:
 	move	$sp,$fp			# sp not trusted here
 	lw	$31,20($sp)
 	lw	$fp,16($sp)
 	addu	$sp,$sp,24
 	j	$31
-## basic block (109 - 124) ##
 	.end	second
+
 	.loc	1 30
 	.ent	POUT
 POUT:
@@ -126,7 +136,6 @@ POUT:
 	sw	$6,72($fp)
 	sw	$7,76($fp)
 	jal	second
-## basic block (125 - 144) ##
 	mov.s	$f2,$f0
 	cvt.d.s	$f0,$f2
 	l.s	$f2,76($fp)
@@ -147,15 +156,14 @@ POUT:
 	lw	$6,68($fp)
 	lw	$7,72($fp)
 	jal	printf
-## basic block (145 - 150) ##
 $L2:
 	move	$sp,$fp			# sp not trusted here
 	lw	$31,60($sp)
 	lw	$fp,56($sp)
 	addu	$sp,$sp,64
 	j	$31
-## basic block (151 - 246) ##
 	.end	POUT
+
 	.loc	1 36
 	.ent	PA
 PA:
@@ -179,17 +187,13 @@ $L4:
 	addu	$3,$4,8
 	l.s	$f2,0($3)
 	add.s	$f0,$f0,$f2
-# 	lw	$4,16($fp)
 	addu	$3,$4,12
-# 	l.s	$f2,0($3)
 	sub.s	$f0,$f0,$f2
 	l.s	$f2,T
 	mul.s	$f0,$f0,$f2
 	s.s	$f0,0($2)
 	lw	$3,16($fp)
 	addu	$2,$3,4
-# 	lw	$3,16($fp)
-# 	lw	$5,16($fp)
 	addu	$4,$5,4
 	l.s	$f0,0($3)
 	l.s	$f2,0($4)
@@ -198,17 +202,13 @@ $L4:
 	addu	$3,$4,8
 	l.s	$f2,0($3)
 	sub.s	$f0,$f0,$f2
-# 	lw	$4,16($fp)
 	addu	$3,$4,12
-# 	l.s	$f2,0($3)
 	add.s	$f0,$f0,$f2
 	l.s	$f2,T
 	mul.s	$f0,$f0,$f2
 	s.s	$f0,0($2)
 	lw	$3,16($fp)
 	addu	$2,$3,8
-# 	lw	$3,16($fp)
-# 	lw	$5,16($fp)
 	addu	$4,$5,4
 	l.s	$f0,0($3)
 	l.s	$f2,0($4)
@@ -217,29 +217,20 @@ $L4:
 	addu	$3,$4,8
 	l.s	$f2,0($3)
 	add.s	$f0,$f0,$f2
-# 	lw	$4,16($fp)
 	addu	$3,$4,12
-# 	l.s	$f2,0($3)
 	add.s	$f0,$f0,$f2
 	l.s	$f2,T
 	mul.s	$f0,$f0,$f2
 	s.s	$f0,0($2)
 	lw	$3,16($fp)
 	addu	$2,$3,12
-# 	lw	$3,16($fp)
 	l.s	$f2,0($3)
 	neg.s	$f0,$f2
-# 	lw	$4,16($fp)
 	addu	$3,$4,4
-# 	l.s	$f2,0($3)
 	add.s	$f0,$f0,$f2
-# 	lw	$4,16($fp)
 	addu	$3,$4,8
-# 	l.s	$f2,0($3)
 	add.s	$f0,$f0,$f2
-# 	lw	$4,16($fp)
 	addu	$3,$4,12
-# 	l.s	$f2,0($3)
 	add.s	$f0,$f0,$f2
 	l.s	$f2,T2
 	div.s	$f0,$f0,$f2
@@ -248,23 +239,19 @@ $L4:
 	addu	$3,$2,1
 	sw	$3,0($fp)
 $L6:
-# 	lw	$2,0($fp)
 	slt	$3,$2,6
 	bne	$3,$0,$L7
-## basic block (247 - 247) ##
 	j	$L5
-## basic block (248 - 249) ##
 $L7:
 	j	$L4
-## basic block (250 - 255) ##
 $L5:
 $L3:
 	move	$sp,$fp			# sp not trusted here
 	lw	$fp,8($sp)
 	addu	$sp,$sp,16
 	j	$31
-## basic block (256 - 306) ##
 	.end	PA
+
 	.loc	1 51
 	.ent	P0
 P0:
@@ -315,8 +302,8 @@ $L8:
 	lw	$fp,0($sp)
 	addu	$sp,$sp,8
 	j	$31
-## basic block (307 - 349) ##
 	.end	P0
+
 	.loc	1 58
 	.ent	P3
 P3:
@@ -359,8 +346,8 @@ $L9:
 	lw	$fp,8($sp)
 	addu	$sp,$sp,16
 	j	$31
-## basic block (350 - 367) ##
 	.end	P3
+
 	.loc	1 85
 	.ent	main
 main:
@@ -378,10 +365,8 @@ main:
 	s.d	$f20,128($sp)
 	move	$fp,$sp
 	jal	__main
-## basic block (368 - 369) ##
 	la	$4,$LC2
 	jal	printf
-## basic block (370 - 453) ##
 	li	$2,0x0000000a		# 10
 	sw	$2,60($fp)
 	l.s	$f0,$LC3
@@ -390,7 +375,6 @@ main:
 	s.s	$f0,T
 	l.s	$f0,$LC5
 	s.s	$f0,T2
-# 	lw	$2,60($fp)
 	sw	$2,64($fp)
 	sw	$0,68($fp)
 	lw	$2,60($fp)
@@ -466,9 +450,7 @@ $L11:
 	lw	$3,68($fp)
 	slt	$2,$2,$3
 	bne	$2,$0,$L14
-## basic block (454 - 454) ##
 	j	$L12
-## basic block (455 - 502) ##
 $L14:
 	l.s	$f0,32($fp)
 	l.s	$f2,36($fp)
@@ -517,7 +499,6 @@ $L13:
 	move	$3,$2
 	sw	$3,60($fp)
 	j	$L11
-## basic block (503 - 514) ##
 $L12:
 	l.s	$f0,36($fp)
 	s.s	$f0,16($sp)
@@ -530,7 +511,6 @@ $L12:
 	lw	$6,68($fp)
 	lw	$7,32($fp)
 	jal	POUT
-## basic block (515 - 528) ##
 	l.s	$f0,$LC6
 	s.s	$f0,E1
 	l.s	$f0,$LC7
@@ -545,9 +525,7 @@ $L15:
 	lw	$3,72($fp)
 	slt	$2,$2,$3
 	bne	$2,$0,$L18
-## basic block (529 - 529) ##
 	j	$L16
-## basic block (530 - 577) ##
 $L18:
 	l.s	$f0,E1
 	l.s	$f2,E1+4
@@ -596,7 +574,6 @@ $L17:
 	move	$3,$2
 	sw	$3,60($fp)
 	j	$L15
-## basic block (578 - 589) ##
 $L16:
 	l.s	$f0,E1+4
 	s.s	$f0,16($sp)
@@ -609,27 +586,22 @@ $L16:
 	lw	$6,72($fp)
 	lw	$7,E1
 	jal	POUT
-## basic block (590 - 595) ##
 	sw	$0,60($fp)
 $L19:
 	lw	$2,60($fp)
 	lw	$3,76($fp)
 	slt	$2,$2,$3
 	bne	$2,$0,$L22
-## basic block (596 - 596) ##
 	j	$L20
-## basic block (597 - 599) ##
 $L22:
 	la	$4,E1
 	jal	PA
-## basic block (600 - 605) ##
 $L21:
 	lw	$3,60($fp)
 	addu	$2,$3,1
 	move	$3,$2
 	sw	$3,60($fp)
 	j	$L19
-## basic block (606 - 617) ##
 $L20:
 	l.s	$f0,E1+4
 	s.s	$f0,16($sp)
@@ -642,7 +614,6 @@ $L20:
 	lw	$6,72($fp)
 	lw	$7,E1
 	jal	POUT
-## basic block (618 - 625) ##
 	li	$2,0x00000001		# 1
 	sw	$2,J
 	sw	$0,60($fp)
@@ -651,40 +622,32 @@ $L23:
 	lw	$3,80($fp)
 	slt	$2,$2,$3
 	bne	$2,$0,$L26
-## basic block (626 - 626) ##
 	j	$L24
-## basic block (627 - 630) ##
 $L26:
 	lw	$2,J
 	li	$3,0x00000001		# 1
 	bne	$2,$3,$L27
-## basic block (631 - 633) ##
 	li	$2,0x00000002		# 2
 	sw	$2,J
 	j	$L28
-## basic block (634 - 640) ##
 $L27:
 	li	$2,0x00000003		# 3
 	sw	$2,J
 $L28:
-# 	lw	$2,J
+	lw	$2,J
 	slt	$3,$2,2
 	beq	$3,$0,$L29
-## basic block (641 - 642) ##
 	sw	$0,J
 	j	$L30
-## basic block (643 - 648) ##
 $L29:
 	li	$2,0x00000001		# 1
 	sw	$2,J
 $L30:
-# 	lw	$2,J
+	lw	$2,J
 	bgtz	$2,$L31
-## basic block (649 - 651) ##
 	li	$2,0x00000001		# 1
 	sw	$2,J
 	j	$L32
-## basic block (652 - 660) ##
 $L31:
 	sw	$0,J
 $L32:
@@ -694,7 +657,6 @@ $L25:
 	move	$3,$2
 	sw	$3,60($fp)
 	j	$L23
-## basic block (661 - 672) ##
 $L24:
 	l.s	$f0,36($fp)
 	s.s	$f0,16($sp)
@@ -707,7 +669,6 @@ $L24:
 	lw	$6,J
 	lw	$7,32($fp)
 	jal	POUT
-## basic block (673 - 684) ##
 	li	$2,0x00000001		# 1
 	sw	$2,J
 	li	$2,0x00000002		# 2
@@ -720,14 +681,11 @@ $L33:
 	lw	$3,88($fp)
 	slt	$2,$2,$3
 	bne	$2,$0,$L36
-## basic block (685 - 685) ##
 	j	$L34
-## basic block (686 - 752) ##
 $L36:
 	lw	$2,K
 	lw	$3,J
 	subu	$2,$2,$3
-# 	lw	$3,J
 	mult	$2,$3
 	mflo	$2
 	lw	$3,L
@@ -748,7 +706,6 @@ $L36:
 	lw	$2,L
 	lw	$3,K
 	subu	$2,$2,$3
-# 	lw	$3,K
 	lw	$4,J
 	addu	$3,$3,$4
 	mult	$2,$3
@@ -790,7 +747,6 @@ $L35:
 	move	$3,$2
 	sw	$3,60($fp)
 	j	$L33
-## basic block (753 - 764) ##
 $L34:
 	l.s	$f0,E1+4
 	s.s	$f0,16($sp)
@@ -803,7 +759,6 @@ $L34:
 	lw	$6,K
 	lw	$7,E1
 	jal	POUT
-## basic block (765 - 778) ##
 	l.s	$f0,$LC8
 	s.s	$f0,48($fp)
 	l.s	$f0,$LC8
@@ -818,39 +773,32 @@ $L37:
 	lw	$3,92($fp)
 	slt	$2,$2,$3
 	bne	$2,$0,$L40
-## basic block (779 - 779) ##
 	j	$L38
-## basic block (780 - 784) ##
 $L40:
 	cvt.d.s	$f28,$f24
 	cvt.d.s	$f0,$f20
 	mov.d	$f12,$f0
 	jal	sin
-## basic block (785 - 788) ##
 	mul.d	$f28,$f28,$f0
 	cvt.d.s	$f0,$f20
 	mov.d	$f12,$f0
 	jal	cos
-## basic block (789 - 793) ##
 	mul.d	$f28,$f28,$f0
 	add.s	$f0,$f20,$f22
 	cvt.d.s	$f2,$f0
 	mov.d	$f12,$f2
 	jal	cos
-## basic block (794 - 798) ##
 	mov.d	$f30,$f0
 	sub.s	$f0,$f20,$f22
 	cvt.d.s	$f2,$f0
 	mov.d	$f12,$f2
 	jal	cos
-## basic block (799 - 804) ##
 	add.d	$f2,$f30,$f0
 	l.d	$f4,$LC9
 	sub.d	$f0,$f2,$f4
 	div.d	$f2,$f28,$f0
 	mov.d	$f12,$f2
 	jal	atan
-## basic block (805 - 811) ##
 	cvt.d.s	$f2,$f26
 	mul.d	$f0,$f2,$f0
 	cvt.s.d	$f20,$f0
@@ -858,31 +806,26 @@ $L40:
 	cvt.d.s	$f0,$f22
 	mov.d	$f12,$f0
 	jal	sin
-## basic block (812 - 815) ##
 	mul.d	$f28,$f28,$f0
 	cvt.d.s	$f0,$f22
 	mov.d	$f12,$f0
 	jal	cos
-## basic block (816 - 820) ##
 	mul.d	$f28,$f28,$f0
 	add.s	$f0,$f20,$f22
 	cvt.d.s	$f2,$f0
 	mov.d	$f12,$f2
 	jal	cos
-## basic block (821 - 825) ##
 	mov.d	$f30,$f0
 	sub.s	$f0,$f20,$f22
 	cvt.d.s	$f2,$f0
 	mov.d	$f12,$f2
 	jal	cos
-## basic block (826 - 831) ##
 	add.d	$f2,$f30,$f0
 	l.d	$f4,$LC9
 	sub.d	$f0,$f2,$f4
 	div.d	$f2,$f28,$f0
 	mov.d	$f12,$f2
 	jal	atan
-## basic block (832 - 840) ##
 	cvt.d.s	$f2,$f26
 	mul.d	$f0,$f2,$f0
 	cvt.s.d	$f22,$f0
@@ -892,7 +835,6 @@ $L39:
 	move	$3,$2
 	sw	$3,60($fp)
 	j	$L37
-## basic block (841 - 854) ##
 $L38:
 	s.s	$f20,48($fp)
 	s.s	$f22,52($fp)
@@ -907,7 +849,6 @@ $L38:
 	lw	$6,K
 	lw	$7,48($fp)
 	jal	POUT
-## basic block (855 - 866) ##
 	l.s	$f0,$LC6
 	s.s	$f0,48($fp)
 	l.s	$f0,$LC6
@@ -920,9 +861,7 @@ $L41:
 	lw	$3,96($fp)
 	slt	$2,$2,$3
 	bne	$2,$0,$L44
-## basic block (867 - 867) ##
 	j	$L42
-## basic block (868 - 874) ##
 $L44:
 	addu	$2,$fp,48
 	addu	$3,$fp,52
@@ -930,14 +869,12 @@ $L44:
 	move	$4,$2
 	move	$5,$3
 	jal	P3
-## basic block (875 - 880) ##
 $L43:
 	lw	$3,60($fp)
 	addu	$2,$3,1
 	move	$3,$2
 	sw	$3,60($fp)
 	j	$L41
-## basic block (881 - 892) ##
 $L42:
 	l.s	$f0,52($fp)
 	s.s	$f0,16($sp)
@@ -950,7 +887,6 @@ $L42:
 	lw	$6,K
 	lw	$7,48($fp)
 	jal	POUT
-## basic block (893 - 910) ##
 	li	$2,0x00000001		# 1
 	sw	$2,J
 	li	$2,0x00000002		# 2
@@ -969,19 +905,15 @@ $L45:
 	lw	$3,100($fp)
 	slt	$2,$2,$3
 	bne	$2,$0,$L48
-## basic block (911 - 911) ##
 	j	$L46
-## basic block (912 - 913) ##
 $L48:
 	jal	P0
-## basic block (914 - 919) ##
 $L47:
 	lw	$3,60($fp)
 	addu	$2,$3,1
 	move	$3,$2
 	sw	$3,60($fp)
 	j	$L45
-## basic block (920 - 931) ##
 $L46:
 	l.s	$f0,E1+4
 	s.s	$f0,16($sp)
@@ -994,7 +926,6 @@ $L46:
 	lw	$6,K
 	lw	$7,E1
 	jal	POUT
-## basic block (932 - 941) ##
 	li	$2,0x00000002		# 2
 	sw	$2,J
 	li	$2,0x00000003		# 3
@@ -1005,9 +936,7 @@ $L49:
 	lw	$3,104($fp)
 	slt	$2,$2,$3
 	bne	$2,$0,$L52
-## basic block (942 - 942) ##
 	j	$L50
-## basic block (943 - 967) ##
 $L52:
 	lw	$2,J
 	lw	$3,K
@@ -1033,7 +962,6 @@ $L51:
 	move	$3,$2
 	sw	$3,60($fp)
 	j	$L49
-## basic block (968 - 979) ##
 $L50:
 	l.s	$f0,36($fp)
 	s.s	$f0,16($sp)
@@ -1046,7 +974,6 @@ $L50:
 	lw	$6,K
 	lw	$7,32($fp)
 	jal	POUT
-## basic block (980 - 989) ##
 	l.s	$f0,$LC11
 	s.s	$f0,48($fp)
 	l.s	$f20,48($fp)
@@ -1057,22 +984,17 @@ $L53:
 	lw	$3,108($fp)
 	slt	$2,$2,$3
 	bne	$2,$0,$L56
-## basic block (990 - 990) ##
 	j	$L54
-## basic block (991 - 994) ##
 $L56:
 	cvt.d.s	$f0,$f20
 	mov.d	$f12,$f0
 	jal	log
-## basic block (995 - 998) ##
 	cvt.d.s	$f2,$f22
 	div.d	$f0,$f0,$f2
 	mov.d	$f12,$f0
 	jal	exp
-## basic block (999 - 1000) ##
 	mov.d	$f12,$f0
 	jal	sqrt
-## basic block (1001 - 1007) ##
 	cvt.s.d	$f20,$f0
 $L55:
 	lw	$3,60($fp)
@@ -1080,7 +1002,6 @@ $L55:
 	move	$3,$2
 	sw	$3,60($fp)
 	j	$L53
-## basic block (1008 - 1020) ##
 $L54:
 	s.s	$f20,48($fp)
 	l.s	$f0,48($fp)
@@ -1094,16 +1015,13 @@ $L54:
 	lw	$6,K
 	lw	$7,48($fp)
 	jal	POUT
-## basic block (1021 - 1021) ##
 	jal	second
-## basic block (1022 - 1027) ##
 	cvt.d.s	$f2,$f0
 	l.d	$f4,$LC12
 	div.d	$f0,$f4,$f2
 	la	$4,$LC13
 	dmfc1	$6,$f0
 	jal	printf
-## basic block (1028 - 1039) ##
 $L10:
 	move	$sp,$fp			# sp not trusted here
 	lw	$31,124($sp)
@@ -1116,5 +1034,4 @@ $L10:
 	l.d	$f20,128($sp)
 	addu	$sp,$sp,176
 	j	$31
-## basic block (1040 - 1040) ##
 	.end	main
