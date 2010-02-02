@@ -192,7 +192,7 @@ def usage():
     print "\t-d (--debug) \t\t - Add debug messages to the output assembly.\n"
     print "\t-x (--execute-optimizations=): \n"
     print "\t\t Select the optimizations that should be executed (in order),"
-    print "\t\t separated by ','."
+    print "\t\t separated by ';'."
     print "\t\t possible optimizations:\n"
     print "\t\t\tcopy_propagation"
     print "\t\t\tredundant_labels"
