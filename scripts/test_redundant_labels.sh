@@ -1,6 +1,6 @@
 #! /bin/bash
 pushd .
-OPTIMIZE="copy_propagation"
+OPTIMIZE="redundant_labels"
 WORKDIR="optimizations/only_$OPTIMIZE"
 
 mkdir -p "../$WORKDIR"
