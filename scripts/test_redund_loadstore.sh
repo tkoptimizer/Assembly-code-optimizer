@@ -4,6 +4,7 @@ cd ../optimizations/only_redund_loadstore
 rm *
 cp ../../scripts/compile.sh .
 cp ../../scripts/execute.sh .
+cp ../../scripts/compareResults.sh .
 popd
 pushd .
 cd ..

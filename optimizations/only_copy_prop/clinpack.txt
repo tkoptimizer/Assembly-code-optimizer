@@ -5,13 +5,13 @@ Unrolled Double Precision Linpack
  times are reported for matrices of order    25
       dgefa      dgesl      total       kflops     unit      ratio
  times for array with leading dimension of  201
-       0.25       0.03       0.28         42      47.65       4.96
-       0.25       0.03       0.28         42      47.65       4.96
-       0.25       0.03       0.28         42      47.82       4.98
-       0.25       0.03       0.28         42      47.48       4.95
+       0.25       0.03       0.28         42      47.31       4.93
+       0.25       0.03       0.28         42      47.31       4.93
+       0.25       0.03       0.28         42      47.31       4.93
+       0.25       0.03       0.28         42      47.31       4.93
  times for array with leading dimension of 200
-       0.25       0.03       0.28         42      47.65       4.96
+       0.25       0.03       0.28         42      47.31       4.93
        0.25       0.03       0.28         42      47.31       4.93
        0.25       0.03       0.28         42      47.48       4.95
-       0.25       0.03       0.28         42      47.65       4.96
+       0.25       0.03       0.27         43      46.96       4.89
 Unrolled Double  Precision    42 Kflops ; 1 Reps 
