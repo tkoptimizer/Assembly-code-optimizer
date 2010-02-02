@@ -1,7 +1,13 @@
 #!/usr/local/bin/bash
-sim-outorder acron > acron.txt 2> acron_error.txt
-sim-outorder clinpack > clinpack.txt 2> clinpack_error.txt
-sim-outorder dhrystone > dhrystone.txt 2> dhrystone_error.txt
-sim-outorder pi > pi.txt 2> pi_error.txt
-#sim-outorder slalom > slalom.txt 2> slalom_error.txt
-sim-outorder whet > whet.txt 2> whet_error.txt
+
+BENCHMARKS=acron clinpack dhrystone whet
+OUT_FOLDER=output_optimized
+#OUT_FOLDER=output_original
+
+for benchmark in $BENCHMARKS; do
+    sim-outorder -redir:prog ${OUT_FOLDER}/${benchmark}.out -redir:sim ${OUT_FOLDER}/${benchmark}.cycles $benchmark
+done
+
+# Pi and Slalom require more arguments
+sim-outorder -redir:prog ${OUT_FOLDER}/pi.out -redir:sim ${OUT_FOLDER}/pi.cycles pi 25000
+sim-outorder -redir:prog ${OUT_FOLDER}/slalom.out -redir:sim ${OUT_FOLDER}/slalom.cycles slalom < slalom.input
