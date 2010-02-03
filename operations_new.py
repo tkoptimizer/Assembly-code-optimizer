@@ -464,6 +464,15 @@ class LoadStore(operation):
             return register
 
 
+    def getOffset(self):
+        address = self.getAddress()
+
+        if address[-1] == ")":
+            parts  = address.split("(")
+            
+            return parts[0]
+
+    
     def determineSize(self):
         """
         Find out if we're loading a block, a byte or a word.

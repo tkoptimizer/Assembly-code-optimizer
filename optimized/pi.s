@@ -1,3 +1,4 @@
+## basic block (1 - 53) ##
 	.file	1 "pi.c"
 
  # GNU C 2.7.2.3 [AL 1.1, MM 40, tma 0.1] SimpleScalar running sstrix compiled by GNU C
@@ -51,34 +52,44 @@ main:
 	sw	$4,56($fp)
 	sw	$5,60($fp)
 	jal	__main
+## basic block (54 - 57) ##
 	sw	$0,24($fp)
 	lw	$2,56($fp)
 	li	$3,0x00000002		# 2
 	beq	$2,$3,$L2
+## basic block (58 - 62) ##
 	lw	$2,60($fp)
 	lw	$4,stderr
 	la	$5,$LC0
 	lw	$6,0($2)
 	jal	fprintf
+## basic block (63 - 64) ##
 	move	$4,$0
 	jal	exit
+## basic block (65 - 69) ##
 $L2:
 	lw	$3,60($fp)
 	addu	$2,$3,4
 	lw	$4,0($2)
 	jal	atoi
+## basic block (70 - 72) ##
 	sw	$2,20($fp)
 	li	$4,0x00000001		# 1
 	jal	srandom
+## basic block (73 - 73) ##
 	sw	$0,16($fp)
+## basic block (74 - 78) ##
 $L3:
 	lw	$2,16($fp)
 	lw	$3,20($fp)
 	slt	$2,$2,$3
 	bne	$2,$0,$L6
+## basic block (79 - 79) ##
 	j	$L4
+## basic block (80 - 81) ##
 $L6:
 	jal	random
+## basic block (82 - 88) ##
 	mtc1	$2,$f0
 	#nop
 	cvt.d.w	$f0,$f0
@@ -86,6 +97,7 @@ $L6:
 	div.d	$f0,$f0,$f2
 	s.d	$f0,32($fp)
 	jal	random
+## basic block (89 - 104) ##
 	mtc1	$2,$f0
 	#nop
 	cvt.d.w	$f0,$f0
@@ -102,15 +114,20 @@ $L6:
 	l.d	$f2,$LC2
 	c.le.d	$f0,$f2
 	bc1f	$L7
+## basic block (105 - 108) ##
 	lw	$3,24($fp)
 	addu	$2,$3,1
-	sw	$2,24($fp)
+	move	$3,$2
+	sw	$3,24($fp)
+## basic block (109 - 115) ##
 $L7:
 $L5:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	sw	$2,16($fp)
+	move	$3,$2
+	sw	$3,16($fp)
 	j	$L3
+## basic block (116 - 128) ##
 $L4:
 	l.s	$f0,24($fp)
 	#nop
@@ -124,12 +141,15 @@ $L4:
 	la	$4,$LC3
 	dmfc1	$6,$f0
 	jal	printf
+## basic block (129 - 130) ##
 	li	$2,0x00000001		# 1
 	j	$L1
+## basic block (131 - 136) ##
 $L1:
 	move	$sp,$fp			# sp not trusted here
 	lw	$31,52($sp)
 	lw	$fp,48($sp)
 	addu	$sp,$sp,56
 	j	$31
+## basic block (137 - 137) ##
 	.end	main
