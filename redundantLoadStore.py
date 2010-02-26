@@ -1,3 +1,10 @@
+"""
+File: redundantLoadStore.py
+
+Authors:  Tim van Deurzen, Koos van Strien
+Date:     26-02-2010
+"""
+
 from basicblock import *
 from operations_new import *
 from optimizationClass import *
@@ -32,7 +39,7 @@ class redundantLoadStore(optimizationClass):
             
             if operation.type in (operation.LOAD, operation.STORE):
                 if oldOperation.type in (operation.LOAD, operation.STORE):
-                    #if oldOperation.size == operation.size:
+                    if oldOperation.size == operation.size:
                         register1 = operation.getTarget()
                         register2 = oldOperation.getTarget()
 
@@ -40,35 +47,36 @@ class redundantLoadStore(optimizationClass):
                         address2 = oldOperation.getAddress()
 
                         if register1 == register2 and address1 == address2:
-                            self.output.append("\t==> Found an identical load /"+ \
+                            self.output.append("\t==> Found identical load /" + 
                                     " store operation: " + oldOperation.code)
 
                         elif address1 == address2 or register1 == register2:
-                            self.output.append("\t==> Found a load / store using"+ \
-                                    " the same address / register: " + oldOperation.code)
+                            self.output.append("\t==> Found load / store using" + 
+                                    " the same address / register: " + 
+                                    oldOperation.code)
 
                         return oldOperation
 
-                elif oldOperation.type in \
-                        (operation.INT_ARITHMETIC, operation.FLOAT_ARITHMETIC):
+                elif oldOperation.type in (operation.INT_ARITHMETIC, 
+                                           operation.FLOAT_ARITHMETIC):
 
                     register1 = operation.getTarget()
                     register2 = oldOperation.getTarget()
 
                     if register1 == register2:
-                        self.output.append("\t==> Found an arithmetic operation"+ \
+                        self.output.append("\t==> Found an arithmetic operation" + 
                             " with the same target: " + oldOperation.code)
 
                         return oldOperation
 
-            elif operation.type in \
-                    (operation.INT_ARITHMETIC, operation.FLOAT_ARITHMETIC):
+            elif operation.type in (operation.INT_ARITHMETIC, 
+                                    operation.FLOAT_ARITHMETIC):
 
                 register1 = operation.getTarget()
                 register2 = oldOperation.getTarget()
 
                 if register1 == register2:
-                    self.output.append("\t==> Found an arithmetic operation with"+ \
+                    self.output.append("\t==> Found an arithmetic operation with" + 
                             " the same target: " + oldOperation.code)
 
                     return oldOperation
@@ -92,10 +100,9 @@ class redundantLoadStore(optimizationClass):
                     address2  = operation.getAddress()
 
                     if register1 == register2 and address1 == address2:
-                        self.output.append(\
-                                "\t==> Found an operation that previously stored"+ \
-                                " the register of operation:" + operation.code  \
-                        )
+                        self.output.append("\t==> Found an operation that" +
+                            "previously stored the register of operation:" + 
+                            operation.code)
 
                         return oldOperation
 
@@ -113,13 +120,12 @@ class redundantLoadStore(optimizationClass):
         for operation in block.operations:
 
             if operation.included == False:
-                self.output.append(\
-                    "\t{{ operation previously excluded: "+operation.code+" }}" \
-                )
+                self.output.append("\t{{ operation previously excluded: " + 
+                    operation.code + " }}")
 
                 continue
             
-            self.output.append("\t--> Analysing operation: " + str(operation) + \
+            self.output.append("\t--> Analysing operation: " + str(operation) + 
                 " on line " + str(operation.lineNumber))
 
             previousEditor = self.previouslyChanged(operation)
@@ -134,41 +140,40 @@ class redundantLoadStore(optimizationClass):
                            and previousEditor.getTarget() == operation.getTarget() \
                            and previousEditor.getAddress() == operation.getAddress():  
 
-                            self.output.append(\
-                                "\n\t!!--> Excluding identical load / store operation from output.\n"
-                            )
+                            self.output.append("\n\t!!--> Excluding identical" +
+                                    "load / store operation from output.\n")
 
                             operation.exclude()
                         
                         elif previousEditor.getTarget() == operation.getTarget() \
-                             and not previousEditor.getAddress() == operation.getAddress():        
+                             and not previousEditor.getAddress() == \
+                             operation.getAddress():
 
                             # The old value was overwritten, so replace the previous
                             # operation with the new operation.
-                            self.output.append(\
-                                "\n\t!!--> Updating listed operation because register was updated.\n" \
-                            )
+                            self.output.append("\n\t!!--> Updating listed" +
+                                    "operation because register was updated.\n")
 
                             self.changed.remove(previousEditor)                        
                             self.changed.append(operation)
                     else:
                         if previousEditor.getTarget() == operation.getTarget():
 
-                            self.output.append(\
-                                "\n\t!!--> Updating listed operation because register was updated.\n" \
-                            )
+                            self.output.append("\n\t!!--> Updating listed" +
+                                    "operation because register was updated.\n")
 
                             self.changed.remove(previousEditor)                        
                             self.changed.append(operation)
 
                 elif self.previouslyStored(operation):
-                    self.output.append(\
-                        "\n\t!!--> Excluding load that was previously stored but not updated.\n" \
-                    )
+                    self.output.append("\n\t!!--> Excluding load that was" +
+                            "previously stored but not updated.\n")
 
                     operation.exclude()
                 else:
-                    self.output.append("\n\t!!--> Appending load / store operation to list.\n")
+                    self.output.append("\n\t!!--> Appending load / store " +
+                            "operation to list.\n")
+
                     self.changed.append(operation)
 
             elif operation.type == operation.STORE:
@@ -176,22 +181,30 @@ class redundantLoadStore(optimizationClass):
                     # This value has already been stored so don't store it
                     # again.
 
-                    self.output.append(\
-                        "\n\t!!-->Excluding store that was previously stored but not updated.\n" \
-                    )
+                    self.output.append("\n\t!!-->Excluding store that was" +
+                            "previously stored but not updated.\n")
 
                     operation.exclude()
                 else:
                     if previousEditor is not None:
-                        self.output.append("\n\t!!--> Removing old operation from list.\n")
+                        self.output.append("\n\t!!--> Removing old operation" +
+                                "from list.\n")
+
                         self.changed.remove(previousEditor)
                     else:
-                        self.output.append("\n\t!!--> Adding new store to list.\n")
+                        self.output.append("\n\t!!--> Adding new store to" +
+                                "list.\n")
+
                         self.changed.append(operation)
 
-            elif operation.type in (operation.INT_ARITHMETIC, operation.FLOAT_ARITHMETIC):
+            elif operation.type in (operation.INT_ARITHMETIC, 
+                                    operation.FLOAT_ARITHMETIC):
+
                 if previousEditor is not None:
-                    self.output.append("\n\t!!--> Removing old operation from list.\n")
+                    self.output.append("\n\t!!--> Removing old operation from" +
+                            "list.\n")
+
                     self.changed.remove(previousEditor)
                 
                 self.changed.append(operation)
+

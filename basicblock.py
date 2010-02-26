@@ -1,4 +1,12 @@
+"""
+File: basicblock.py
+
+Authors:  Tim van Deurzen, Koos van Strien
+Date:     26-02-2010
+"""
+
 from operations_new import *
+
 
 class basicBlock:
     """
@@ -28,7 +36,8 @@ class basicBlock:
         Gives a string representation if the line interval.
         """
 
-        return str(self.operations[0].lineNumber) + " - " + str(self.operations[len(self.operations) - 1].lineNumber)
+        return str(self.operations[0].lineNumber) + " - " + \
+               str(self.operations[len(self.operations) - 1].lineNumber)
 
 
     def addOperation(self, line):
@@ -55,6 +64,7 @@ class basicBlock:
 
         for operation in self.operations:
             operation.exclude()
+
 
     def getLine(self, lineNumber):
         """
@@ -96,14 +106,17 @@ class basicBlock:
 
         if label[0] == "$":
             for operation in self.operations:
-                if operation.type == operation.LABEL and operation.getLabelName()[0:3] == label:
+                if operation.type == operation.LABEL and \
+                   operation.getLabelName()[0:3] == label:
                     
                     self.labels.append(label)
                     return True
 
         elif label[0:2] == "__":
             for operation in self.operations:
-                if operation.type == operation.LABEL and operation.getLabelName()[:-2] == label[2:]:
+                if operation.type == operation.LABEL and \
+                   operation.getLabelName()[:-2] == label[2:]:
+
                     self.labels.append(label)
                     return True
 

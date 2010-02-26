@@ -1,13 +1,19 @@
+"""
+File: subExpressionElimination.py
+
+Authors:  Tim van Deurzen, Koos van Strien
+Date:     26-02-2010
+"""
+
 from basicblock import *
 from operations_new import *
 from optimizationClass import *
 
-#
-# Optimization class.
-#
-# Iterates over all basicblocks and removes redundant loads and stores.
-#
 class subExpressionElimination(optimizationClass):
+    """
+    Remove expressions that are duplicated while the result is still stored in a
+    variable.
+    """
 
     def __init__(self, blocks):
         """
@@ -21,10 +27,11 @@ class subExpressionElimination(optimizationClass):
 
 
     def findCommonExpression(self, operation):
-        if operation.operation not in ("addu", "subu"):
-            for expression in self.expressions:
-                if expression.operation == operation.operation and expression.getArguments() == operation.getArguments():
-                    return expression
+        for expression in self.expressions:
+            if expression.operation == operation.operation and \
+               expression.getArguments() == operation.getArguments():
+
+                return expression
 
         return None
 
@@ -39,25 +46,30 @@ class subExpressionElimination(optimizationClass):
 
         return None
 
-    
 
     def analyseBasicBlock(self, block):
         self.expressions = []
         for operation in block.operations:
             if operation.included == False:
-                self.output.append("  {{ operation previously excluded: "+operation.code+" }}")
+                self.output.append("  {{ operation previously excluded: " +
+                        operation.code + " }}")
+
                 continue
 
             if operation.hasArguments():
-                updatingExpression = self.getUpdatingExpression(operation.getArguments())
+                updatingExpression = \
+                        self.getUpdatingExpression(operation.getArguments())
             else:
                 updatingExpression = None
 
-            if operation.type in (operation.INT_ARITHMETIC, operation.FLOAT_ARITHMETIC):
+            if operation.type in (operation.INT_ARITHMETIC, 
+                                  operation.FLOAT_ARITHMETIC):
+
                 commonExpression = self.findCommonExpression(operation)
                 
                 if commonExpression is not None:
                     operation.exclude()
+
                 elif updatingExpression is None:
                     self.expressions.append(operation)
 

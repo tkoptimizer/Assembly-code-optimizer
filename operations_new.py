@@ -1,3 +1,10 @@
+"""
+File: operations_new.py
+
+Authors:  Tim van Deurzen, Koos van Strien
+Date:     26-02-2010
+"""
+
 class operation:
     """
     Defines a single operation and allows easy access to all the datafields of
@@ -137,14 +144,14 @@ class operation:
     
     # The operation types, these values can be used for operation
     # identification by other classes.
-    CONTROL          = 0
-    LOAD             = 1
-    STORE            = 2
-    INT_ARITHMETIC   = 3
+    CONTROL= 0
+    LOAD = 1
+    STORE = 2
+    INT_ARITHMETIC = 3
     FLOAT_ARITHMETIC = 4
-    SYSTEM           = 5
-    LABEL            = 6
-    NONE             = 7
+    SYSTEM = 5
+    LABEL = 6
+    NONE = 7
 
     # Load and store sizes
     BYTE = 0
@@ -157,6 +164,7 @@ class operation:
         
         if len(parts) == 1:
             return LabelOp(line, lineNumber)
+
         elif len(parts) < 1:
             return NoOp(line, lineNumber)
 
@@ -176,10 +184,12 @@ class operation:
 
         elif op in operation.floatArithmetic:
             return FloatArithmeticOp(line, lineNumber)
+
         elif op in operation.system:
             return SystemOp(line, lineNumber)
         else:
             return NoOp(line, lineNumber)
+
 
     def __init__(self, line, lineNumber):
         if len(line) == 0:
@@ -197,14 +207,6 @@ class operation:
         self.lineNumber = lineNumber
 
 
-    def isMove(self):
-        """
-        Determine if current operation is a 'move' operation
-        """
-        
-        return False
-
-    
     def __str__(self):
         """
         Python's version of toString :-)
@@ -214,9 +216,11 @@ class operation:
         code = code.replace('\t', ' ')
 
         if self.included:
-            return str(self.lineNumber) + " [ " + self.verboseType(self.type) + " ]:  " + code
+            return str(self.lineNumber) + " [ " + \
+                   self.verboseType(self.type) + " ]:  " + code
         else:
-            return str(self.lineNumber) + " [ " + self.verboseType(self.type) + " ]:  " + code
+            return str(self.lineNumber) + " [ " + \
+                   self.verboseType(self.type) + " ]:  " + code
     
 
     def hasArguments(self):
@@ -225,10 +229,7 @@ class operation:
         arguments are sought, but are not there.
         """
 
-        if self.getArguments() == None:
-            return False
-        
-        return True
+        return self.getArguments() is not None
 
     
     def getArguments(self):
@@ -248,7 +249,6 @@ class operation:
         """
         Change the arguments.
         """
-
 
         parts = self.code.split()
 
@@ -389,7 +389,9 @@ class ControlOp(operation):
 
 
     def getTarget(self):
-        # For branch operations the last argument is the target (or offset).
+        """
+        For branch operations the last argument is the target (or offset).
+        """
         
         parts = self.code.split(",")
 
@@ -398,6 +400,7 @@ class ControlOp(operation):
             parts = parts.split()
         
         return parts[-1]
+
 
 class LoadStore(operation):
     
@@ -492,6 +495,7 @@ class LoadStore(operation):
         else:
             return operation.UNKNOWN
 
+
 class LoadOp(LoadStore):
     def __init__(self, line, lineNumber):
         """
@@ -500,6 +504,7 @@ class LoadOp(LoadStore):
 
         LoadStore.__init__(self, line, lineNumber)
         self.type      = operation.LOAD
+
 
 class StoreOp(LoadStore):
     def __init__(self, line, lineNumber):
@@ -555,7 +560,8 @@ class IntArithmeticOp(operation):
             try:
                 return parts[1]
             except:
-                raise Exception, "Fatal: move operation " + self.code + " has no source address."
+                raise Exception, "Fatal: move operation " + self.code + \
+                                 " has no source address."
         
 
     def setMoveSource(self, address):
@@ -582,7 +588,8 @@ class IntArithmeticOp(operation):
             try:
                 return parts[0]
             except:
-                raise Exception, "Fatal: move operation " + self.code + " has no destination address..."
+                raise Exception, "Fatal: move operation " + self.code + \
+                                 " has no destination address..."
 
 
     def setMoveDestination(self, address):
@@ -594,6 +601,7 @@ class IntArithmeticOp(operation):
             parts = self.code.split()
             parts = parts[1].split(",")
             self.code = self.code.replace(parts[0], address)
+
 
 class FloatArithmeticOp(operation):
     def __init__(self, line, lineNumber):
@@ -622,6 +630,7 @@ class SystemOp(operation):
     def getTarget(self):
         raise Exception, "System operations don't have a target!"
 
+
 class LabelOp(operation):
     def __init__(self, line, lineNumber):
         """
@@ -640,6 +649,7 @@ class LabelOp(operation):
 
         if self.type == operation.LABEL:
             return self.labelName
+
 
 class NoOp(operation):
     def __init__(self, line, lineNumber):

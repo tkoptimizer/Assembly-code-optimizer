@@ -1,5 +1,13 @@
+"""
+File: blockBuilder.py
+
+Authors:  Tim van Deurzen, Koos van Strien
+Date:     26-02-2010
+"""
+
 from basicblock import *
 from operations_new import *
+
 
 class blockBuilder:
     """
@@ -29,6 +37,7 @@ class blockBuilder:
         """
         Finds so-called ``leaders'' - heads of basic blocks - in code listing.
         """
+
         lineNumber = 1
         leaders = []            # Here the linenumbers of leaders are stored
         leaderLabels = []       # Here are jump targets (leaders-to-be) stored
@@ -49,6 +58,7 @@ class blockBuilder:
             # Check if we found a jump or branch operator.
             if currentOpp.type == operation.CONTROL:
                 tgt = currentOpp.getTarget()
+                
                 if tgt[0:2] == "$L":
                     # Set the jump target on the ``to add-list'' of leaders
                     leaderLabels.append(currentOpp.getTarget())
@@ -58,6 +68,7 @@ class blockBuilder:
 
                 # Next operation should be a leader
                 curLeader = True 
+
             elif currentOpp.type == operation.LABEL:
                 lbl = currentOpp.getLabelName()[:-2]
                 labelTranslation[lbl] = lineNumber
@@ -102,55 +113,6 @@ class blockBuilder:
             self.basicBlocks.append(currentBlock)
             fromLine = toLine
             
-
-    def analyze_old(self):
-        """
-        Method that analyses the assembly code on each line and begins or ends a
-        basicblock depending on what code is on the current line.
-        """
-
-        lineNumber   = 1
-        numBlocks    = 0
-        currentBlock = None;
-        newBlock     = True
-
-        # Iterate over every line of assembly stored in this object. 
-        for line in self.listing:
-
-            try:
-                currentOpp = operation.getInstance(line, lineNumber)
-            except Exception, (error):
-                # Keep a log of all exceptions.
-                self.exceptions.append(error)
-            else:
-                # Create a new block if we previously found a control operator
-                # or if we're in the first block.
-                if newBlock == True:
-                    numBlocks += 1
-                    
-                    currentBlock = basicBlock("B" + str(numBlocks), lineNumber)
-                    self.basicBlocks.append(currentBlock)
-
-                    newBlock = False
-                
-                currentBlock.addOperation(currentOpp)
-
-                # Check if we found a jump or branch operator.
-                if currentOpp.type == operation.CONTROL:
-
-                    # Jump or branch operator: end of block
-                    newBlock = True
-
-                lineNumber += 1
-
-
-    def findGenSet(self):
-        pass
-
-
-    def findKillSet(self):
-        pass
-
 
     def hasErrors(self):
         """

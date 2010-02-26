@@ -1,7 +1,15 @@
+"""
+File: copyPropagation.py
+
+Authors:  Tim van Deurzen, Koos van Strien
+Date:     26-02-2010
+"""
+
+import re
+
 from basicblock import *
 from operations_new import *
 from optimizationClass import *
-import re
 
 class copyPropagation(optimizationClass):
     """
@@ -37,7 +45,9 @@ class copyPropagation(optimizationClass):
             opArgs   = operation.getArguments()
             register = ""
 
-            if operation.type == operation.LOAD or operation.type == operation.STORE:
+            if operation.type == operation.LOAD or \
+               operation.type == operation.STORE:
+
                 if operation.usesOffset():
                     register = operation.getOffsetRegister()
 
@@ -53,8 +63,8 @@ class copyPropagation(optimizationClass):
 
     def findDeadMove(self, operation):
         """
-        Look for dead moves that use the same registers as the current operation.
-        Details are handled in 'analyseBasicBlock'.
+        Look for dead moves that use the same registers as the current
+        operation.  Details are handled in 'analyseBasicBlock'.
         """
         
         if len(self.dead_moves) > 0:
@@ -67,7 +77,9 @@ class copyPropagation(optimizationClass):
             opArgs   = operation.getArguments()
             register = ""
 
-            if operation.type == operation.LOAD or operation.type == operation.STORE:
+            if operation.type == operation.LOAD or \
+               operation.type == operation.STORE:
+
                 if operation.usesOffset():
                     register = operation.getOffsetRegister()
 
@@ -114,7 +126,9 @@ class copyPropagation(optimizationClass):
 
         for operation in block.operations:
             if operation.included == False:
-                self.output.append("  {{ operation previously excluded: "+operation.code+" }}")
+                self.output.append( "  {{ operation previously excluded: " + 
+                        operation.code + " }}")
+
                 continue
 
             self.output.append("  || Analysing operation: " + str(operation))
@@ -122,17 +136,21 @@ class copyPropagation(optimizationClass):
             redundantMove = self.findUnnecessaryMove(operation)
 
             if operation.isMove():                
-                if operation.getMoveSource() in ("$sp", "$fp") \
-                    or operation.getMoveDestination() in ("$sp", "$fp"):
+                if operation.getMoveSource() in ("$sp", "$fp") or \
+                   operation.getMoveDestination() in ("$sp", "$fp"):
                     
                     self.output.append("\tSkipping move operation.")
                     continue
 
                 if redundantMove is not None:
-                    if redundantMove.getMoveSource() == operation.getMoveDestination():
+                    if redundantMove.getMoveSource() == \
+                       operation.getMoveDestination():
+
                         self.moves.remove(redundantMove)
                         
-                        self.output.append("\tRemoving move operation from redundant-moves-list.")
+                        self.output.append("\tRemoving move operation from " +
+                                "redundant-moves-list.")
+
                         continue
                 
                 self.output.append("\tAdding move to list.")
@@ -141,14 +159,17 @@ class copyPropagation(optimizationClass):
 
             elif operation.type == operation.STORE:
                 if redundantMove is not None:
-                    if redundantMove.getMoveDestination() == operation.getTarget():
+                    if redundantMove.getMoveDestination() == \
+                       operation.getTarget():
                         
-                        self.output.append("\tUpdating store operation ("+operation.code+")")
+                        self.output.append("\tUpdating store operation (" +
+                                operation.code + ")")
 
                         operation.setSource(redundantMove.getMoveSource())
                         redundantMove.exclude()
                         
-                        self.output.append("\tOperation updated ("+operation.code+")")
+                        self.output.append("\tOperation updated (" +
+                                operation.code + ")")
 
                         self.updatedOps.append(redundantMove)
                         self.updatedOps.append(operation)
@@ -156,34 +177,55 @@ class copyPropagation(optimizationClass):
 
             elif operation.type == operation.LOAD:
                 if redundantMove is not None:        
-                    if redundantMove.getMoveDestination() == operation.getTarget() or redundantMove.getMoveSource() == operation.getTarget():
-                        self.output.append("\tMove source / destination was updated by a load, removing move from list: " +  operation.code)
+                    if redundantMove.getMoveDestination() == \
+                       operation.getTarget() or \
+                       redundantMove.getMoveSource() == operation.getTarget():
+
+                        self.output.append("\tMove source / destination was " +
+                                "updated by a load, removing move " + "from " +
+                                "list: " +  operation.code)
                         
                         self.moves.remove(redundantMove)
                         self.dead_moves.append(redundantMove)
 
-                    if redundantMove.getMoveSource() == operation.getOffsetRegister() or redundantMove.getMoveDestination() == operation.getOffsetRegister():
-                        self.output.append("\tComplex load situation: reseting operations.")
+                    if redundantMove.getMoveSource() == \
+                       operation.getOffsetRegister() or \
+                       redundantMove.getMoveDestination() == \
+                       operation.getOffsetRegister():
+
+                        self.output.append("\tComplex load situation: " +
+                                "reseting operations.")
 
                         self.resetOperations()
                 else:
                     deadMove = self.findDeadMove(operation)
 
                     if deadMove is not None:
-                        if deadMove.getMoveDestination() == operation.getTarget() or deadMove.getMoveSource() == operation.getTarget():
-                            self.output.append("\tMove source / destination was updated by a load, removing move from list: " +  operation.code)
+                        if deadMove.getMoveDestination() == \
+                           operation.getTarget() or \
+                           deadMove.getMoveSource() == operation.getTarget():
+
+                            self.output.append("\tMove source / destination " +
+                                "was updated by a load, removing move from " +
+                                "list: " + operation.code)
                             
                             self.dead_moves.remove(deadMove)
 
-                        if deadMove.getMoveSource() == operation.getOffsetRegister() or deadMove.getMoveDestination() == operation.getOffsetRegister():
-                            self.output.append("\tComplex load situation: reseting operations.")
+                        if deadMove.getMoveSource() == \
+                           operation.getOffsetRegister() or \
+                           deadMove.getMoveDestination() == \
+                           operation.getOffsetRegister():
+
+                            self.output.append("\tComplex load situation: " +
+                                    "reseting operations.")
 
                             self.resetOperations()
 
 
 
-            elif operation.type in (operation.INT_ARITHMETIC, \
-                    operation.FLOAT_ARITHMETIC, operation.CONTROL):
+            elif operation.type in (operation.INT_ARITHMETIC, 
+                                    operation.FLOAT_ARITHMETIC, 
+                                    operation.CONTROL):
 
                 if redundantMove is not None:
                     destination = redundantMove.getMoveDestination()
@@ -200,23 +242,31 @@ class copyPropagation(optimizationClass):
                             if arguments[i] == destination:
                                 arguments[i] = source
                         
-                        self.output.append("\tUpdating arithmetic or control operation ("+operation.code+")")
+                        self.output.append("\tUpdating arithmetic or control " +
+                                "operation (" + operation.code + ")")
 
                         operation.setArguments(arguments)
                         redundantMove.exclude()
                         
-                        self.output.append("\tOperation updated ("+operation.code+")")
+                        self.output.append("\tOperation updated (" + 
+                                operation.code + ")")
 
                         self.updatedOps.append(redundantMove)
                         self.updatedOps.append(operation)
 
                     if arguments[0] == destination:
-                        self.output.append("\tArithmetic overwrites register with new result")
+                        self.output.append("\tArithmetic overwrites register" +
+                                "with new result")
+
                         self.moves.remove(redundantMove)
                         self.dead_moves.append(redundantMove)
                 else:
                     deadMove = self.findDeadMove(operation)
                     
                     if deadMove is not None:
-                        if deadMove.getMoveDestination() == operation.getTarget() or deadMove.getMoveSource() == operation.getTarget():
+                        if deadMove.getMoveDestination() == \
+                           operation.getTarget() or \
+                           deadMove.getMoveSource() == operation.getTarget():
+
                                 self.dead_moves.remove(deadMove)
+

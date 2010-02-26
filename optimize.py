@@ -1,3 +1,10 @@
+"""
+File: optimize.py
+
+Authors:  Tim van Deurzen, Koos van Strien
+Date:     26-02-2010
+"""
+
 import getopt 
 import sys
 import os
@@ -38,7 +45,7 @@ def main():
     """
 
     global PARSE_FOLDER, PARSE_FILE, BE_VERBOSE, DEBUG, input_folder, \
-            input_file, output_folder, optimizations
+           input_file, output_folder, optimizations
 
     try:
         options, arguments = getopt.getopt(
