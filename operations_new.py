@@ -259,7 +259,16 @@ class operation:
             
             # remove last ','
             self.code = self.code[:-1]
+    
+    def setOperation(self, operation):
+        """
+        Alter the operation.
+        """
 
+        parts = self.code.split()
+
+        if len(parts) > 1:
+            self.code = "\t" + operation + "\t" + parts[1]
 
     def verboseType(self, type):
         """

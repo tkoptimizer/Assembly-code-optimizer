@@ -15,6 +15,7 @@ from redundantLoadStore import *
 from redundantLabels import *
 from copyPropagation import *
 from subExpressionElimination import *
+from globalBranchOptimization import *
 
 #
 # A simple script that runs a set of optimization classes on a set of assembly
@@ -36,7 +37,8 @@ optimizers = ({
     'copy_propagation': copyPropagation(None),
     'redundant_labels': redundantLabels(None),
     'redundant_load_store': redundantLoadStore(None),
-    'common_subexpression': subExpressionElimination(None)
+    'common_subexpression': subExpressionElimination(None),
+    'global_branch_opt': globalBranchOptimization(None)
     })
 
 def main():

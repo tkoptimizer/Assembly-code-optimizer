@@ -41,6 +41,7 @@ class copyPropagation(optimizationClass):
             if op.included == False:
                 self.output.append("\t{{ operation previously excluded: " + 
                     op.code + " }}")
+                continue
 
 
             self.output.append("\t--> Analysing operation: " + str(op) + 
