@@ -14,8 +14,8 @@ class operation:
     # Control operations
     control = [
         'j',
-        'jal',
         'jr',
+        'jal',
         'jalr',
         'beq',
         'bne',
@@ -375,6 +375,9 @@ class operation:
         self.code = self.original_code
         
 
+    def isMove(self):
+        return False
+
 class ControlOp(operation):
 
     def __init__(self, line, lineNumber):
@@ -628,7 +631,8 @@ class SystemOp(operation):
 
 
     def getTarget(self):
-        raise Exception, "System operations don't have a target!"
+        raise Exception, "System operations don't have a target!" + \
+            str(self.operation)
 
 
 class LabelOp(operation):
@@ -660,3 +664,7 @@ class NoOp(operation):
         operation.__init__(self, line, lineNumber)
         self.labelName = line
         self.type      = operation.NONE
+
+        parts = line.split()
+        if len(parts) > 0:
+            self.operation = parts[0]

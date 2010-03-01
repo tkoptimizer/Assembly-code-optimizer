@@ -669,8 +669,8 @@ What:
 ## basic block (626 - 633) ##
 $L21:
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,2
+# 	move	$3,$2
+	sll	$2,$2,2
 	la	$3,info.4
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -680,8 +680,8 @@ $L21:
 ## basic block (635 - 642) ##
 $L24:
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,2
+# 	move	$3,$2
+	sll	$2,$2,2
 	la	$3,info.4
 	addu	$2,$2,$3
 	lw	$4,0($2)
@@ -690,8 +690,8 @@ $L24:
 $L23:
 	lw	$3,24($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,24($fp)
+# 	move	$3,$2
+	sw	$2,24($fp)
 	j	$L21
 ## basic block (649 - 657) ##
 $L22:
@@ -715,20 +715,20 @@ $L22:
 	jal	printf
 ## basic block (667 - 682) ##
 	lw	$2,40($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,40($fp)
 	mult	$2,$3
 	mflo	$2
 # 	lw	$3,40($fp)
 	move	$5,$3
-	sll	$4,$5,4
+	sll	$4,$3,4
 	subu	$4,$4,$3
 	sll	$3,$4,3
 	addu	$2,$2,$3
 	addu	$3,$2,800
 	la	$4,$LC21
-	move	$5,$3
+# 	move	$5,$3
 	jal	printf
 ## basic block (683 - 688) ##
 $L20:
@@ -894,7 +894,7 @@ $L31:
 ## basic block (813 - 819) ##
 	s.d	$f0,208($fp)
 	lw	$2,284($fp)
-# 	l.d	$f0,208($fp)
+	l.d	$f0,208($fp)
 	l.d	$f2,152($fp)
 	sub.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
@@ -909,19 +909,19 @@ $L32:
 ## basic block (825 - 852) ##
 $L35:
 	lw	$2,232($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,40
 	addu	$3,$2,$4
 	addu	$2,$3,112
 	addu	$3,$fp,160
 	lw	$4,232($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	addu	$3,$3,$4
 	lw	$4,232($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	addu	$5,$fp,40
 	addu	$4,$4,$5
 	addu	$5,$4,112
@@ -932,8 +932,8 @@ $L35:
 $L34:
 	lw	$3,232($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,232($fp)
+# 	move	$3,$2
+	sw	$2,232($fp)
 	j	$L32
 ## basic block (853 - 856) ##
 $L33:
@@ -950,17 +950,17 @@ $L36:
 ## basic block (862 - 926) ##
 $L39:
 	lw	$2,232($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,40
 	addu	$3,$2,$4
 	addu	$2,$3,64
 	lw	$3,232($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	lw	$4,232($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	lw	$3,loop.17+4($3)
 	lw	$4,loop.17($4)
 	subu	$3,$3,$4
@@ -970,14 +970,14 @@ $L39:
 	cvt.d.w	$f0,$f0
 	s.d	$f0,0($2)
 	lw	$2,232($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,40
 	addu	$3,$2,$4
 	addu	$2,$3,64
 	lw	$3,232($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$4,$fp,40
 	addu	$3,$3,$4
 	addu	$4,$3,64
@@ -991,22 +991,22 @@ $L39:
 	#nop
 	cvt.d.w	$f24,$f24
 	lw	$2,232($fp)
-	move	$3,$2
-	sll	$2,$3,3
-	addu	$4,$fp,40
+# 	move	$3,$2
+	sll	$2,$2,3
+# 	addu	$4,$fp,40
 	addu	$3,$2,$4
 	addu	$2,$3,64
 	lw	$3,232($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	la	$4,box.8
 	addu	$3,$3,$4
 	l.d	$f0,0($2)
 	l.d	$f2,0($3)
 	mul.d	$f0,$f0,$f2
 	lw	$2,232($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	la	$3,box.8+8
 	addu	$2,$2,$3
 	l.d	$f2,0($2)
@@ -1022,8 +1022,8 @@ $L39:
 $L38:
 	lw	$3,232($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,232($fp)
+# 	move	$3,$2
+	sw	$2,232($fp)
 	j	$L36
 ## basic block (938 - 1099) ##
 $L37:
@@ -1060,8 +1060,8 @@ $L37:
 	add.d	$f0,$f0,$f2
 	s.d	$f0,56($fp)
 	lw	$2,280($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	mtc1	$2,$f0
 	#nop
 	cvt.d.w	$f0,$f0
@@ -1123,7 +1123,7 @@ $L37:
 	mtc1	$2,$f2
 	#nop
 	cvt.d.w	$f2,$f2
-	lw	$3,240($fp)
+# 	lw	$3,240($fp)
 	addu	$2,$3,1
 	mtc1	$2,$f4
 	#nop
@@ -1148,7 +1148,7 @@ $L37:
 	mflo	$2
 	mtc1	$2,$f2
 	#nop
-	cvt.d.w	$f2,$f2
+# 	cvt.d.w	$f2,$f2
 	l.s	$f4,240($fp)
 	#nop
 	cvt.d.w	$f4,$f4
@@ -1162,13 +1162,13 @@ $L37:
 	add.d	$f0,$f0,$f2
 	s.d	$f0,80($fp)
 	lw	$2,280($fp)
-	move	$4,$2
-	sll	$3,$4,1
+# 	move	$4,$2
+	sll	$3,$2,1
 	addu	$3,$3,$2
 	sll	$2,$3,4
 	mtc1	$2,$f0
 	#nop
-	cvt.d.w	$f0,$f0
+# 	cvt.d.w	$f0,$f0
 	s.d	$f0,88($fp)
 	lw	$2,288($fp)
 	l.d	$f0,40($fp)
@@ -1203,8 +1203,8 @@ $L40:
 ## basic block (1108 - 1119) ##
 $L43:
 	lw	$2,232($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$3,$fp,40
 	addu	$2,$2,$3
 	addu	$3,$2,112
@@ -1215,8 +1215,8 @@ $L43:
 	bc1f	$L44
 ## basic block (1120 - 1127) ##
 	lw	$2,232($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$3,$fp,40
 	addu	$2,$2,$3
 	addu	$3,$2,112
@@ -1225,31 +1225,31 @@ $L43:
 ## basic block (1128 - 1180) ##
 $L44:
 	lw	$2,232($fp)
-	move	$3,$2
-	sll	$2,$3,2
+# 	move	$3,$2
+	sll	$2,$2,2
 	la	$3,tasks.18
 	addu	$2,$2,$3
 	lw	$3,232($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$5,$fp,40
 	addu	$4,$3,$5
 	addu	$3,$4,112
 	lw	$4,232($fp)
-	move	$5,$4
-	sll	$4,$5,3
-	addu	$5,$fp,40
+# 	move	$5,$4
+	sll	$4,$4,3
+# 	addu	$5,$fp,40
 	addu	$4,$4,$5
 	l.d	$f0,0($4)
 	s.d	$f0,16($sp)
 	lw	$4,232($fp)
-	move	$5,$4
-	sll	$4,$5,3
-	addu	$5,$fp,40
+# 	move	$5,$4
+	sll	$4,$4,3
+# 	addu	$5,$fp,40
 	addu	$4,$4,$5
 	lw	$5,232($fp)
-	move	$6,$5
-	sll	$5,$6,3
+# 	move	$6,$5
+	sll	$5,$5,3
 	addu	$6,$fp,40
 	addu	$5,$5,$6
 	addu	$6,$5,112
@@ -1260,8 +1260,8 @@ $L44:
 	mul.d	$f0,$f0,$f2
 	s.d	$f0,24($sp)
 	lw	$4,232($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	addu	$5,$fp,40
 	addu	$4,$4,$5
 	addu	$5,$4,112
@@ -1280,8 +1280,8 @@ $L44:
 $L42:
 	lw	$3,232($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,232($fp)
+# 	move	$3,$2
+	sw	$2,232($fp)
 	j	$L40
 ## basic block (1187 - 1205) ##
 $L41:
@@ -1289,7 +1289,7 @@ $L41:
 	lw	$3,288($fp)
 	l.d	$f0,0($3)
 	s.d	$f0,16($sp)
-	lw	$3,288($fp)
+# 	lw	$3,288($fp)
 	lw	$4,284($fp)
 	l.d	$f0,0($3)
 	l.d	$f2,0($4)
@@ -1403,8 +1403,8 @@ $L48:
 ## basic block (1290 - 1299) ##
 $L51:
 	lw	$2,16($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,144($fp)
 	addu	$2,$2,$3
 	lw	$4,40($fp)
@@ -1418,8 +1418,8 @@ $L51:
 $L50:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L48
 ## basic block (1309 - 1314) ##
 $L49:
@@ -1463,14 +1463,14 @@ $L57:
 $L60:
 	lw	$2,16($fp)
 	move	$4,$2
-	sll	$3,$4,1
+	sll	$3,$2,1
 	addu	$3,$3,$2
 	sll	$2,$3,3
 	lw	$3,148($fp)
 	addu	$2,$2,$3
 	lw	$3,20($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$2,$2,$3
 	lw	$4,40($fp)
 	la	$5,$LC1
@@ -1483,16 +1483,16 @@ $L60:
 $L59:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L57
 ## basic block (1362 - 1368) ##
 $L58:
 $L55:
 	lw	$3,20($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,20($fp)
+# 	move	$3,$2
+	sw	$2,20($fp)
 	j	$L53
 ## basic block (1369 - 1374) ##
 $L54:
@@ -1536,14 +1536,14 @@ $L66:
 $L69:
 	lw	$2,16($fp)
 	move	$4,$2
-	sll	$3,$4,1
+	sll	$3,$2,1
 	addu	$3,$3,$2
 	sll	$2,$3,3
 	lw	$3,152($fp)
 	addu	$2,$2,$3
 	lw	$3,20($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$2,$2,$3
 	lw	$4,40($fp)
 	la	$5,$LC1
@@ -1556,16 +1556,16 @@ $L69:
 $L68:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L66
 ## basic block (1422 - 1428) ##
 $L67:
 $L64:
 	lw	$3,20($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,20($fp)
+# 	move	$3,$2
+	sw	$2,20($fp)
 	j	$L62
 ## basic block (1429 - 1434) ##
 $L63:
@@ -1600,8 +1600,8 @@ $L71:
 ## basic block (1451 - 1460) ##
 $L74:
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,144($fp)
 	addu	$2,$2,$3
 	l.d	$f0,0($2)
@@ -1610,8 +1610,8 @@ $L74:
 	bc1t	$L76
 ## basic block (1461 - 1469) ##
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,144($fp)
 	addu	$2,$2,$3
 	l.d	$f0,0($2)
@@ -1630,14 +1630,14 @@ $L76:
 ## basic block (1476 - 1491) ##
 $L75:
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$4,144($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,24
 	lw	$3,20($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	lw	$4,144($fp)
 	addu	$3,$3,$4
 	l.d	$f0,0($3)
@@ -1655,10 +1655,10 @@ $L77:
 $L80:
 	lw	$3,16($fp)
 	lw	$2,20($fp)
-	move	$4,$2
-	sll	$2,$4,3
-	move	$5,$3
-	sll	$4,$5,1
+# 	move	$4,$2
+	sll	$2,$2,3
+# 	move	$5,$3
+	sll	$4,$3,1
 	addu	$4,$4,$3
 	sll	$3,$4,3
 	lw	$4,148($fp)
@@ -1672,10 +1672,10 @@ $L80:
 ## basic block (1514 - 1528) ##
 	lw	$3,16($fp)
 	lw	$2,20($fp)
-	move	$4,$2
-	sll	$2,$4,3
-	move	$5,$3
-	sll	$4,$5,1
+# 	move	$4,$2
+	sll	$2,$2,3
+# 	move	$5,$3
+	sll	$4,$3,1
 	addu	$4,$4,$3
 	sll	$3,$4,3
 	lw	$4,148($fp)
@@ -1698,10 +1698,10 @@ $L82:
 $L81:
 	lw	$3,16($fp)
 	lw	$2,20($fp)
-	move	$4,$2
-	sll	$2,$4,3
-	move	$5,$3
-	sll	$4,$5,1
+# 	move	$4,$2
+	sll	$2,$2,3
+# 	move	$5,$3
+	sll	$4,$3,1
 	addu	$4,$4,$3
 	sll	$3,$4,3
 	lw	$4,152($fp)
@@ -1722,10 +1722,10 @@ $L81:
 $L83:
 	lw	$3,16($fp)
 	lw	$2,20($fp)
-	move	$4,$2
-	sll	$2,$4,3
-	move	$5,$3
-	sll	$4,$5,1
+# 	move	$4,$2
+	sll	$2,$2,3
+# 	move	$5,$3
+	sll	$4,$3,1
 	addu	$4,$4,$3
 	sll	$3,$4,3
 	lw	$4,152($fp)
@@ -1738,10 +1738,10 @@ $L83:
 ## basic block (1572 - 1584) ##
 	lw	$3,16($fp)
 	lw	$2,20($fp)
-	move	$4,$2
-	sll	$2,$4,3
-	move	$5,$3
-	sll	$4,$5,1
+# 	move	$4,$2
+	sll	$2,$2,3
+# 	move	$5,$3
+	sll	$4,$3,1
 	addu	$4,$4,$3
 	sll	$3,$4,3
 	lw	$4,152($fp)
@@ -1754,8 +1754,8 @@ $L84:
 $L79:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L77
 ## basic block (1592 - 1597) ##
 $L78:
@@ -1775,8 +1775,8 @@ $L85:
 $L73:
 	lw	$3,20($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,20($fp)
+# 	move	$3,$2
+	sw	$2,20($fp)
 	j	$L71
 ## basic block (1609 - 1617) ##
 $L72:
@@ -1821,7 +1821,7 @@ Region:
 	mul.d	$f20,$f0,$f2
 	lw	$3,128($fp)
 	addu	$2,$3,8
-	lw	$4,128($fp)
+# 	lw	$4,128($fp)
 	addu	$3,$4,16
 	l.d	$f0,0($2)
 	l.d	$f2,0($3)
@@ -1829,7 +1829,7 @@ Region:
 	add.d	$f20,$f20,$f0
 	lw	$3,128($fp)
 	addu	$2,$3,16
-	lw	$3,128($fp)
+# 	lw	$3,128($fp)
 	l.d	$f0,0($2)
 	l.d	$f2,0($3)
 	mul.d	$f0,$f0,$f2
@@ -1854,13 +1854,13 @@ $L87:
 ## basic block (1677 - 1732) ##
 $L90:
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,128($fp)
 	addu	$2,$2,$3
 	lw	$3,24($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	lw	$4,128($fp)
 	addu	$3,$3,$4
 	addu	$4,$3,8
@@ -1871,8 +1871,8 @@ $L90:
 	add.d	$f0,$f2,$f0
 	s.d	$f0,72($fp)
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$4,124($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,4
@@ -1888,14 +1888,14 @@ $L90:
 	subu	$4,$3,1
 	sw	$4,0($2)
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$4,124($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,8
 	lw	$3,24($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	lw	$4,124($fp)
 	addu	$3,$3,$4
 	addu	$4,$3,4
@@ -1905,8 +1905,8 @@ $L90:
 $L89:
 	lw	$3,24($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,24($fp)
+# 	move	$3,$2
+	sw	$2,24($fp)
 	j	$L87
 ## basic block (1733 - 1739) ##
 $L88:
@@ -1926,14 +1926,14 @@ $L91:
 ## basic block (1745 - 1765) ##
 $L94:
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$4,124($fp)
 	addu	$3,$2,$4
 	addu	$2,$3,4
 	lw	$3,24($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	lw	$4,124($fp)
 	addu	$3,$3,$4
 	lw	$2,0($2)
@@ -1947,8 +1947,8 @@ $L94:
 	bne	$3,$0,$L95
 ## basic block (1766 - 1773) ##
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,128($fp)
 	addu	$2,$2,$3
 	subu	$3,$2,8
@@ -1960,15 +1960,15 @@ $L95:
 	#nop
 	cvt.d.w	$f0,$f0
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,128($fp)
 	addu	$2,$2,$3
 	l.d	$f2,0($2)
 	mul.d	$f0,$f0,$f2
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,128($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,8
@@ -1998,8 +1998,8 @@ $L96:
 ## basic block (1810 - 1826) ##
 $L97:
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,128($fp)
 	addu	$2,$2,$3
 	l.s	$f0,44($fp)
@@ -2035,7 +2035,7 @@ $L101:
 	lw	$3,32($fp)
 	subu	$2,$2,$3
 	sw	$2,52($fp)
-	lw	$2,52($fp)
+# 	lw	$2,52($fp)
 	bne	$2,$0,$L102
 ## basic block (1848 - 1849) ##
 	la	$4,$LC70
@@ -2046,8 +2046,8 @@ $L101:
 ## basic block (1852 - 1886) ##
 $L102:
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,128($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,8
@@ -2065,8 +2065,8 @@ $L102:
 	mul.d	$f0,$f0,$f2
 	s.d	$f0,88($fp)
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,124($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -2090,38 +2090,38 @@ $L103:
 ## basic block (1893 - 1949) ##
 $L106:
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,136($fp)
 	addu	$2,$2,$3
 	l.d	$f0,96($fp)
 	s.d	$f0,0($2)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,136($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,16384
 	l.d	$f0,56($fp)
 	s.d	$f0,0($3)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,132($fp)
 	addu	$2,$2,$3
 	l.d	$f0,64($fp)
 	s.d	$f0,0($2)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,132($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,16384
 	l.d	$f0,72($fp)
 	s.d	$f0,0($3)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,132($fp)
 	addu	$2,$2,$3
 	li	$3,0x00008000		# 32768
@@ -2129,8 +2129,8 @@ $L106:
 	l.d	$f0,80($fp)
 	s.d	$f0,0($2)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,140($fp)
 	addu	$2,$2,$3
 	l.d	$f0,88($fp)
@@ -2142,8 +2142,8 @@ $L106:
 $L105:
 	lw	$3,20($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,20($fp)
+# 	move	$3,$2
+	sw	$2,20($fp)
 	j	$L103
 ## basic block (1950 - 1964) ##
 $L104:
@@ -2158,16 +2158,16 @@ $L104:
 $L100:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L98
 ## basic block (1965 - 1971) ##
 $L99:
 $L93:
 	lw	$3,24($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,24($fp)
+# 	move	$3,$2
+	sw	$2,24($fp)
 	j	$L91
 ## basic block (1972 - 1974) ##
 $L92:
@@ -2212,28 +2212,28 @@ $L111:
 	addu	$3,$2,3
 	sw	$3,44($fp)
 	lw	$2,44($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,260($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
-	move	$2,$3
-	sll	$3,$2,3
+# 	move	$2,$3
+	sll	$3,$3,3
 	lw	$4,268($fp)
 	addu	$2,$3,$4
 	li	$3,0x00008000		# 32768
 	addu	$2,$2,$3
 	lw	$3,44($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	lw	$4,260($fp)
 	addu	$3,$3,$4
 	lw	$4,0($3)
-	move	$3,$4
-	sll	$4,$3,3
+# 	move	$3,$4
+	sll	$4,$4,3
 	lw	$5,268($fp)
 	addu	$3,$4,$5
-	li	$4,0x00008000		# 32768
+# 	li	$4,0x00008000		# 32768
 	addu	$3,$3,$4
 	l.d	$f0,0($2)
 	l.d	$f2,0($3)
@@ -2244,8 +2244,8 @@ $L111:
 	add.d	$f0,$f0,$f2
 	s.d	$f0,224($fp)
 	lw	$2,36($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,260($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -2253,8 +2253,8 @@ $L111:
 ## basic block (2047 - 2057) ##
 $L112:
 	lw	$2,36($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,260($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,4
@@ -2267,8 +2267,8 @@ $L112:
 ## basic block (2059 - 2066) ##
 $L115:
 	lw	$2,44($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,260($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -2276,8 +2276,8 @@ $L115:
 ## basic block (2067 - 2077) ##
 $L116:
 	lw	$2,44($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,260($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,4
@@ -2300,23 +2300,23 @@ $L120:
 ## basic block (2086 - 2278) ##
 $L123:
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,16
 	addu	$3,$2,$4
 	addu	$2,$3,40
 	lw	$4,20($fp)
 	lw	$3,48($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,268($fp)
 	addu	$4,$5,$6
 	addu	$3,$3,$4
 	lw	$5,20($fp)
 	lw	$4,40($fp)
-	move	$6,$4
-	sll	$4,$6,3
+# 	move	$6,$4
+	sll	$4,$4,3
 	sll	$6,$5,14
 	lw	$7,268($fp)
 	addu	$5,$6,$7
@@ -2326,21 +2326,21 @@ $L123:
 	sub.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,16
 	addu	$3,$2,$4
 	addu	$2,$3,72
 	lw	$3,20($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$5,$fp,16
 	addu	$4,$3,$5
 	addu	$3,$4,40
 	lw	$5,20($fp)
 	lw	$4,48($fp)
-	move	$6,$4
-	sll	$4,$6,3
+# 	move	$6,$4
+	sll	$4,$4,3
 	sll	$6,$5,14
 	lw	$7,272($fp)
 	addu	$5,$6,$7
@@ -2350,23 +2350,23 @@ $L123:
 	add.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,16
 	addu	$3,$2,$4
 	addu	$2,$3,56
 	lw	$3,20($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$5,$fp,16
 	addu	$4,$3,$5
 	addu	$3,$4,40
 	lw	$5,20($fp)
 	lw	$4,40($fp)
-	move	$6,$4
-	sll	$4,$6,3
+# 	move	$6,$4
+	sll	$4,$4,3
 	sll	$6,$5,14
-	lw	$7,272($fp)
+# 	lw	$7,272($fp)
 	addu	$5,$6,$7
 	addu	$4,$4,$5
 	l.d	$f0,0($3)
@@ -2374,23 +2374,23 @@ $L123:
 	sub.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,16
 	addu	$3,$2,$4
 	addu	$2,$3,88
 	lw	$3,20($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$5,$fp,16
 	addu	$4,$3,$5
 	addu	$3,$4,72
 	lw	$5,20($fp)
 	lw	$4,40($fp)
-	move	$6,$4
-	sll	$4,$6,3
+# 	move	$6,$4
+	sll	$4,$4,3
 	sll	$6,$5,14
-	lw	$7,272($fp)
+# 	lw	$7,272($fp)
 	addu	$5,$6,$7
 	addu	$4,$4,$5
 	l.d	$f0,0($3)
@@ -2398,20 +2398,20 @@ $L123:
 	sub.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,16
 	addu	$3,$2,$4
 	addu	$2,$3,104
 	lw	$3,20($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$5,$fp,16
 	addu	$4,$3,$5
 	addu	$3,$4,40
 	lw	$4,20($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	addu	$5,$fp,16
 	addu	$4,$4,$5
 	addu	$5,$4,40
@@ -2420,20 +2420,20 @@ $L123:
 	mul.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,16
 	addu	$3,$2,$4
 	addu	$2,$3,136
 	lw	$3,20($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$5,$fp,16
 	addu	$4,$3,$5
 	addu	$3,$4,72
 	lw	$4,20($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	addu	$5,$fp,16
 	addu	$4,$4,$5
 	addu	$5,$4,72
@@ -2442,20 +2442,20 @@ $L123:
 	mul.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,16
 	addu	$3,$2,$4
 	addu	$2,$3,120
 	lw	$3,20($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$5,$fp,16
 	addu	$4,$3,$5
 	addu	$3,$4,56
 	lw	$4,20($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	addu	$5,$fp,16
 	addu	$4,$4,$5
 	addu	$5,$4,56
@@ -2464,20 +2464,20 @@ $L123:
 	mul.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,16
 	addu	$3,$2,$4
 	addu	$2,$3,152
 	lw	$3,20($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$5,$fp,16
 	addu	$4,$3,$5
 	addu	$3,$4,88
 	lw	$4,20($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	addu	$5,$fp,16
 	addu	$4,$4,$5
 	addu	$5,$4,88
@@ -2488,8 +2488,8 @@ $L123:
 $L122:
 	lw	$3,20($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,20($fp)
+# 	move	$3,$2
+	sw	$2,20($fp)
 	j	$L120
 ## basic block (2279 - 2281) ##
 $L121:
@@ -2515,11 +2515,11 @@ $L128:
 ## basic block (2294 - 2309) ##
 $L131:
 	lw	$2,16($fp)
-	move	$3,$2
-	sll	$2,$3,4
+# 	move	$3,$2
+	sll	$2,$2,4
 	lw	$3,28($fp)
-	move	$4,$3
-	sll	$3,$4,5
+# 	move	$4,$3
+	sll	$3,$3,5
 	addu	$2,$2,$3
 	addu	$3,$fp,120
 	addu	$2,$3,$2
@@ -2557,11 +2557,11 @@ $L136:
 ## basic block (2329 - 2345) ##
 $L139:
 	lw	$2,32($fp)
-	move	$3,$2
-	sll	$2,$3,4
+# 	move	$3,$2
+	sll	$2,$2,4
 	lw	$3,24($fp)
-	move	$4,$3
-	sll	$3,$4,5
+# 	move	$4,$3
+	sll	$3,$3,5
 	addu	$2,$2,$3
 	addu	$3,$fp,56
 	addu	$2,$3,$2
@@ -2582,8 +2582,8 @@ $L139:
 $L138:
 	lw	$3,32($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,32($fp)
+# 	move	$3,$2
+	sw	$2,32($fp)
 	j	$L136
 ## basic block (2358 - 2367) ##
 $L137:
@@ -2593,8 +2593,8 @@ $L137:
 $L134:
 	lw	$3,24($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,24($fp)
+# 	move	$3,$2
+	sw	$2,24($fp)
 	j	$L132
 ## basic block (2368 - 2385) ##
 $L133:
@@ -2630,8 +2630,8 @@ $L133:
 $L130:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L128
 ## basic block (2403 - 2412) ##
 $L129:
@@ -2641,8 +2641,8 @@ $L129:
 $L126:
 	lw	$3,28($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,28($fp)
+# 	move	$3,$2
+	sw	$2,28($fp)
 	j	$L124
 ## basic block (2413 - 2417) ##
 $L125:
@@ -2670,11 +2670,11 @@ $L144:
 ## basic block (2430 - 2444) ##
 $L147:
 	lw	$2,16($fp)
-	move	$3,$2
-	sll	$2,$3,4
+# 	move	$3,$2
+	sll	$2,$2,4
 	lw	$3,28($fp)
-	move	$4,$3
-	sll	$3,$4,5
+# 	move	$4,$3
+	sll	$3,$3,5
 	addu	$2,$2,$3
 	addu	$3,$fp,120
 	addu	$2,$3,$2
@@ -2711,11 +2711,11 @@ $L152:
 ## basic block (2464 - 2480) ##
 $L155:
 	lw	$2,32($fp)
-	move	$3,$2
-	sll	$2,$3,4
+# 	move	$3,$2
+	sll	$2,$2,4
 	lw	$3,24($fp)
-	move	$4,$3
-	sll	$3,$4,5
+# 	move	$4,$3
+	sll	$3,$3,5
 	addu	$2,$2,$3
 	addu	$3,$fp,56
 	addu	$2,$3,$2
@@ -2736,8 +2736,8 @@ $L155:
 $L154:
 	lw	$3,32($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,32($fp)
+# 	move	$3,$2
+	sw	$2,32($fp)
 	j	$L152
 ## basic block (2493 - 2502) ##
 $L153:
@@ -2747,8 +2747,8 @@ $L153:
 $L150:
 	lw	$3,24($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,24($fp)
+# 	move	$3,$2
+	sw	$2,24($fp)
 	j	$L148
 ## basic block (2503 - 2517) ##
 $L149:
@@ -2763,8 +2763,8 @@ $L149:
 $L146:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L144
 ## basic block (2518 - 2527) ##
 $L145:
@@ -2774,15 +2774,15 @@ $L145:
 $L142:
 	lw	$3,28($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,28($fp)
+# 	move	$3,$2
+	sw	$2,28($fp)
 	j	$L140
 ## basic block (2528 - 2554) ##
 $L141:
 	lw	$3,40($fp)
 	lw	$2,48($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,264($fp)
 	addu	$3,$4,$5
@@ -2791,10 +2791,10 @@ $L141:
 	s.d	$f0,0($2)
 	lw	$3,48($fp)
 	lw	$2,40($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
-	lw	$5,264($fp)
+# 	lw	$5,264($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	l.d	$f0,192($fp)
@@ -2802,24 +2802,24 @@ $L141:
 $L118:
 	lw	$3,48($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,48($fp)
+# 	move	$3,$2
+	sw	$2,48($fp)
 	j	$L116
 ## basic block (2555 - 2561) ##
 $L117:
 $L114:
 	lw	$3,40($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,40($fp)
+# 	move	$3,$2
+	sw	$2,40($fp)
 	j	$L112
 ## basic block (2562 - 2568) ##
 $L113:
 $L110:
 	lw	$3,36($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,36($fp)
+# 	move	$3,$2
+	sw	$2,36($fp)
 	j	$L108
 ## basic block (2569 - 2575) ##
 $L109:
@@ -2885,14 +2885,14 @@ $L164:
 	sra	$4,$2,31
 	subu	$3,$6,$4
 	move	$5,$3
-	sll	$4,$5,1
+	sll	$4,$3,1
 	addu	$4,$4,$3
 	sll	$3,$4,1
 	subu	$2,$2,$3
 	sw	$2,28($fp)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,516($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -2900,8 +2900,8 @@ $L164:
 ## basic block (2637 - 2647) ##
 $L165:
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,516($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,4
@@ -2915,21 +2915,21 @@ $L165:
 $L168:
 	lw	$3,16($fp)
 	lw	$2,24($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,524($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$3,28($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	lw	$4,516($fp)
 	addu	$3,$3,$4
 	lw	$4,0($3)
-	move	$3,$4
-	sll	$4,$3,3
-	lw	$5,524($fp)
+# 	move	$3,$4
+	sll	$4,$4,3
+# 	lw	$5,524($fp)
 	addu	$3,$4,$5
 	li	$4,0x00008000		# 32768
 	addu	$3,$3,$4
@@ -2939,8 +2939,8 @@ $L168:
 	s.d	$f0,216($fp)
 	lw	$3,16($fp)
 	lw	$2,24($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,528($fp)
 	addu	$3,$4,$5
@@ -2958,8 +2958,8 @@ $L168:
 	mul.d	$f0,$f0,$f2
 	s.d	$f0,224($fp)
 	lw	$2,28($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,516($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -2967,8 +2967,8 @@ $L168:
 ## basic block (2701 - 2711) ##
 $L169:
 	lw	$2,28($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,516($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,4
@@ -2982,8 +2982,8 @@ $L169:
 $L172:
 	lw	$3,16($fp)
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,524($fp)
 	addu	$3,$4,$5
@@ -2992,8 +2992,8 @@ $L172:
 	lw	$5,16($fp)
 	subu	$4,$3,$5
 	lw	$3,24($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,524($fp)
 	addu	$4,$5,$6
@@ -3004,8 +3004,8 @@ $L172:
 	s.d	$f0,56($fp)
 	lw	$3,16($fp)
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,528($fp)
 	addu	$3,$4,$5
@@ -3014,28 +3014,28 @@ $L172:
 	l.d	$f2,0($2)
 	add.d	$f0,$f0,$f2
 	s.d	$f0,64($fp)
-	li	$2,0x00000001		# 1
+# 	li	$2,0x00000001		# 1
 	lw	$4,16($fp)
 	subu	$3,$2,$4
 	lw	$2,24($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
-	lw	$5,528($fp)
+# 	lw	$5,528($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	l.d	$f0,56($fp)
 	l.d	$f2,0($2)
 	sub.d	$f0,$f0,$f2
 	s.d	$f0,72($fp)
-	li	$2,0x00000001		# 1
+# 	li	$2,0x00000001		# 1
 	lw	$4,16($fp)
 	subu	$3,$2,$4
 	lw	$2,24($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
-	lw	$5,528($fp)
+# 	lw	$5,528($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	l.d	$f0,64($fp)
@@ -3058,19 +3058,19 @@ $L172:
 	l.d	$f2,80($fp)
 	mul.d	$f0,$f0,$f2
 	s.d	$f0,112($fp)
-	li	$2,0x00000001		# 1
+# 	li	$2,0x00000001		# 1
 	lw	$4,16($fp)
 	subu	$3,$2,$4
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,524($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$3,24($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	lw	$4,524($fp)
 	addu	$3,$3,$4
 	li	$4,0x00008000		# 32768
@@ -3079,12 +3079,12 @@ $L172:
 	l.d	$f2,0($3)
 	sub.d	$f0,$f0,$f2
 	s.d	$f0,232($fp)
-	li	$2,0x00000001		# 1
+# 	li	$2,0x00000001		# 1
 	lw	$4,16($fp)
 	subu	$3,$2,$4
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,528($fp)
 	addu	$3,$4,$5
@@ -3509,8 +3509,8 @@ $L172:
 	s.d	$f2,40($fp)
 	lw	$3,24($fp)
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,520($fp)
 	addu	$3,$4,$5
@@ -3524,16 +3524,16 @@ $L172:
 	s.d	$f2,0($2)
 	lw	$3,32($fp)
 	lw	$2,24($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
-	lw	$5,520($fp)
+# 	lw	$5,520($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,24($fp)
 	lw	$3,32($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,520($fp)
 	addu	$4,$5,$6
@@ -3543,32 +3543,32 @@ $L172:
 $L171:
 	lw	$3,32($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,32($fp)
+# 	move	$3,$2
+	sw	$2,32($fp)
 	j	$L169
 ## basic block (3252 - 3258) ##
 $L170:
 $L167:
 	lw	$3,24($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,24($fp)
+# 	move	$3,$2
+	sw	$2,24($fp)
 	j	$L165
 ## basic block (3259 - 3265) ##
 $L166:
 $L163:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L161
 ## basic block (3266 - 3272) ##
 $L162:
 $L159:
 	lw	$3,20($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,20($fp)
+# 	move	$3,$2
+	sw	$2,20($fp)
 	j	$L157
 ## basic block (3273 - 3285) ##
 $L158:
@@ -3622,17 +3622,17 @@ $L178:
 ## basic block (3315 - 3369) ##
 $L181:
 	lw	$2,16($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,16
 	addu	$3,$2,$4
 	addu	$2,$3,24
 	lw	$4,20($fp)
 	lw	$3,16($fp)
-	move	$5,$3
-	sll	$3,$5,3
-	move	$6,$4
-	sll	$5,$6,1
+# 	move	$5,$3
+	sll	$3,$3,3
+# 	move	$6,$4
+	sll	$5,$4,1
 	addu	$5,$5,$4
 	sll	$4,$5,3
 	lw	$5,108($fp)
@@ -3643,25 +3643,25 @@ $L181:
 	div.d	$f0,$f0,$f2
 	s.d	$f0,0($2)
 	lw	$2,16($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	addu	$4,$fp,16
 	addu	$3,$2,$4
 	addu	$2,$3,48
 	lw	$4,20($fp)
 	lw	$3,16($fp)
-	move	$5,$3
-	sll	$3,$5,3
-	move	$6,$4
-	sll	$5,$6,1
+# 	move	$5,$3
+	sll	$3,$3,3
+# 	move	$6,$4
+	sll	$5,$4,1
 	addu	$5,$5,$4
 	sll	$4,$5,3
 	lw	$5,112($fp)
 	addu	$4,$4,$5
 	addu	$3,$3,$4
 	lw	$4,16($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	addu	$5,$fp,16
 	addu	$4,$4,$5
 	addu	$5,$4,24
@@ -3672,8 +3672,8 @@ $L181:
 $L180:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L178
 ## basic block (3370 - 3380) ##
 $L179:
@@ -3681,8 +3681,8 @@ $L179:
 	nop
 	.set	reorder
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,100($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -3690,8 +3690,8 @@ $L179:
 ## basic block (3381 - 3391) ##
 $L182:
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,100($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,4
@@ -3708,8 +3708,8 @@ $L185:
 ## basic block (3396 - 3405) ##
 $L186:
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,100($fp)
 	addu	$2,$2,$3
 	lw	$3,28($fp)
@@ -3722,8 +3722,8 @@ $L186:
 $L189:
 	lw	$3,24($fp)
 	lw	$2,28($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,116($fp)
 	addu	$3,$4,$5
@@ -3735,8 +3735,8 @@ $L189:
 $L188:
 	lw	$3,28($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,28($fp)
+# 	move	$3,$2
+	sw	$2,28($fp)
 	j	$L186
 ## basic block (3426 - 3438) ##
 $L187:
@@ -3744,8 +3744,8 @@ $L187:
 	nop
 	.set	reorder
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,100($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,4
@@ -3764,8 +3764,8 @@ $L190:
 $L193:
 	lw	$3,24($fp)
 	lw	$2,28($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,116($fp)
 	addu	$3,$4,$5
@@ -3777,14 +3777,14 @@ $L193:
 $L192:
 	lw	$3,28($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,28($fp)
+# 	move	$3,$2
+	sw	$2,28($fp)
 	j	$L190
 ## basic block (3464 - 3478) ##
 $L191:
 	lw	$2,24($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,104($fp)
 	addu	$2,$2,$3
 	l.d	$f0,32($fp)
@@ -3808,8 +3808,8 @@ $L194:
 	neg.d	$f2,$f0
 	s.d	$f2,32($fp)
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,100($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -3817,8 +3817,8 @@ $L194:
 ## basic block (3494 - 3504) ##
 $L195:
 	lw	$2,20($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,100($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,4
@@ -3832,8 +3832,8 @@ $L195:
 $L198:
 	lw	$3,24($fp)
 	lw	$2,28($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,116($fp)
 	addu	$3,$4,$5
@@ -3842,8 +3842,8 @@ $L198:
 $L197:
 	lw	$3,28($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,28($fp)
+# 	move	$3,$2
+	sw	$2,28($fp)
 	j	$L195
 ## basic block (3522 - 3526) ##
 $L196:
@@ -3862,15 +3862,15 @@ $L199:
 $L202:
 	lw	$3,16($fp)
 	lw	$2,24($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,120($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$3,16($fp)
-	move	$4,$3
-	sll	$3,$4,3
+# 	move	$4,$3
+	sll	$3,$3,3
 	addu	$4,$fp,16
 	addu	$3,$3,$4
 	addu	$4,$3,24
@@ -3880,16 +3880,16 @@ $L202:
 	s.d	$f0,0($2)
 	lw	$3,16($fp)
 	lw	$2,24($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,124($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$3,16($fp)
-	move	$4,$3
-	sll	$3,$4,3
-	addu	$4,$fp,16
+# 	move	$4,$3
+	sll	$3,$3,3
+# 	addu	$4,$fp,16
 	addu	$3,$3,$4
 	addu	$4,$3,48
 	l.d	$f0,0($4)
@@ -3899,24 +3899,24 @@ $L202:
 $L201:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L199
 ## basic block (3575 - 3581) ##
 $L200:
 $L184:
 	lw	$3,24($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,24($fp)
+# 	move	$3,$2
+	sw	$2,24($fp)
 	j	$L182
 ## basic block (3582 - 3588) ##
 $L183:
 $L176:
 	lw	$3,20($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,20($fp)
+# 	move	$3,$2
+	sw	$2,20($fp)
 	j	$L174
 ## basic block (3589 - 3591) ##
 $L175:
@@ -3970,16 +3970,16 @@ $L208:
 $L211:
 	lw	$3,24($fp)
 	lw	$2,24($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,64($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,36($fp)
 	lw	$3,24($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,68($fp)
 	addu	$4,$5,$6
@@ -3988,16 +3988,16 @@ $L211:
 	s.d	$f0,0($2)
 	lw	$3,36($fp)
 	lw	$2,24($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,76($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,36($fp)
 	lw	$3,24($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,72($fp)
 	addu	$4,$5,$6
@@ -4017,16 +4017,16 @@ $L212:
 $L215:
 	lw	$3,24($fp)
 	lw	$2,28($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,64($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,28($fp)
 	lw	$3,24($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,64($fp)
 	addu	$4,$5,$6
@@ -4036,16 +4036,16 @@ $L215:
 $L214:
 	lw	$3,28($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,28($fp)
+# 	move	$3,$2
+	sw	$2,28($fp)
 	j	$L212
 ## basic block (3698 - 3704) ##
 $L213:
 $L210:
 	lw	$3,24($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,24($fp)
+# 	move	$3,$2
+	sw	$2,24($fp)
 	j	$L208
 ## basic block (3705 - 3709) ##
 $L209:
@@ -4065,16 +4065,16 @@ $L216:
 $L219:
 	lw	$3,28($fp)
 	lw	$2,28($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,64($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,36($fp)
 	lw	$3,28($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,68($fp)
 	addu	$4,$5,$6
@@ -4085,16 +4085,16 @@ $L219:
 	s.d	$f0,0($2)
 	lw	$3,36($fp)
 	lw	$2,28($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,76($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,36($fp)
 	lw	$3,28($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,72($fp)
 	addu	$4,$5,$6
@@ -4104,8 +4104,8 @@ $L219:
 $L218:
 	lw	$3,28($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,28($fp)
+# 	move	$3,$2
+	sw	$2,28($fp)
 	j	$L216
 ## basic block (3761 - 3766) ##
 $L217:
@@ -4137,35 +4137,35 @@ $L224:
 ## basic block (3782 - 3799) ##
 $L227:
 	lw	$2,32($fp)
-	move	$3,$2
-	sll	$2,$3,14
+# 	move	$3,$2
+	sll	$2,$2,14
 	lw	$3,64($fp)
 	addu	$2,$2,$3
 	lw	$3,28($fp)
-	move	$4,$3
-	sll	$3,$4,14
+# 	move	$4,$3
+	sll	$3,$3,14
 	lw	$4,64($fp)
 	addu	$3,$3,$4
 	li	$4,0x00000001		# 1
 	sw	$4,16($sp)
 	lw	$4,32($fp)
 	move	$5,$2
-	li	$6,0x00000001		# 1
+# 	li	$6,0x00000001		# 1
 	move	$7,$3
 	jal	Ddot
 ## basic block (3800 - 3824) ##
 	lw	$3,28($fp)
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,64($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,28($fp)
 	lw	$3,32($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,64($fp)
 	addu	$4,$5,$6
@@ -4176,8 +4176,8 @@ $L227:
 $L226:
 	lw	$3,32($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,32($fp)
+# 	move	$3,$2
+	sw	$2,32($fp)
 	j	$L224
 ## basic block (3825 - 3829) ##
 $L225:
@@ -4197,8 +4197,8 @@ $L228:
 $L231:
 	lw	$3,28($fp)
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,64($fp)
 	addu	$3,$4,$5
@@ -4207,16 +4207,16 @@ $L231:
 	s.d	$f0,40($fp)
 	lw	$3,28($fp)
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
-	lw	$5,64($fp)
+# 	lw	$5,64($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,32($fp)
 	lw	$3,32($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,64($fp)
 	addu	$4,$5,$6
@@ -4227,24 +4227,24 @@ $L231:
 	s.d	$f0,0($2)
 	lw	$3,28($fp)
 	lw	$2,28($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,64($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,28($fp)
 	lw	$3,28($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
-	lw	$6,64($fp)
+# 	lw	$6,64($fp)
 	addu	$4,$5,$6
 	addu	$3,$3,$4
 	lw	$5,28($fp)
 	lw	$4,32($fp)
-	move	$6,$4
-	sll	$4,$6,3
+# 	move	$6,$4
+	sll	$4,$4,3
 	sll	$6,$5,14
 	lw	$7,64($fp)
 	addu	$5,$6,$7
@@ -4258,23 +4258,23 @@ $L231:
 $L230:
 	lw	$3,32($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,32($fp)
+# 	move	$3,$2
+	sw	$2,32($fp)
 	j	$L228
 ## basic block (3903 - 3929) ##
 $L229:
 	lw	$3,28($fp)
 	lw	$2,28($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,64($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,28($fp)
 	lw	$3,28($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,64($fp)
 	addu	$4,$5,$6
@@ -4286,8 +4286,8 @@ $L229:
 $L222:
 	lw	$3,28($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,28($fp)
+# 	move	$3,$2
+	sw	$2,28($fp)
 	j	$L220
 ## basic block (3930 - 3935) ##
 $L221:
@@ -4307,35 +4307,35 @@ $L232:
 ## basic block (3942 - 3959) ##
 $L235:
 	lw	$2,36($fp)
-	move	$3,$2
-	sll	$2,$3,14
+# 	move	$3,$2
+	sll	$2,$2,14
 	lw	$3,76($fp)
 	addu	$2,$2,$3
 	lw	$3,32($fp)
-	move	$4,$3
-	sll	$3,$4,14
+# 	move	$4,$3
+	sll	$3,$3,14
 	lw	$4,64($fp)
 	addu	$3,$3,$4
 	li	$4,0x00000001		# 1
 	sw	$4,16($sp)
 	lw	$4,32($fp)
 	move	$5,$2
-	li	$6,0x00000001		# 1
+# 	li	$6,0x00000001		# 1
 	move	$7,$3
 	jal	Ddot
 ## basic block (3960 - 3984) ##
 	lw	$3,36($fp)
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,76($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,36($fp)
 	lw	$3,32($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,76($fp)
 	addu	$4,$5,$6
@@ -4346,8 +4346,8 @@ $L235:
 $L234:
 	lw	$3,32($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,32($fp)
+# 	move	$3,$2
+	sw	$2,32($fp)
 	j	$L232
 ## basic block (3985 - 3989) ##
 $L233:
@@ -4367,24 +4367,24 @@ $L236:
 $L239:
 	lw	$3,36($fp)
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,76($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,36($fp)
 	lw	$3,32($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,76($fp)
 	addu	$4,$5,$6
 	addu	$3,$3,$4
 	lw	$5,32($fp)
 	lw	$4,32($fp)
-	move	$6,$4
-	sll	$4,$6,3
+# 	move	$6,$4
+	sll	$4,$4,3
 	sll	$6,$5,14
 	lw	$7,64($fp)
 	addu	$5,$6,$7
@@ -4396,8 +4396,8 @@ $L239:
 $L238:
 	lw	$3,32($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,32($fp)
+# 	move	$3,$2
+	sw	$2,32($fp)
 	j	$L236
 ## basic block (4031 - 4037) ##
 $L237:
@@ -4422,24 +4422,24 @@ $L243:
 	lw	$3,32($fp)
 	subu	$2,$2,$3
 	lw	$3,36($fp)
-	move	$4,$3
-	sll	$3,$4,14
+# 	move	$4,$3
+	sll	$3,$3,14
 	lw	$4,76($fp)
 	addu	$3,$3,$4
 	lw	$4,32($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	addu	$5,$4,8
 	addu	$3,$3,$5
 	lw	$4,32($fp)
-	move	$5,$4
-	sll	$4,$5,14
+# 	move	$5,$4
+	sll	$4,$4,14
 	addu	$5,$4,16384
 	lw	$6,64($fp)
 	addu	$4,$5,$6
 	lw	$5,32($fp)
 	move	$6,$5
-	sll	$5,$6,3
+	sll	$5,$5,3
 	addu	$7,$4,$5
 	li	$4,0x00000800		# 2048
 	sw	$4,16($sp)
@@ -4450,16 +4450,16 @@ $L243:
 ## basic block (4075 - 4099) ##
 	lw	$3,36($fp)
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,76($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,36($fp)
 	lw	$3,32($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,76($fp)
 	addu	$4,$5,$6
@@ -4470,8 +4470,8 @@ $L243:
 $L242:
 	lw	$3,32($fp)
 	subu	$2,$3,1
-	move	$3,$2
-	sw	$3,32($fp)
+# 	move	$3,$2
+	sw	$2,32($fp)
 	j	$L240
 ## basic block (4100 - 4106) ##
 $L241:
@@ -4493,22 +4493,22 @@ $L247:
 	lw	$3,60($fp)
 	subu	$2,$2,$3
 	lw	$3,36($fp)
-	move	$4,$3
-	sll	$3,$4,14
+# 	move	$4,$3
+	sll	$3,$3,14
 	lw	$4,76($fp)
 	addu	$3,$3,$4
 	lw	$4,60($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	addu	$3,$3,$4
 	lw	$4,60($fp)
-	move	$5,$4
-	sll	$4,$5,14
+# 	move	$5,$4
+	sll	$4,$4,14
 	lw	$5,64($fp)
 	addu	$4,$4,$5
 	lw	$5,32($fp)
 	move	$6,$5
-	sll	$5,$6,3
+	sll	$5,$5,3
 	addu	$7,$4,$5
 	li	$4,0x00000800		# 2048
 	sw	$4,16($sp)
@@ -4519,16 +4519,16 @@ $L247:
 ## basic block (4139 - 4163) ##
 	lw	$3,36($fp)
 	lw	$2,32($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,76($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,36($fp)
 	lw	$3,32($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,76($fp)
 	addu	$4,$5,$6
@@ -4539,16 +4539,16 @@ $L247:
 $L246:
 	lw	$3,32($fp)
 	subu	$2,$3,1
-	move	$3,$2
-	sw	$3,32($fp)
+# 	move	$3,$2
+	sw	$2,32($fp)
 	j	$L244
 ## basic block (4164 - 4170) ##
 $L245:
 $L206:
 	lw	$3,36($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,36($fp)
+# 	move	$3,$2
+	sw	$2,36($fp)
 	j	$L204
 ## basic block (4171 - 4177) ##
 $L205:
@@ -4610,8 +4610,8 @@ $L250:
 ## basic block (4218 - 4225) ##
 $L253:
 	lw	$2,60($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,84($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -4619,8 +4619,8 @@ $L253:
 ## basic block (4226 - 4236) ##
 $L254:
 	lw	$2,60($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,84($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,4
@@ -4637,23 +4637,23 @@ $L257:
 	lw	$4,60($fp)
 	addu	$3,$4,1
 	lw	$4,64($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	lw	$5,88($fp)
 	addu	$4,$4,$5
 	l.d	$f0,0($4)
 	s.d	$f0,16($sp)
 	lw	$4,64($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	lw	$5,88($fp)
 	addu	$4,$4,$5
 	addu	$5,$4,16384
 	l.d	$f0,0($5)
 	s.d	$f0,24($sp)
 	lw	$4,64($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	lw	$5,88($fp)
 	addu	$4,$4,$5
 	li	$5,0x00008000		# 32768
@@ -4661,15 +4661,15 @@ $L257:
 	l.d	$f0,0($4)
 	s.d	$f0,32($sp)
 	lw	$4,64($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	lw	$5,92($fp)
 	addu	$4,$4,$5
 	l.d	$f0,0($4)
 	s.d	$f0,40($sp)
 	lw	$4,64($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	lw	$5,92($fp)
 	addu	$4,$4,$5
 	addu	$5,$4,16384
@@ -4684,16 +4684,16 @@ $L257:
 $L256:
 	lw	$3,64($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,64($fp)
+# 	move	$3,$2
+	sw	$2,64($fp)
 	j	$L254
 ## basic block (4293 - 4299) ##
 $L255:
 $L252:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+# 	move	$3,$2
+	sw	$2,60($fp)
 	j	$L250
 ## basic block (4300 - 4303) ##
 $L251:
@@ -4712,8 +4712,8 @@ $L258:
 ## basic block (4310 - 4317) ##
 $L261:
 	lw	$2,60($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,84($fp)
 	addu	$2,$2,$3
 	lw	$3,0($2)
@@ -4721,8 +4721,8 @@ $L261:
 ## basic block (4318 - 4328) ##
 $L262:
 	lw	$2,60($fp)
-	move	$3,$2
-	sll	$2,$3,3
+# 	move	$3,$2
+	sll	$2,$2,3
 	lw	$3,84($fp)
 	addu	$2,$2,$3
 	addu	$3,$2,4
@@ -4739,23 +4739,23 @@ $L265:
 	lw	$4,60($fp)
 	addu	$3,$4,1
 	lw	$4,64($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	lw	$5,96($fp)
 	addu	$4,$4,$5
 	l.d	$f0,0($4)
 	s.d	$f0,16($sp)
 	lw	$4,64($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	lw	$5,96($fp)
 	addu	$4,$4,$5
 	addu	$5,$4,16384
 	l.d	$f0,0($5)
 	s.d	$f0,24($sp)
 	lw	$4,64($fp)
-	move	$5,$4
-	sll	$4,$5,3
+# 	move	$5,$4
+	sll	$4,$4,3
 	lw	$5,96($fp)
 	addu	$4,$4,$5
 	li	$5,0x00008000		# 32768
@@ -4771,16 +4771,16 @@ $L265:
 $L264:
 	lw	$3,64($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,64($fp)
+# 	move	$3,$2
+	sw	$2,64($fp)
 	j	$L262
 ## basic block (4370 - 4376) ##
 $L263:
 $L260:
 	lw	$3,60($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,60($fp)
+# 	move	$3,$2
+	sw	$2,60($fp)
 	j	$L258
 ## basic block (4377 - 4379) ##
 $L259:
@@ -4834,16 +4834,16 @@ $L271:
 $L274:
 	lw	$3,48($fp)
 	lw	$2,48($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,76($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,56($fp)
 	lw	$3,48($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,80($fp)
 	addu	$4,$5,$6
@@ -4863,16 +4863,16 @@ $L275:
 $L278:
 	lw	$3,48($fp)
 	lw	$2,52($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,76($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,52($fp)
 	lw	$3,48($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,76($fp)
 	addu	$4,$5,$6
@@ -4882,16 +4882,16 @@ $L278:
 $L277:
 	lw	$3,52($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,52($fp)
+# 	move	$3,$2
+	sw	$2,52($fp)
 	j	$L275
 ## basic block (4468 - 4474) ##
 $L276:
 $L273:
 	lw	$3,48($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,48($fp)
+# 	move	$3,$2
+	sw	$2,48($fp)
 	j	$L271
 ## basic block (4475 - 4480) ##
 $L272:
@@ -4912,8 +4912,8 @@ $L279:
 $L282:
 	lw	$3,56($fp)
 	lw	$2,52($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,84($fp)
 	addu	$3,$4,$5
@@ -4933,16 +4933,16 @@ $L283:
 $L286:
 	lw	$3,52($fp)
 	lw	$2,48($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,76($fp)
 	addu	$3,$4,$5
 	addu	$2,$2,$3
 	lw	$4,56($fp)
 	lw	$3,48($fp)
-	move	$5,$3
-	sll	$3,$5,3
+# 	move	$5,$3
+	sll	$3,$3,3
 	sll	$5,$4,14
 	lw	$6,88($fp)
 	addu	$4,$5,$6
@@ -4955,8 +4955,8 @@ $L286:
 	s.d	$f0,24($fp)
 	lw	$3,52($fp)
 	lw	$2,48($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,76($fp)
 	addu	$3,$4,$5
@@ -4973,8 +4973,8 @@ $L286:
 $L287:
 	lw	$3,52($fp)
 	lw	$2,48($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,76($fp)
 	addu	$3,$4,$5
@@ -4987,15 +4987,15 @@ $L288:
 $L285:
 	lw	$3,48($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,48($fp)
+# 	move	$3,$2
+	sw	$2,48($fp)
 	j	$L283
 ## basic block (4562 - 4575) ##
 $L284:
 	lw	$3,56($fp)
 	lw	$2,52($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,88($fp)
 	addu	$3,$4,$5
@@ -5012,8 +5012,8 @@ $L284:
 $L289:
 	lw	$3,56($fp)
 	lw	$2,52($fp)
-	move	$4,$2
-	sll	$2,$4,3
+# 	move	$4,$2
+	sll	$2,$2,3
 	sll	$4,$3,14
 	lw	$5,88($fp)
 	addu	$3,$4,$5
@@ -5031,16 +5031,16 @@ $L290:
 $L281:
 	lw	$3,52($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,52($fp)
+# 	move	$3,$2
+	sw	$2,52($fp)
 	j	$L279
 ## basic block (4602 - 4608) ##
 $L280:
 $L269:
 	lw	$3,56($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,56($fp)
+# 	move	$3,$2
+	sw	$2,56($fp)
 	j	$L267
 ## basic block (4609 - 4619) ##
 $L268:
@@ -5103,10 +5103,10 @@ $L295:
 	mul.d	$f0,$f0,$f4
 	add.d	$f2,$f2,$f0
 	move	$7,$2
-	sll	$8,$7,3
+	sll	$8,$2,3
 	addu	$5,$5,$8
-	move	$7,$3
-	sll	$8,$7,3
+# 	move	$7,$3
+	sll	$8,$3,3
 	addu	$6,$6,$8
 	j	$L293
 ## basic block (4667 - 4669) ##

@@ -20,6 +20,7 @@ class basicBlock:
         self.name       = name
         self.startLine  = startLine
         self.target     = None
+        self.previous   = []
 
         self.operations = []
         self.genSet     = []
@@ -133,5 +134,3 @@ class basicBlock:
             return True
         else:
             return self.findLabel(label)
-                    
-                

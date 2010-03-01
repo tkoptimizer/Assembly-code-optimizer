@@ -44,7 +44,7 @@ class blockBuilder:
         labelTranslation = {}   # Dictionary containing labelname => linenumber
         curLeader = True        # First block should be a leader
         
-        for line in self.listing:
+        for i,line in enumerate(self.listing):
             try:
                 currentOpp = operation.getInstance(line, lineNumber)
             except Exception, (error):
@@ -153,3 +153,5 @@ class blockBuilder:
                 for searchBlock in self.basicBlocks:
                     if searchBlock.hasLabel(targetLabel):
                         block.target = searchBlock
+                        searchBlock.previous.append(block)
+

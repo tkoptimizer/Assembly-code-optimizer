@@ -24,249 +24,126 @@ class copyPropagation(optimizationClass):
         self.name            = "Copy propagation"
         self.optimizedBlocks = blocks
         self.moves           = []
-        self.dead_moves      = []
-        self.output          = ["#\n#\n ==== Copy propagation optimizer ==== \n#\n#"]
-        self.updatedOps      = []
-
-
-    def findUnnecessaryMove(self, operation):
-        """
-        Look for moves that use the same registers as the current operation.
-        Details are handled in 'analyseBasicBlock'.
-        """
-        
-        if len(self.moves) > 0:
-            moves = self.moves
-            moves.reverse()
-        else:
-            return None
-
-        if operation.hasArguments():
-            opArgs   = operation.getArguments()
-            register = ""
-
-            if operation.type == operation.LOAD or \
-               operation.type == operation.STORE:
-
-                if operation.usesOffset():
-                    register = operation.getOffsetRegister()
-
-            for move in moves:
-                moveArgs = move.getArguments()
-
-                for argument in moveArgs:
-                    if argument in opArgs or argument == register:
-                        return move
-
-        return None
-
-
-    def findDeadMove(self, operation):
-        """
-        Look for dead moves that use the same registers as the current
-        operation.  Details are handled in 'analyseBasicBlock'.
-        """
-        
-        if len(self.dead_moves) > 0:
-            dead_moves = self.dead_moves
-            dead_moves.reverse()
-        else:
-            return None
-
-        if operation.hasArguments():
-            opArgs   = operation.getArguments()
-            register = ""
-
-            if operation.type == operation.LOAD or \
-               operation.type == operation.STORE:
-
-                if operation.usesOffset():
-                    register = operation.getOffsetRegister()
-
-            for move in dead_moves:
-                moveArgs = move.getArguments()
-
-                for argument in moveArgs:
-                    if argument in opArgs or argument == register:
-                        return move
-
-        return None
-    
-
-    def resetOperations(self):
-        """
-        Restore the backed up code for each operation and re-include it in the
-        code.
-        """
-        
-        ops = self.updatedOps
-        ops.reverse()
-        ops = set(ops)
-
-        for op in ops:
-            self.output.append("\tResetting operation ("+op.code+")")
-            op.resetOperation()
-
-            if op.isMove():
-                break
-
+        self.output          = [" ==== Copy propagation optimizer ==== "]
 
     def analyseBasicBlock(self, block):
-        """
-        Analyse each operation in a basic block. If we find a move, try to
-        remove it and fix any registers affected by the change. If there is a
-        problem, we roll back.
-        """
-        
-        self.moves      = []
-        self.dead_moves = []
-        self.updatedOps = []
-
         self.output.append("\n>>>> Starting analysis of new block. <<<<\n")
 
-        for operation in block.operations:
-            if operation.included == False:
-                self.output.append( "  {{ operation previously excluded: " + 
-                        operation.code + " }}")
+        updated_ops = []
+        dead_moves = []
 
+        for i, op in enumerate(block.operations):
+            # For each move operation check all next operations.
+
+            if not op.isMove():
                 continue
 
-            self.output.append("  || Analysing operation: " + str(operation))
+            if op.included == False:
+                self.output.append("\t{{ operation previously excluded: " + 
+                    op.code + " }}")
 
-            redundantMove = self.findUnnecessaryMove(operation)
 
-            if operation.isMove():                
-                if operation.getMoveSource() in ("$sp", "$fp") or \
-                   operation.getMoveDestination() in ("$sp", "$fp"):
-                    
-                    self.output.append("\tSkipping move operation.")
-                    continue
+            self.output.append("\t--> Analysing operation: " + str(op) + 
+                " on line " + str(op.lineNumber))
 
-                if redundantMove is not None:
-                    if redundantMove.getMoveSource() == \
-                       operation.getMoveDestination():
+            dest = op.getMoveDestination()
+            source = op.getMoveSource()
+            
+            pattern = "\$(s|f)[0-9p]+"
+            
+            # We don't mess with frame pointers and such.
+            if re.match(pattern, dest):
+                continue
 
-                        self.moves.remove(redundantMove)
+            next_ops = block.operations[i + 1:]
+            
+            for n_op in next_ops:
+                n_target = None
+                n_source = None
+                n_offset = None
+
+                if n_op.type not in (operation.CONTROL, operation.SYSTEM):
+                    n_target = n_op.getTarget()
+
+                    if n_op.type in (operation.LOAD, operation.STORE):
+                        n_source = n_op.getAddress()
+                        if n_op.usesOffset():
+                            n_offset = n_op.getOffsetRegister()
+
+
+                if n_op.type is operation.STORE:
+                    if n_target == dest:
+                        # Storing the dest. register of a move, try to store
+                        # source register. 
                         
-                        self.output.append("\tRemoving move operation from " +
-                                "redundant-moves-list.")
+                        updated_ops.append(n_op)
+                        dead_moves.append(op)
 
-                        continue
+                        n_op.setSource(source)
+
+                        self.output.append("\n\t!!--> Updated  " + 
+                                "STORE operation\n");
+
+                elif n_op.isMove():
+                    n_dest = n_op.getMoveDestination()
+                    n_source = n_op.getMoveSource()
+
+                    if n_dest == dest and n_source == source or \
+                            n_dest == source or n_source == dest:
+                                try:
+                                    dead_moves.remove(op)
+                                except:
+                                    " Move wasn't dead yet, skip step "
+
+                                break
+                    if n_dest == dest and n_source != source:
+                        try:
+                            dead_moves.remove(op)
+                        except:
+                            " Move wasn't dead yet, skip step "
+
+                        break
+
+
+                elif n_op.type is operation.LOAD:
+                    if n_target == dest or n_target == source:
+                        break
                 
-                self.output.append("\tAdding move to list.")
-                self.moves.append(operation)
+                elif n_op.type in (operation.INT_ARITHMETIC,
+                        operation.FLOAT_ARITHMETIC, 
+                        operation.CONTROL):
 
+                    args = n_op.getArguments()
+                    if n_op.operation in ("jal", "jalr"):
+                        self.output.append("\n\t!!--> Breaking at function call" +
+                                " (jal / jalr).")
+                        break
 
-            elif operation.type == operation.STORE:
-                if redundantMove is not None:
-                    if redundantMove.getMoveDestination() == \
-                       operation.getTarget():
-                        
-                        self.output.append("\tUpdating store operation (" +
-                                operation.code + ")")
+                    if dest in args:
+                        if n_target == dest and dest not in args[1:]:
+                            self.output.append("\n\t!!--> Arithmetic operation" +
+                                    " only writes register, breaking: " +
+                                    n_op.code)
+                            break                          
 
-                        operation.setSource(redundantMove.getMoveSource())
-                        redundantMove.exclude()
-                        
-                        self.output.append("\tOperation updated (" +
-                                operation.code + ")")
-
-                        self.updatedOps.append(redundantMove)
-                        self.updatedOps.append(operation)
-
-
-            elif operation.type == operation.LOAD:
-                if redundantMove is not None:        
-                    if redundantMove.getMoveDestination() == \
-                       operation.getTarget() or \
-                       redundantMove.getMoveSource() == operation.getTarget():
-
-                        self.output.append("\tMove source / destination was " +
-                                "updated by a load, removing move " + "from " +
-                                "list: " +  operation.code)
-                        
-                        self.moves.remove(redundantMove)
-                        self.dead_moves.append(redundantMove)
-
-                    if redundantMove.getMoveSource() == \
-                       operation.getOffsetRegister() or \
-                       redundantMove.getMoveDestination() == \
-                       operation.getOffsetRegister():
-
-                        self.output.append("\tComplex load situation: " +
-                                "reseting operations.")
-
-                        self.resetOperations()
-                else:
-                    deadMove = self.findDeadMove(operation)
-
-                    if deadMove is not None:
-                        if deadMove.getMoveDestination() == \
-                           operation.getTarget() or \
-                           deadMove.getMoveSource() == operation.getTarget():
-
-                            self.output.append("\tMove source / destination " +
-                                "was updated by a load, removing move from " +
-                                "list: " + operation.code)
-                            
-                            self.dead_moves.remove(deadMove)
-
-                        if deadMove.getMoveSource() == \
-                           operation.getOffsetRegister() or \
-                           deadMove.getMoveDestination() == \
-                           operation.getOffsetRegister():
-
-                            self.output.append("\tComplex load situation: " +
-                                    "reseting operations.")
-
-                            self.resetOperations()
-
-
-
-            elif operation.type in (operation.INT_ARITHMETIC, 
-                                    operation.FLOAT_ARITHMETIC, 
-                                    operation.CONTROL):
-
-                if redundantMove is not None:
-                    destination = redundantMove.getMoveDestination()
-                    source      = redundantMove.getMoveSource()
-                    arguments   = operation.getArguments()
-                    
-                    if destination in arguments:
-                        if operation.type == operation.CONTROL:
+                        if n_op.type == operation.CONTROL:
                             start = 0
                         else:
-                            #first argument is write register
                             start = 1
-                        for i in range(start, len(arguments)):
-                            if arguments[i] == destination:
-                                arguments[i] = source
-                        
-                        self.output.append("\tUpdating arithmetic or control " +
-                                "operation (" + operation.code + ")")
 
-                        operation.setArguments(arguments)
-                        redundantMove.exclude()
-                        
-                        self.output.append("\tOperation updated (" + 
-                                operation.code + ")")
+                        for i in range(start, len(args)):
+                            if args[i] == dest:
+                                args[i] = source
 
-                        self.updatedOps.append(redundantMove)
-                        self.updatedOps.append(operation)
+                        n_op.setArguments(args)
+                        self.output.append("\n\t!!--> Updating arithmetic or" +
+                                " control operation (" + n_op.code + ")")
 
-                    if arguments[0] == destination:
-                        self.output.append("\tArithmetic overwrites register" +
-                                "with new result")
-
-                        self.moves.remove(redundantMove)
-                        self.dead_moves.append(redundantMove)
-                else:
-                    deadMove = self.findDeadMove(operation)
-                    
-                    if deadMove is not None:
-                        if deadMove.getMoveDestination() == \
-                           operation.getTarget() or \
-                           deadMove.getMoveSource() == operation.getTarget():
-
-                                self.dead_moves.remove(deadMove)
+                        updated_ops.append(n_op)
+                        dead_moves.append(op)
+        
+        # Exclude all the dead moves from the output.
+        for move in dead_moves:
+            self.output.append("Excluding move (" + move.code + ") from output.")
+            move.exclude()
 

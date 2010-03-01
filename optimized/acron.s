@@ -220,16 +220,16 @@ $L5:
 	addu	$2,$3,$2
 	sw	$2,24($fp)
 	lw	$2,24($fp)
-	beq	$2,$0,$L4
+	beq	$2,$0,$L8
 ## basic block (203 - 205) ##
 	lw	$2,24($fp)
 	li	$3,0x00000003		# 3
-	beq	$2,$3,$L4
+	beq	$2,$3,$L8
 ## basic block (206 - 206) ##
 	j	$L7
 ## basic block (207 - 208) ##
-# $L8:
-# 	j	$L4
+$L8:
+	j	$L4
 ## basic block (209 - 209) ##
 $L7:
 ## basic block (210 - 221) ##

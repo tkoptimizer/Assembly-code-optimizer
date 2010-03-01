@@ -117,15 +117,15 @@ $L6:
 ## basic block (105 - 108) ##
 	lw	$3,24($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,24($fp)
+# 	move	$3,$2
+	sw	$2,24($fp)
 ## basic block (109 - 115) ##
 $L7:
 $L5:
 	lw	$3,16($fp)
 	addu	$2,$3,1
-	move	$3,$2
-	sw	$3,16($fp)
+# 	move	$3,$2
+	sw	$2,16($fp)
 	j	$L3
 ## basic block (116 - 128) ##
 $L4:
